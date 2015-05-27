@@ -12,18 +12,31 @@ $ npm install
 
 ## Development
 ```bash
-$ npm start
+$ grunt serve
 ```
-Starts the express and the webpack-dev-server (which has livereload and hot loading).
+Starts the express and the webpack-dev-server. Livereload and hot loading for client side code but when making changes to the server code the above command needs to be made again.
 
-Boilerplate has been generated using [`generator-react-webpack`](https://github.com/newtriks/generator-react-webpack). Use the following generators to create new components, actions or stores with corresponding test.
+```bash
+$ grunt serve:dist
+```
+Builds the Webpack project and start the express server with production settings.
 
-* [react-webpack:component \<NAME> --rich](https://github.com/newtriks/generator-react-webpack#component)
-* [react-webpack:action \<NAME>](https://github.com/newtriks/generator-react-webpack#action) (Reflux style action)
-* [react-webpack:store \<NAME>](https://github.com/newtriks/generator-react-webpack#store) (Reflux style store)
+### Generators
+Front-end has been generated using [Yeoman](http://yeoman.io/) with [`generator-react-webpack`](https://github.com/newtriks/generator-react-webpack). Install with following command to access React and Reflux generators.
+
+```bash
+$ npm install -g yo generator-react-webpack
+```
+Use the following commands to create new components, actions or stores with corresponding test.
+
+* [yo react-webpack:component \<NAME> --rich](https://github.com/newtriks/generator-react-webpack#component)
+* [yo react-webpack:action \<NAME>](https://github.com/newtriks/generator-react-webpack#action) (Reflux style action)
+* [yo react-webpack:store \<NAME>](https://github.com/newtriks/generator-react-webpack#store) (Reflux style store)
+
+## Deployment
+...
 
 ## Noteworthy
-
 * **Proxy** - A proxy is needed in order to have both the express and the webpack-dev-server running properly, [info](http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup).
 
 ## Stack
@@ -40,7 +53,6 @@ Boilerplate has been generated using [`generator-react-webpack`](https://github.
 * Socket.io
 
 ## Creators
-
 [Simon Johansson](https://github.com/simon-johansson) <br>
 [Jose Granjo](https://github.com/josegranjo)
 
