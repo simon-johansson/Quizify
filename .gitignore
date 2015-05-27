@@ -1,0 +1,16 @@
+### SublimeText ###
+*.sublime-workspace
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# App specific
+
+node_modules/
+.tmp
+dist
+/src/main.js
+/server/config/secrets.js
