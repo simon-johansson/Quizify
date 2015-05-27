@@ -1,9 +1,5 @@
 'use strict';
 
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
-
 var webpackDistConfig = require('./webpack.dist.config.js'),
     webpackDevConfig = require('./webpack.config.js');
 
@@ -17,6 +13,11 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: pkgConfig,
 
+    paths: {
+      dev: 'src',
+      dist: 'dist'
+    },
+
     webpack: {
       options: webpackDistConfig,
       dist: {
@@ -24,35 +25,16 @@ module.exports = function (grunt) {
       }
     },
 
-    'webpack-dev-server': {
+    express: {
       options: {
-        hot: true,
-        port: 8000,
-        webpack: webpackDevConfig,
-        publicPath: '/assets/',
-        contentBase: './<%= pkg.src %>/'
+        port: process.env.PORT || 9000,
       },
-
-      start: {
-        keepAlive: true
-      }
-    },
-
-    connect: {
-      options: {
-        port: 8000
-      },
-
-      dist: {
+      dev: {
         options: {
-          keepalive: true,
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, pkgConfig.dist)
-            ];
-          }
-        }
-      }
+          script: './server.js',
+          debug: true
+        },
+      },
     },
 
     open: {
@@ -60,12 +42,28 @@ module.exports = function (grunt) {
         delay: 500
       },
       dev: {
-        path: 'http://localhost:<%= connect.options.port %>/webpack-dev-server/'
+        path: 'http://localhost:<%= express.options.port %>/'
       },
-      dist: {
-        path: 'http://localhost:<%= connect.options.port %>/'
-      }
     },
+
+    env: {
+      test: { NODE_ENV: 'test' },
+      prod: { NODE_ENV: 'production' },
+    },
+
+    // 'webpack-dev-server': {
+    //   options: {
+    //     hot: true,
+    //     port: 8000,
+    //     webpack: webpackDevConfig,
+    //     publicPath: '/assets/',
+    //     contentBase: './<%= pkg.src %>/'
+    //   },
+
+    //   start: {
+    //     keepAlive: true
+    //   }
+    // },
 
     karma: {
       unit: {
@@ -80,15 +78,15 @@ module.exports = function (grunt) {
           {
             flatten: true,
             expand: true,
-            src: ['<%= pkg.src %>/*'],
-            dest: '<%= pkg.dist %>/',
+            src: ['<%= paths.dev %>/*'],
+            dest: '<%= paths.dist %>/',
             filter: 'isFile'
           },
           {
             flatten: true,
             expand: true,
-            src: ['<%= pkg.src %>/images/*'],
-            dest: '<%= pkg.dist %>/images/'
+            src: ['<%= paths.dev %>/images/*'],
+            dest: '<%= paths.dist %>/images/'
           }
         ]
       }
@@ -99,27 +97,43 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= pkg.dist %>'
+            '<%= paths.dist %>'
           ]
         }]
       }
     }
   });
 
+  grunt.registerTask('express-keepalive', 'Keep grunt running', function () {
+    this.async();
+  });
+
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'open:dist', 'connect:dist']);
+      return grunt.task.run([
+        'build',
+        'env:prod',
+        'express',
+        'open',
+        'express-keepalive',
+      ]);
     }
 
     grunt.task.run([
-      'open:dev',
-      'webpack-dev-server'
+      // 'webpack-dev-server'
+      'express',
+      'open',
+      'express-keepalive',
     ]);
   });
 
   grunt.registerTask('test', ['karma']);
 
-  grunt.registerTask('build', ['clean', 'copy', 'webpack']);
+  grunt.registerTask('build', [
+    'clean',
+    'copy',
+    'webpack'
+  ]);
 
   grunt.registerTask('default', []);
 };
