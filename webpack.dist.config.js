@@ -6,9 +6,10 @@
 
 'use strict';
 
+var path = require('path');
 var webpack = require('webpack');
 
-var buildPath = path.resolve(__dirname, 'src', 'build');
+var buildPath = path.resolve(__dirname, 'dist', 'build');
 var mainPath = path.resolve(__dirname, 'src', 'components', 'main.js');
 
 module.exports = {

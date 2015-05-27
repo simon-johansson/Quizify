@@ -17,6 +17,7 @@ Router.run(Routes, function (Handler) {
   React.render(<Handler/>, content);
 });
 
+// Socket.io test
 var socket = window.io.connect();
 socket.on('news', function (data) {
   console.log(data);
