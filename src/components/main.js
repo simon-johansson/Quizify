@@ -1,8 +1,10 @@
 'use strict';
 
-var QuizifyApp = require('./QuizifyApp');
+var socket = require('socket.io-client')();
 var React = require('react');
 var Router = require('react-router');
+
+var QuizifyApp = require('./QuizifyApp');
 var Route = Router.Route;
 
 var content = document.getElementById('content');
@@ -18,7 +20,9 @@ Router.run(Routes, function (Handler) {
 });
 
 // Socket.io test
-var socket = window.io.connect();
+socket.on('connect', function(){
+  console.log('connected');
+});
 socket.on('news', function (data) {
   console.log(data);
   socket.emit('my other event', { my: 'data' });
