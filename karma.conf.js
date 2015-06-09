@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks: ['mocha', 'phantomjs-shim'],
     files: [
       'test/helpers/**/*.js',
       'test/spec/components/**/*.js',
@@ -31,7 +31,8 @@ module.exports = function (config) {
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
           test: /\.js$/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          exclude: /node_modules/
         }, {
           test: /\.scss/,
           loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
@@ -56,6 +57,7 @@ module.exports = function (config) {
       }
     },
     webpackServer: {
+      noInfo: true, //please don't spam the console when running in karma!
       stats: {
         colors: true
       }
@@ -74,7 +76,7 @@ module.exports = function (config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['PhantomJS'],
-    reporters: ['progress'],
+    reporters: ['mocha'],
     captureTimeout: 60000,
     singleRun: true
   });

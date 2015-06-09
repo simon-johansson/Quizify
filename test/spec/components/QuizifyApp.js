@@ -1,19 +1,22 @@
 'use strict';
 
+var React = require('react/addons');
+var TestUtils = React.addons.TestUtils;
+
+var React = require('react');
+var expect = require('chai').expect;
+var QuizifyApp = require('components/QuizifyApp.js');
+
 describe('QuizifyApp', function () {
-  var React = require('react/addons');
-  var QuizifyApp, component;
-
-  beforeEach(function () {
-    var container = document.createElement('div');
-    container.id = 'content';
-    document.body.appendChild(container);
-
-    QuizifyApp = require('components/QuizifyApp.js');
-    component = React.createElement(QuizifyApp);
-  });
 
   it('should create a new instance of QuizifyApp', function () {
-    expect(component).toBeDefined();
+    var quizifyApp = TestUtils.renderIntoDocument(<QuizifyApp/>);
+    expect(quizifyApp).to.exist;
+  });
+
+  it('should contain the correct text', function () {
+    var quizifyApp = TestUtils.renderIntoDocument(<QuizifyApp/>);
+    var node = TestUtils.findRenderedDOMComponentWithTag(quizifyApp, "div");
+    expect(node.getDOMNode().textContent).to.eql('Quizify');
   });
 });
