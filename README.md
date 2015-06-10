@@ -33,8 +33,12 @@ Use the following commands to create new components, actions or stores with corr
 * [yo react-webpack:action \<NAME>](https://github.com/newtriks/generator-react-webpack#action) (Reflux style action)
 * [yo react-webpack:store \<NAME>](https://github.com/newtriks/generator-react-webpack#store) (Reflux style store)
 
-## Deployment
-...
+
+## Tests
+Running `grunt test` will run the front-end unit tests with karma. Tests are written using mocha and chai.
+
+## Build & Deployment
+Running `grunt build` will build the front-end code and make it available in the `dist/` folder. Run `NODE_ENV=production node server.js` to start the server in production mode.
 
 ## Noteworthy
 * **Proxy** - A proxy is needed in order to have both the express and the webpack-dev-server running properly, [info](http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup).
