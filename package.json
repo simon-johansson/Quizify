@@ -62,6 +62,7 @@
     "url": "https://github.com/simon-johansson/Quizify.git"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/main.js",
+    "test": "mocha --compilers js:babel/register --opts test/server/mocha.opts test/server"
   }
 }
