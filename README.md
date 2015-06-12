@@ -1,5 +1,7 @@
 # Quizify
 
+[![Build Status][travis-image]][travis-url]
+
 > Spotify quiz
 
 ## Install
@@ -62,3 +64,6 @@ Running `grunt build` will build the front-end code and make it available in the
 
 ## Licese
 ??
+
+[travis-image]: https://travis-ci.org/simon-johansson/Quizify.svg?branch=master
+[travis-url]: https://travis-ci.org/simon-johansson/Quizify
