@@ -8,6 +8,12 @@ node_js:
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
 
+before_install:
+  # GUI for Firefox.
+  # see: http://docs.travis-ci.com/user/gui-and-headless-browsers/
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
 script:
   # Build environment.
   - node --version
