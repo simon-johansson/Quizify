@@ -7,10 +7,13 @@
 .LSOverride
 Icon
 
-# App specific
+### Other ###
+TODO.md
 
+### App specific ###
 node_modules/
 .tmp
 dist
 /src/main.js
 /server/config/secrets.js
+coverage/
