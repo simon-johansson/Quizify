@@ -5,17 +5,17 @@ var path = require('path');
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['mocha', 'phantomjs-shim'],
+    frameworks: ['mocha'],
     files: [
-      'test/helpers/**/*.js',
-      'test/spec/components/**/*.js',
-      'test/spec/stores/**/*.js',
-      'test/spec/actions/**/*.js'
+      './helpers/**/*.js',
+      './spec/components/**/*.js',
+      './spec/stores/**/*.js',
+      './spec/actions/**/*.js'
     ],
     preprocessors: {
-      'test/spec/components/**/*.js': ['webpack'],
-      'test/spec/stores/**/*.js': ['webpack'],
-      'test/spec/actions/**/*.js': ['webpack']
+      './spec/components/**/*.js': ['webpack'],
+      './spec/stores/**/*.js': ['webpack'],
+      './spec/actions/**/*.js': ['webpack']
     },
     webpack: {
       cache: true,
@@ -47,6 +47,11 @@ module.exports = function (config) {
           loader: 'url-loader?limit=10000&mimetype=application/font-woff2'
         }]
       },
+      postLoaders: [{
+        test: /src\/.*\.js$/,
+        loader: 'istanbul-instrumenter',
+        exclude: /(test|node_modules|bower_components|dist|server)/,
+      }],
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
@@ -75,9 +80,22 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
-    reporters: ['mocha'],
+    browsers: ['Firefox'],
+    reporters: ['spec', 'coverage'],
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'coverage/'
+    },
     captureTimeout: 60000,
-    singleRun: true
+    singleRun: true,
+    plugins: [
+      require("karma-webpack"),
+      require("istanbul-instrumenter-loader"),
+      require("karma-mocha"),
+      require("karma-coverage"),
+      // require("karma-phantomjs-launcher"),
+      require("karma-firefox-launcher"),
+      require("karma-spec-reporter")
+    ],
   });
 };
