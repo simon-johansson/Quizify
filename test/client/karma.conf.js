@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['mocha'],
+    frameworks: ['phantomjs-shim', 'mocha'],
     files: [
       './helpers/**/*.js',
       './spec/components/**/*.js',
@@ -80,7 +80,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Firefox'],
+    browsers: ['PhantomJS', 'Firefox'],
     reporters: ['spec', 'coverage'],
     coverageReporter: {
       type: 'lcov',
@@ -93,7 +93,8 @@ module.exports = function (config) {
       require("istanbul-instrumenter-loader"),
       require("karma-mocha"),
       require("karma-coverage"),
-      // require("karma-phantomjs-launcher"),
+      require("karma-phantomjs-launcher"),
+      require("karma-phantomjs-shim"),
       require("karma-firefox-launcher"),
       require("karma-spec-reporter")
     ],
