@@ -67,7 +67,7 @@
   "scripts": {
     "start": "node server/main.js",
     "test-frontend": "node node_modules/karma/bin/karma start test/client/karma.conf.js",
-    "test-backend": "mocha --compilers js:babel/register --opts test/server/mocha.opts test/server",
+    "test-backend": "mocha --opts test/server/mocha.opts test/server",
     "test": "npm run-script test-frontend && npm run-script test-backend"
   }
 }
