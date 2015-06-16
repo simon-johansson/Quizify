@@ -32,7 +32,11 @@ module.exports = app => {
     // app.use(morgan('dev'));
   }
 
-  if(env === 'development' || env === 'test') {
+  if(env === 'test') {
+    // app.use(morgan('dev'));
+  }
+
+  if(env === 'development') {
     var proxy = httpProxy.createProxyServer({ ws: true });
 
     app.use(express.static(path.join(config.root, 'src')));
