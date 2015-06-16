@@ -4,9 +4,9 @@ var socketIO = require('socket.io');
 var io;
 
 function bindEvents (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
+  socket.emit('init', 'welcome');
+  socket.on('create_game', function (data) {
+    console.log(`new game created for id ${data.id}`);
   });
 }
 

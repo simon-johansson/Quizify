@@ -23,7 +23,6 @@ Router.run(Routes, function (Handler) {
 socket.on('connect', function(){
   console.log('connected');
 });
-socket.on('news', function (data) {
+socket.on('init', function (data) {
   console.log(data);
-  socket.emit('my other event', { my: 'data' });
 });
