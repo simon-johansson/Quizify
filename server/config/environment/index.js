@@ -10,4 +10,10 @@ var all = {
   spotifyTokenRefreshRate: 3600000 // one hour
 };
 
-module.exports = _.merge(all, require(`./${all.env}.js`) || {});
+try {
+  var env = require(`./${all.env}.js`);
+} catch (err){
+  var env = {};
+}
+
+module.exports = _.merge(all, env);
