@@ -37,7 +37,21 @@ Use the following commands to create new components, actions or stores with corr
 
 
 ## Tests
-Running `grunt test` will run the front-end unit tests with karma. Tests are written using mocha and chai.
+Run all tests:
+```bash
+$ npm test
+```
+
+Run frontend-tests with Karma using PhantomJS and Firefox:
+```bash
+$ npm run-script test-frontend
+```
+
+Run backend-tests with Mocha:
+```bash
+$ npm run-script test-backend
+```
+
 
 ## Build & Deployment
 Running `grunt build` will build the front-end code and make it available in the `dist/` folder. Run `NODE_ENV=production node server.js` to start the server in production mode.
