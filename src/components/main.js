@@ -1,28 +1,35 @@
 'use strict';
 
-var socket = require('socket.io-client')();
 var React = require('react');
+
 var Router = require('react-router');
+var { Route, NotFoundRoute, HashLocation, DefaultRoute } = Router;
 
 var QuizifyApp = require('./QuizifyApp');
-var Route = Router.Route;
+var Home = require('./Home');
+var Lobby = require('./Lobby');
+var About = require('./About');
 
-var content = document.getElementById('content');
+var NotFound = React.createClass({
+  render () {
+    return (
+      <div>
+        <h2>Error!</h2>
+      </div>
+    );
+  }
+});
 
-var Routes = (
-  <Route handler={QuizifyApp}>
-    <Route name="/" handler={QuizifyApp}/>
+var routes = (
+  <Route path="/" handler={ QuizifyApp }>
+    <DefaultRoute name="home" handler={ Home }/>
+
+    <Route name="lobby" path="lobby" handler={ Lobby }/>
+    <Route name="about" path="about" handler={ About }/>
+    <NotFoundRoute handler={ NotFound } />
   </Route>
 );
 
-Router.run(Routes, function (Handler) {
-  React.render(<Handler/>, content);
-});
-
-// Socket.io test
-socket.on('connect', function(){
-  console.log('connected');
-});
-socket.on('init', function (data) {
-  console.log(data);
+Router.run(routes, HashLocation, (Root) => {
+  React.render(<Root/>, document.getElementById('content'));
 });

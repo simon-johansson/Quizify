@@ -1,12 +1,16 @@
 'use strict';
 
-var socketIO = require('socket.io');
-var io;
+let socketIO = require('socket.io');
+let socketEvents = require('../../common/socketEvents');
+let io;
 
 function bindEvents (socket) {
-  socket.emit('init', 'welcome');
-  socket.on('create_game', function (data) {
-    console.log(`new game created for id ${data.id}`);
+  socket.on(socketEvents.client.host.createLobby, (data) => {
+
+    // Just a dummy id at the moment
+    let lobbyId = Math.floor(Math.random() * 2000);
+    console.log(`new lobby created with ID: ${lobbyId}`);
+    socket.emit(socketEvents.server.lobbyCreated, { lobbyId });
   });
 }
 

@@ -1,16 +1,43 @@
 'use strict';
 
+var socket = require('../utils/socket');
+
+var Router = require('react-router');
+var { RouteHandler, Link } = Router;
+
 var React = require('react/addons');
+var Reflux = require('reflux');
 
 // CSS
 require('normalize.css');
 require('../styles/main.scss');
 
 var QuizifyApp = React.createClass({
-  render: function() {
+
+  componentDidMount() {
+    socket.on('connect', () => {
+      console.log('Connected with WebSockets');
+    });
+  },
+
+  render() {
     return (
-      <div ref="p" className='main'>
+      <div className='QuizifyApp'>
         <h1>Quizify</h1>
+        <ul>
+          <li>
+            <Link to="home">
+              <span>Home</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="about">
+              <span>About</span>
+            </Link>
+          </li>
+        </ul>
+
+        <RouteHandler/>
       </div>
     );
   }
