@@ -4,6 +4,7 @@ var app = require('../../../server/main.js');
 var io = require('socket.io-client');
 var config = require('../../../server/config/environment');
 
+var socketEvents = require('../../../common/socketEvents');
 var socketURL = `http://0.0.0.0:${config.port}`;
 var options = {
   transports: ['websocket'],
@@ -34,29 +35,32 @@ describe("WebSocket communication",function(){
     });
   });
 
-  it('Should receive "init" event upon connection', function(done){
+  it('Should receive "lobbyCreated" upon emitting "createLobby" event', function(done){
     var client = io.connect(socketURL, options);
 
-    client.on('init', function (data) {
-      expect(data).to.be.eql('welcome');
+    client.on(socketEvents.server.lobbyCreated, (data) => {
+      expect(data).to.have.keys("lobbyId");
+      expect(data.lobbyId).to.be.a("number");
       done();
     });
+
+    client.emit(socketEvents.client.host.createLobby);
   });
 
 
-  it('Should be able to create new game', function(done){
-    var client = io.connect(socketURL, options);
+  // it('Should be able to create new game', function(done){
+  //   var client = io.connect(socketURL, options);
 
-    client.on('connect', function(data){
+  //   client.on('connect', function(data){
 
-      client.emit('create_game', { id: 'abc123' });
-      setTimeout(function () {
-        expect(console.log).to.have.been.calledOnce;
-        expect(console.log).to.have.been.calledWith('new game created for id abc123');
-        done();
-      }, 100);
-    });
-  });
+  //     client.emit('create_game', { id: 'abc123' });
+  //     setTimeout(function () {
+  //       expect(console.log).to.have.been.calledOnce;
+  //       expect(console.log).to.have.been.calledWith('new game created for id abc123');
+  //       done();
+  //     }, 100);
+  //   });
+  // });
 });
 
 
