@@ -12,13 +12,17 @@ var Reflux = require('reflux');
 require('normalize.css');
 require('../styles/main.scss');
 
-var QuizifyApp = React.createClass({
+class QuizifyApp extends React.Component {
+
+  constructor(props, context) {
+     super(props, context);
+  }
 
   componentDidMount() {
     socket.on('connect', () => {
       console.log('Connected with WebSockets');
     });
-  },
+  }
 
   render() {
     return (
@@ -41,6 +45,10 @@ var QuizifyApp = React.createClass({
       </div>
     );
   }
-});
+}
+
+QuizifyApp.contextTypes = {
+  router: React.PropTypes.func.isRequired
+};
 
 module.exports = QuizifyApp;

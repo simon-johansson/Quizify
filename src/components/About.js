@@ -4,7 +4,7 @@ var React = require('react/addons');
 
 require('styles/views/About.scss');
 
-var About = React.createClass({
+class About extends React.Component {
   render () {
     return (
       <div>
@@ -14,7 +14,7 @@ var About = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = About;
 

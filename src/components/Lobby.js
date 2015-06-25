@@ -8,28 +8,32 @@ var HostStore = require('../stores/HostStore');
 
 require('styles/views/Lobby.scss');
 
-var Lobby = React.createClass({
-  mixins: [Reflux.ListenerMixin],
+class Lobby extends React.Component {
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       id: ''
     };
-  },
+  }
 
   componentDidMount() {
-    this.listenTo(HostStore, this.onIdChange);
+    this.unsubscribe = HostStore.listen(this.onIdChange.bind(this));
 
     // Triggering of the createLobby could also be done in
     // the Home component when clicking on the "Create" button
     HostActions.createLobby();
-  },
+  }
+
+  componentWillUnmount() {
+      this.unsubscribe();
+  }
 
   onIdChange(roomID) {
     this.setState({
       id: roomID
     });
-  },
+  }
 
   render() {
     return (
@@ -41,7 +45,7 @@ var Lobby = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Lobby;
 

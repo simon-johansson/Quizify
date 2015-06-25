@@ -8,7 +8,7 @@ var { Link } = Router;
 
 require('styles/views/Home.scss');
 
-var Home = React.createClass({
+class Home extends React.Component {
   render() {
     return (
       <div className="Home-view">
@@ -21,7 +21,7 @@ var Home = React.createClass({
       </div>
     );
   }
-});
+}
 
 module.exports = Home;
 

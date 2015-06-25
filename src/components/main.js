@@ -10,7 +10,7 @@ var Home = require('./Home');
 var Lobby = require('./Lobby');
 var About = require('./About');
 
-var NotFound = React.createClass({
+class NotFound extends React.Component {
   render () {
     return (
       <div>
@@ -18,7 +18,7 @@ var NotFound = React.createClass({
       </div>
     );
   }
-});
+}
 
 var routes = (
   <Route path="/" handler={ QuizifyApp }>
