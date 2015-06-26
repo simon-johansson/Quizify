@@ -1,22 +1,37 @@
 'use strict';
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+function noop() {}
 
-var React = require('react');
-var expect = require('chai').expect;
-var QuizifyApp = require('components/QuizifyApp.js');
+describe('QuizifyApp', () => {
+  var React, Router, TestUtils, stubContext, QuizifyApp;
 
-describe('QuizifyApp', function () {
+  beforeEach( () => {
+    React = require('react/addons');
+    TestUtils = React.addons.TestUtils;
+    stubContext = require('react-stub-context');
+    QuizifyApp = require('components/QuizifyApp.js');
 
-  it('should create a new instance of QuizifyApp', function () {
-    var quizifyApp = TestUtils.renderIntoDocument(<QuizifyApp/>);
-    expect(quizifyApp).to.exist;
+    Router = function() {};
+    Router.makeHref = function () { return 'link'; };
+    Router.setRouteComponentAtDepth = Router.isActive = Router.getRouteAtDepth = noop;
+
+    QuizifyApp = stubContext(QuizifyApp, { router: Router });
   });
 
-  it('should contain the correct text', function () {
-    var quizifyApp = TestUtils.renderIntoDocument(<QuizifyApp/>);
-    var node = TestUtils.findRenderedDOMComponentWithTag(quizifyApp, "div");
-    expect(node.getDOMNode().textContent).to.eql('Quizify');
+  it('should create a new instance of QuizifyApp', () => {
+    var render = TestUtils.renderIntoDocument(React.createElement(QuizifyApp, {}));
+    expect(render).to.exist;
   });
+
+  it('view should contain links to "Home" and "About"', () => {
+    var render = TestUtils.renderIntoDocument(React.createElement(QuizifyApp, {}));
+    var links = TestUtils.scryRenderedDOMComponentsWithTag(render, 'a');
+
+    expect(links).to.have.length(2);
+    links.forEach( (link) => {
+      expect(link.getDOMNode().getAttribute('href')).to.eql('link');
+      expect(link.getDOMNode().textContent).to.match(/^Home|About/);
+    });
+  });
+
 });
