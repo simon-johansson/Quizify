@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['phantomjs-shim', 'mocha'],
+    frameworks: ['phantomjs-shim', 'mocha', 'sinon-chai'],
     files: [
       './helpers/**/*.js',
       './spec/components/**/*.js',
@@ -56,8 +56,8 @@ module.exports = function (config) {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
           'components': path.join(process.cwd(), './src/components/'),
-          'stores': '../../../src/stores/',
-          'actions': '../../../src/actions/'
+          'stores': path.join(process.cwd(), './src/stores/'),
+          'actions': path.join(process.cwd(), './src/actions/')
         }
       }
     },
@@ -96,7 +96,8 @@ module.exports = function (config) {
       require("karma-phantomjs-launcher"),
       require("karma-phantomjs-shim"),
       require("karma-firefox-launcher"),
-      require("karma-spec-reporter")
+      require("karma-spec-reporter"),
+      require("karma-sinon-chai"),
     ],
   });
 };
