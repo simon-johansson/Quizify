@@ -11,23 +11,34 @@ var HostStore = Reflux.createStore({
 
   setInitialState() {
     this.state = {
-      lobbyId: 'null',
-      users: []
+      lobbyId: null,
+      players: []
     };
   },
 
-  onCreateLobby(data) {
+  getPlayers() {
+    return this.state.players;
+  },
+
+  getLobbyId() {
+    return this.state.lobbyId;
+  },
+
+  onCreateLobby() {
     socket.emit(socketEvents.client.host.createLobby);
+  },
+
+  onLobbyCreated(data) {
+    var {state} = this;
+    state.lobbyId = data.lobbyId;
+    this.trigger(state);
   },
 
   init() {
     this.setInitialState();
 
-    socket.on(socketEvents.server.lobbyCreated, (data) => {
-      var {state} = this;
-      state.lobbyId = data.lobbyId;
-      this.trigger(state);
-    });
+    // bind socket events
+    socket.on(socketEvents.server.lobbyCreated, this.onLobbyCreated);
   },
 
 });
