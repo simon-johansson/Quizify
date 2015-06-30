@@ -9,8 +9,7 @@ module.exports = function (config) {
     files: [
       './helpers/**/*.js',
       './spec/components/**/*.js',
-      './spec/stores/**/*.js',
-      './spec/actions/**/*.js'
+      './spec/stores/**/*.js'
     ],
     preprocessors: {
       './spec/components/**/*.js': ['webpack'],
@@ -57,7 +56,6 @@ module.exports = function (config) {
           'styles': path.join(process.cwd(), './src/styles/'),
           'components': path.join(process.cwd(), './src/components/'),
           'stores': path.join(process.cwd(), './src/stores/'),
-          'actions': path.join(process.cwd(), './src/actions/')
         }
       }
     },
