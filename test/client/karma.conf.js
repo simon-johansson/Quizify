@@ -56,6 +56,7 @@ module.exports = function (config) {
           'styles': path.join(process.cwd(), './src/styles/'),
           'components': path.join(process.cwd(), './src/components/'),
           'stores': path.join(process.cwd(), './src/stores/'),
+          'actions': path.join(process.cwd(), './src/actions/'),
           'utils': path.join(process.cwd(), './src/utils/'),
           'common': path.join(process.cwd(), './common/')
         }
