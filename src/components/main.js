@@ -9,6 +9,7 @@ var QuizifyApp = require('./QuizifyApp');
 var Home = require('./Home');
 var Lobby = require('./Lobby');
 var About = require('./About');
+var PlayerLobby = require('./PlayerLobby');
 
 class NotFound extends React.Component {
   render () {
@@ -26,6 +27,7 @@ var routes = (
 
     <Route name="lobby" path="lobby" handler={ Lobby }/>
     <Route name="about" path="about" handler={ About }/>
+    <Route name="playerLobby" path="playerLobby" handler={ PlayerLobby }/>
     <NotFoundRoute handler={ NotFound } />
   </Route>
 );

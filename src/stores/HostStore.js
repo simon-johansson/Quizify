@@ -39,6 +39,15 @@ var HostStore = Reflux.createStore({
 
     // bind socket events
     socket.on(socketEvents.server.lobbyCreated, this.onLobbyCreated);
+
+    socket.on(socketEvents.server.userJoined, (data) => {
+      var {state} = this;  
+      state.users.push({
+        playerId: data.playerId,
+        playerName: data.playerName
+      });
+      this.trigger(state);
+    });
   },
 
 });

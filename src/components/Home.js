@@ -15,7 +15,7 @@ class Home extends React.Component {
         <Link to="lobby">
           <button>Create</button>
         </Link>
-        <Link to="home">
+        <Link to="playerLobby">
           <button>Join</button>
         </Link>
       </div>
