@@ -1,13 +1,10 @@
 'use strict';
 
-var socket = require('../utils/socket');
-var socketEvents = require('../../common/socketEvents');
-
 var Reflux = require('reflux');
-var Actions = require('../actions/PlayerActionCreators');
+var PlayerActions = require('../actions/PlayerActionCreators');
 
 var PlayerStore = Reflux.createStore({
-  listenables: Actions,
+  listenables: PlayerActions,
 
   setInitialState() {
     this.state = {
@@ -17,20 +14,20 @@ var PlayerStore = Reflux.createStore({
     };
   },
 
-  onJoinLobby(data) {
-    this.state.playerName = data.playerName;
-    this.state.lobbyId = data.lobbyId;
-    socket.emit(socketEvents.client.player.joinLobby, this.state);
+  onPLayerJoined(data) {
+    var {state} = this;
+    state.lobbyId = data.lobbyId;
+    state.playerId = data.playerId;
+    state.playerName = data.playerName;
+    this.trigger(state);
   },
 
   init() {
     this.setInitialState();
 
-    socket.on(socketEvents.server.playerJoined, (data) => {
-      var {state} = this;  
-      state.playerId = data.playerId;    
-      this.trigger(state);
-    });
+    // this.listenTo(PlayerActions.joinLobby, this.onPLayerJoined);
+    // this.listenTo(PlayerActions.joinLobby.failed, this.onPLayerJoined);
+    this.listenTo(PlayerActions.joinLobby.completed, this.onPLayerJoined);
   },
 
 });

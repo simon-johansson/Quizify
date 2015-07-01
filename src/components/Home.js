@@ -12,7 +12,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="Home-view">
-        <Link to="lobby">
+        <Link to="hostLobby">
           <button>Create</button>
         </Link>
         <Link to="playerLobby">

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var Reflux = require('reflux'); 
+var Reflux = require('reflux');
 
 var Actions = require('../actions/PlayerActionCreators');
 var Store = require('../stores/PlayerStore');
@@ -16,51 +16,54 @@ class PlayerLobby extends React.Component {
       playerId: null,
       playerName: null,
       lobbyId: null
-    }; 
-  } 
-
-  componentWillMount() {
-    // this.unsubscribe();
+    };
   }
-  
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   componentDidMount() {
-    this.unsubscribe = Store.listen(this.onIdChange.bind(this));
+    this.unsubscribe = Store.listen(this._onStoreChange.bind(this));
   }
 
-  onIdChange(playerId) {
+  // Really need all the setter functions?
+  _onStoreChange(data) {
     this.setState({
-      playerId: playerId
+      playerId: data.playerId
     });
   }
 
-  onNameChange(event) {
+  // Really need all the setter functions?
+  _onNameChange(event) {
     this.setState({
       playerName: event.target.value
     });
   }
 
-  onLobbyIdChange(event) {
+  // Really need all the setter functions?
+  _onLobbyIdChange(event) {
     this.setState({
       lobbyId: event.target.value
     });
   }
 
-  join(event) {
+  _onJoin(event) {
     Actions.joinLobby({
       playerName: this.state.playerName,
       lobbyId: this.state.lobbyId
     });
   }
-  
+
   render() {
-    let {playerName,lobbyId,playerId} = this.state;
+    let {playerName, lobbyId, playerId} = this.state;
     return (
         <div className="PlayerLobby">
           <span>Name</span>
-          <input type="text" value={playerName} onChange={this.onNameChange.bind(this)} />
+          <input type="text" value={playerName} onChange={this._onNameChange.bind(this)} />
           <span>ID</span>
-          <input type="text" value={lobbyId} onChange={this.onLobbyIdChange.bind(this)} />
-          <button onClick={this.join.bind(this)}>Join</button>
+          <input type="text" value={lobbyId} onChange={this._onLobbyIdChange.bind(this)} />
+          <button onClick={this._onJoin.bind(this)}>Join</button>
           <span>{playerId}</span>
         </div>
       );

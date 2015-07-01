@@ -4,12 +4,12 @@ describe('PlayerLobby', function () {
   var React = require('react/addons');
   var io = require('socket.io-client');
   var TestUtils = React.addons.TestUtils;
-  
-  var PlayerLobby, component, doc;	
+
+  var PlayerLobby, component, doc;
 
   beforeEach(function () {
     PlayerLobby = require('components/PlayerLobby.js');
-    
+
     // component = React.createElement(PlayerLobby);
     doc = TestUtils.renderIntoDocument( <PlayerLobby /> );
   });

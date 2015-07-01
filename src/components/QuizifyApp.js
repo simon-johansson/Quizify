@@ -6,8 +6,6 @@ var { RouteHandler, Link } = Router;
 var React = require('react/addons');
 var Reflux = require('reflux');
 
-var socket = require('../utils/WebSocketService');
-
 // CSS
 require('normalize.css');
 require('../styles/main.scss');
@@ -19,7 +17,6 @@ class QuizifyApp extends React.Component {
   }
 
   componentDidMount() {
-    socket.connect();
   }
 
   render() {

@@ -1,8 +1,8 @@
 'use strict';
 
-let socketIO = require('socket.io');
-let socketEvents = require('../../common/socketEvents');
-let io;
+var socketIO = require('socket.io');
+var socketEvents = require('../../common/socketEvents');
+var io;
 
 function bindEvents (socket) {
 
@@ -15,14 +15,13 @@ function bindEvents (socket) {
 
   socket.on(socketEvents.client.player.joinLobby, (data) => {
     // Just a dummy id at the moment
-    console.log(data);
     let playerId = Math.floor(Math.random() * 2000);
     console.log(data);
     console.log(`new player ${data.playerName} joined lobby: ${data.lobbyId}`);
-    socket.emit(socketEvents.server.playerJoined, { 
+    io.sockets.emit(socketEvents.server.playerJoined, {
       lobbyId: data.lobbyId,
       playerId: playerId,
-      payerName:  data.playerName
+      playerName:  data.playerName
     });
   });
 }

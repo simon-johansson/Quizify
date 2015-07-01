@@ -1,10 +1,11 @@
 'use strict';
 
 var Reflux = require('reflux');
-var Actions = require('../actions/HostActionCreators');
+var HostActions = require('../actions/HostActionCreators');
+var PlayerActions = require('../actions/PlayerActionCreators');
 
 var HostStore = Reflux.createStore({
-  listenables: Actions,
+  listenables: [HostActions, PlayerActions],
 
   setInitialState() {
     this.state = {
@@ -27,6 +28,15 @@ var HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  onPLayerJoined(data) {
+    let {state} = this;
+    let {playerId, playerName} = data
+    state.players.push({
+      playerId, playerName
+    });
+    this.trigger(state);
+  },
+
   // Maybe a good idea to move all the errors out to
   // a seperate store?
   onError(err) {
@@ -36,17 +46,9 @@ var HostStore = Reflux.createStore({
   init() {
     this.setInitialState();
 
-    socket.on(socketEvents.server.userJoined, (data) => {
-      var {state} = this;
-      state.users.push({
-        playerId: data.playerId,
-        playerName: data.playerName
-      });
-      this.trigger(state);
-    });
-
-    this.listenTo(Actions.createLobby.completed, this.onLobbyCreated);
-    this.listenTo(Actions.createLobby.failed, this.onError);
+    this.listenTo(HostActions.createLobby.completed, this.onLobbyCreated);
+    this.listenTo(HostActions.createLobby.failed, this.onError);
+    this.listenTo(PlayerActions.joinLobby.completed, this.onPLayerJoined);
   },
 
 });
