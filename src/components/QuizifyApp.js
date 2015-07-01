@@ -1,12 +1,12 @@
 'use strict';
 
-var socket = require('../utils/socket');
-
 var Router = require('react-router');
 var { RouteHandler, Link } = Router;
 
 var React = require('react/addons');
 var Reflux = require('reflux');
+
+var socket = require('../utils/WebSocketService');
 
 // CSS
 require('normalize.css');
@@ -19,9 +19,7 @@ class QuizifyApp extends React.Component {
   }
 
   componentDidMount() {
-    socket.on('connect', () => {
-      console.log('Connected with WebSockets');
-    });
+    socket.connect();
   }
 
   render() {
