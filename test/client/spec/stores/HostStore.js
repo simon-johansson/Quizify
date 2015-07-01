@@ -1,21 +1,11 @@
 'use strict';
 
-var socket = require('utils/socket');
-var socketEvents = require('common/socketEvents');
-
 describe('HostStore', () => {
   var HostStore, HostActions, sandbox;
 
   beforeEach( () => {
     HostStore = require('stores/HostStore');
     HostActions = require('actions/HostActionCreators');
-
-    sandbox = sinon.sandbox.create();
-    sandbox.spy(socket, "emit");
-  });
-
-  afterEach(function() {
-    sandbox.restore();
   });
 
   it('should be defined', () => {
@@ -33,12 +23,11 @@ describe('HostStore', () => {
     expect(id).to.eql(null);
   });
 
-  it('should emit to server upon getting the "createLobby" event', (done) => {
-    HostActions.createLobby();
+  it('should set lobbyId when lobby has been created', (done) => {
+    HostActions.createLobby.completed({lobbyId: 123});
 
     setTimeout( () => {
-      expect(socket.emit).to.have.been.called;
-      expect(socket.emit).to.have.been.calledWith(socketEvents.client.host.createLobby);
+      expect(HostStore.getLobbyId()).to.eql(123);
       done()
     }, 200);
   });
