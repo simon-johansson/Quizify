@@ -51,23 +51,14 @@ module.exports = function (grunt) {
       prod: { NODE_ENV: 'production' },
     },
 
-    // 'webpack-dev-server': {
-    //   options: {
-    //     hot: true,
-    //     port: 8000,
-    //     webpack: webpackDevConfig,
-    //     publicPath: '/assets/',
-    //     contentBase: './<%= pkg.src %>/'
-    //   },
-
-    //   start: {
-    //     keepAlive: true
-    //   }
-    // },
-
     karma: {
-      unit: {
-        configFile: 'test/client/karma.conf.js'
+      watch: {
+        configFile: 'test/client/karma.conf.js',
+        autoWatch: true,
+        singleRun: false
+      },
+      single: {
+        configFile: 'test/client/karma.conf.js',
       }
     },
 
@@ -120,14 +111,23 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      // 'webpack-dev-server'
       'express',
       'open',
       'express-keepalive',
     ]);
   });
 
-  grunt.registerTask('test', ['karma']);
+  grunt.registerTask('test', function (target) {
+    if (target === 'watch') {
+      return grunt.task.run([
+        'karma:watch',
+      ]);
+    }
+
+    grunt.task.run([
+      'karma:single',
+    ]);
+  });
 
   grunt.registerTask('build', [
     'clean',
