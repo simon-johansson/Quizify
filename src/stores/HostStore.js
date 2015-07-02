@@ -46,6 +46,7 @@ var HostStore = Reflux.createStore({
   init() {
     this.setInitialState();
 
+    this.listenTo(HostActions.createLobby, this.setInitialState);
     this.listenTo(HostActions.createLobby.completed, this.onLobbyCreated);
     this.listenTo(HostActions.createLobby.failed, this.onError);
     this.listenTo(PlayerActions.joinLobby.completed, this.onPLayerJoined);
