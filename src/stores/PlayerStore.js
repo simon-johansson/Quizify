@@ -14,7 +14,7 @@ var PlayerStore = Reflux.createStore({
     };
   },
 
-  onPLayerJoined(data) {
+  _onPLayerJoined(data) {
     var {state} = this;
     state.lobbyId = data.lobbyId;
     state.playerId = data.playerId;
@@ -22,12 +22,16 @@ var PlayerStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  _onError(err) {
+    window.alert(err);
+  },
+
   init() {
     this.setInitialState();
 
     // this.listenTo(PlayerActions.joinLobby, this.onPLayerJoined);
-    // this.listenTo(PlayerActions.joinLobby.failed, this.onPLayerJoined);
-    this.listenTo(PlayerActions.joinLobby.completed, this.onPLayerJoined);
+    this.listenTo(PlayerActions.joinLobby.failed, this._onError);
+    this.listenTo(PlayerActions.joinLobby.completed, this._onPLayerJoined);
   },
 
 });

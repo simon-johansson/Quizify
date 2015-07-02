@@ -26,7 +26,7 @@ var WebSocketService = {
   onSocket() {
     socket.on(socketEvents.server.playerJoined, (data) => {
       let {failed, completed} = PlayerActions.joinLobby;
-      if(data.error) {failed(data);}
+      if(data.errorMessage) {failed(data.errorMessage);}
       else {completed(data);}
     });
   },
@@ -35,7 +35,7 @@ var WebSocketService = {
     socket.off(socketEvents.server.lobbyCreated);
     return new Promise ((resolve, reject) => {
       socket.on(socketEvents.server.lobbyCreated, (data) => {
-        if(data.error) {reject('Failed!');}
+        if(data.errorMessage) {reject('Failed!');}
         else {resolve(data);}
       });
       socket.emit(socketEvents.client.host.createLobby);
