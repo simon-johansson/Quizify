@@ -6,7 +6,7 @@ var Reflux = require('reflux');
 var Actions = require('../actions/PlayerActionCreators');
 var Store = require('../stores/PlayerStore');
 
-require('styles/PlayerLobby.scss');
+require('styles/views/PlayerLobby.scss');
 
 class PlayerLobby extends React.Component {
 
