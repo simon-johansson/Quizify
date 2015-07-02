@@ -43,7 +43,7 @@ class HostLobby extends React.Component {
     let playerElements = [];
     players.forEach(function (player, i) {
       let index = i + 1;
-      let {playerName} = player
+      let {playerName} = player;
       playerElements.push(<Player username={playerName} index={index} />);
     });
     return (

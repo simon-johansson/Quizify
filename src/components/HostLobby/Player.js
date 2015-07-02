@@ -23,6 +23,6 @@ class Player extends React.Component {
 Player.propTypes = {
   index: React.PropTypes.number,
   username: React.PropTypes.string,
-}
+};
 
 module.exports = Player;

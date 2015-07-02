@@ -30,7 +30,7 @@ var HostStore = Reflux.createStore({
 
   onPLayerJoined(data) {
     let {state} = this;
-    let {playerId, playerName} = data
+    let {playerId, playerName} = data;
     state.players.push({
       playerId, playerName
     });
@@ -40,7 +40,7 @@ var HostStore = Reflux.createStore({
   // Maybe a good idea to move all the errors out to
   // a seperate store?
   onError(err) {
-    alert(err);
+    window.alert(err);
   },
 
   init() {
