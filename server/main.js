@@ -2,8 +2,6 @@
 
 require("babel/register");
 
-var path = require('path');
-
 var express = require('express');
 var config = require('./config/environment/');
 
@@ -17,3 +15,4 @@ server.listen(config.port, function () {
   console.log('Server running on port ' + config.port);
 });
 
+module.export = app;
