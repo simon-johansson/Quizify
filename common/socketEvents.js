@@ -1,11 +1,12 @@
 
 var socketEvents = {
   client : {
+    disconnected: 'client:disconnected'
     host: {
       createLobby: 'host:create lobby'
     },
     player: {
-      joinLobby: 'player:join lobby'
+      joinLobby: 'player:join lobby',
     },
   },
   server : {
