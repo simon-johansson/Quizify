@@ -25,11 +25,19 @@ function playerJoined (data) {
   return data.errorMessage ? failed(data.errorMessage) : completed(data);
 }
 
+/**
+ * @param  {{playerId: string}} data
+ */
+function clientDisconnected (data) {
+  console.log('Client disconnected!');
+}
+
 function bindEvents () {
   HostActions.createLobby.listenAndPromise(createLobby);
   PlayerActions.joinLobby.listen(joinLobby);
 
   socket.on(socketEvents.server.playerJoined, playerJoined);
+  socket.on(socketEvents.server.clientDisconnected, clientDisconnected);
 }
 
 var WebSocketService = {
