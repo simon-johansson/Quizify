@@ -10,7 +10,7 @@ module.exports = function (config) {
       // './helpers/**/*.js',
       // './spec/views/**/*.js',
       // './spec/stores/**/*.js'
-      '../../client/**/__tests__/*.js'
+      '../../client/**/__tests__/test.js'
     ],
     preprocessors: {
       // './spec/views/**/*.js': ['webpack'],

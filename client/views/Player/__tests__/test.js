@@ -1,0 +1,3 @@
+describe('Player', () => {
+  require('./Lobby');
+});
