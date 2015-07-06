@@ -6,7 +6,7 @@ describe('Lobby', () => {
   beforeEach( () => {
     React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    Lobby = require('components/HostLobby');
+    Lobby = require('views/Host/Lobby');
     HostActions = require('actions/HostActionCreators');
 
     sandbox = sinon.sandbox.create();

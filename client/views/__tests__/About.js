@@ -6,7 +6,7 @@ describe('About', () => {
   beforeEach( () => {
     React = require('react/addons');
     TestUtils = React.addons.TestUtils;
-    About = require('components/About.js');
+    About = require('views/About.js');
   });
 
   it('should create a new instance of About', () => {

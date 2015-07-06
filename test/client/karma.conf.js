@@ -7,14 +7,16 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['phantomjs-shim', 'mocha', 'sinon-chai'],
     files: [
-      './helpers/**/*.js',
-      './spec/components/**/*.js',
-      './spec/stores/**/*.js'
+      // './helpers/**/*.js',
+      // './spec/views/**/*.js',
+      // './spec/stores/**/*.js'
+      '../../client/**/__tests__/*.js'
     ],
     preprocessors: {
-      './spec/components/**/*.js': ['webpack'],
-      './spec/stores/**/*.js': ['webpack'],
-      './spec/actions/**/*.js': ['webpack']
+      // './spec/views/**/*.js': ['webpack'],
+      // './spec/stores/**/*.js': ['webpack'],
+      // './spec/actions/**/*.js': ['webpack']
+      '../../client/**/__tests__/*.js': ['webpack']
     },
     webpack: {
       cache: true,
@@ -47,17 +49,17 @@ module.exports = function (config) {
         }]
       },
       postLoaders: [{
-        test: /src\/.*\.js$/,
+        test: /client\/.*\.js$/,
         loader: 'istanbul-instrumenter',
         exclude: /(test|node_modules|bower_components|dist|server)/,
       }],
       resolve: {
         alias: {
-          'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/components/'),
-          'stores': path.join(process.cwd(), './src/stores/'),
-          'actions': path.join(process.cwd(), './src/actions/'),
-          'utils': path.join(process.cwd(), './src/utils/'),
+          'styles': path.join(process.cwd(), './client/styles/'),
+          'views': path.join(process.cwd(), './client/views/'),
+          'stores': path.join(process.cwd(), './client/stores/'),
+          'actions': path.join(process.cwd(), './client/actions/'),
+          'utils': path.join(process.cwd(), './client/utils/'),
           'common': path.join(process.cwd(), './common/')
         }
       }
@@ -81,7 +83,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS', 'Firefox'],
+    browsers: ['PhantomJS'],
     reporters: ['spec', 'coverage'],
     coverageReporter: {
       type: 'lcov',

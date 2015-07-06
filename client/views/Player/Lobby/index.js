@@ -3,10 +3,8 @@
 var React = require('react/addons');
 var Reflux = require('reflux');
 
-var Actions = require('../actions/PlayerActionCreators');
-var Store = require('../stores/PlayerStore');
-
-require('styles/views/PlayerLobby.scss');
+var Actions = require('actions/PlayerActionCreators');
+var Store = require('stores/PlayerStore');
 
 class PlayerLobby extends React.Component {
 
@@ -58,7 +56,7 @@ class PlayerLobby extends React.Component {
   render() {
     let {playerName, lobbyId, playerId} = this.state;
     return (
-        <div className="PlayerLobby">
+        <div className="PlayerLobby-view">
           <span>Name</span>
           <input type="text" value={playerName} onChange={this._onNameChange.bind(this)} />
           <span>ID</span>

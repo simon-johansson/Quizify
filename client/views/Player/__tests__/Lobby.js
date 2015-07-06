@@ -8,7 +8,7 @@ describe('PlayerLobby', function () {
   var PlayerLobby, component, doc;
 
   beforeEach(function () {
-    PlayerLobby = require('components/PlayerLobby.js');
+    PlayerLobby = require('views/Player/Lobby');
 
     // component = React.createElement(PlayerLobby);
     doc = TestUtils.renderIntoDocument( <PlayerLobby /> );

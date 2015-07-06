@@ -12,10 +12,10 @@ class Home extends React.Component {
   render() {
     return (
       <div className="Home-view">
-        <Link to="hostLobby">
+        <Link to="host-lobby">
           <button>Create</button>
         </Link>
-        <Link to="playerLobby">
+        <Link to="player-lobby">
           <button>Join</button>
         </Link>
       </div>

@@ -8,7 +8,7 @@ var Reflux = require('reflux');
 
 // CSS
 require('normalize.css');
-require('../styles/main.scss');
+require('styles/main.scss');
 
 class QuizifyApp extends React.Component {
 

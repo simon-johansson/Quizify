@@ -8,8 +8,6 @@ var HostStore = require('stores/HostStore');
 
 var Player = require('./Player');
 
-require('styles/views/HostLobby.scss');
-
 class HostLobby extends React.Component {
   constructor(props) {
     super(props);

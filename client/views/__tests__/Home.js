@@ -9,7 +9,7 @@ describe('Home', () => {
     React = require('react/addons');
     TestUtils = React.addons.TestUtils;
     stubContext = require('react-stub-context');
-    Home = require('components/Home.js');
+    Home = require('views/Home.js');
 
     Router = function() {};
     Router.makeHref = function () { return 'link'; };

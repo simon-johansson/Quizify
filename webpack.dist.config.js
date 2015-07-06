@@ -10,7 +10,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 var buildPath = path.resolve(__dirname, 'dist', 'build');
-var mainPath = path.resolve(__dirname, 'client', 'components', 'main.js');
+var mainPath = path.resolve(__dirname, 'client', 'views', 'main.js');
 
 module.exports = {
 
@@ -41,7 +41,7 @@ module.exports = {
     alias: {
       'styles': __dirname + '/client/styles',
       'mixins': __dirname + '/client/mixins',
-      'components': __dirname + '/client/components/',
+      'views': __dirname + '/client/views/',
       'stores': __dirname + '/client/stores/',
       'actions': __dirname + '/client/actions/',
       'utils': __dirname + '/client/utils/'

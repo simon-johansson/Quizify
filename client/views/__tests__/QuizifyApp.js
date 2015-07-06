@@ -9,7 +9,7 @@ describe('QuizifyApp', () => {
     React = require('react/addons');
     TestUtils = React.addons.TestUtils;
     stubContext = require('react-stub-context');
-    QuizifyApp = require('components/QuizifyApp.js');
+    QuizifyApp = require('views/QuizifyApp.js');
 
     Router = function() {};
     Router.makeHref = function () { return 'link'; };

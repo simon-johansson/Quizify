@@ -10,8 +10,10 @@ var socket = require('utils/WebSocketService').connect();
 var QuizifyApp = require('./QuizifyApp');
 var Home = require('./Home');
 var About = require('./About');
-var HostLobby = require('./HostLobby');
-var PlayerLobby = require('./PlayerLobby');
+var Host = require('./Host');
+var HostLobby = require('./Host/Lobby');
+var Player = require('./Player');
+var PlayerLobby = require('./Player/Lobby');
 
 class NotFound extends React.Component {
   render () {
@@ -26,10 +28,14 @@ class NotFound extends React.Component {
 var routes = (
   <Route path="/" handler={ QuizifyApp }>
     <DefaultRoute name="home" handler={ Home }/>
-
-    <Route name="hostLobby" path="host-lobby" handler={ HostLobby }/>
     <Route name="about" path="about" handler={ About }/>
-    <Route name="playerLobby" path="player-lobby" handler={ PlayerLobby }/>
+
+    <Route name="host" path="host" handler={ Host }>
+      <Route name="host-lobby" path="lobby" handler={ HostLobby }/>
+    </Route>
+    <Route name="player" path="player" handler={ Player }>
+      <Route name="player-lobby" path="lobby" handler={ PlayerLobby }/>
+    </Route>
     <NotFoundRoute handler={ NotFound } />
   </Route>
 );
