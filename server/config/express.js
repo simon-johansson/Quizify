@@ -24,7 +24,7 @@ module.exports = app => {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  app.set('appPath', `${config.root}/src`);
+  app.set('appPath', `${config.root}/client`);
 
   if(env === 'production') {
     app.use(express.static(path.join(config.root, 'dist')));
@@ -39,7 +39,7 @@ module.exports = app => {
   if(env === 'development') {
     var proxy = httpProxy.createProxyServer({ ws: true });
 
-    app.use(express.static(path.join(config.root, 'src')));
+    app.use(express.static(path.join(config.root, 'client')));
     app.use(morgan('dev'));
     app.use(errorHandler());
 

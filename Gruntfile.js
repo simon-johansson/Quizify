@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     pkg: pkgConfig,
 
     paths: {
-      dev: 'src',
+      dev: 'client',
       dist: 'dist'
     },
 
