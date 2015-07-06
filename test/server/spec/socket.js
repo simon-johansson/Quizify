@@ -1,40 +1,40 @@
 'use strict';
 
-var clientSocket = require('socket.io-client');
-var serverSocket = require('../../../server/components/socket');
-var app = require('../../../server/main');
-var config = require('../../../server/config/environment');
-var socketEvents = require('../../../common/socketEvents');
-var socketURL = `http://0.0.0.0:${config.port}`;
-var options = {
+const clientSocket = require('socket.io-client');
+const serverSocket = require('../../../server/components/socket');
+const app = require('../../../server/main');
+const config = require('../../../server/config/environment');
+const socketEvents = require('../../../common/socketEvents');
+const socketURL = `http://0.0.0.0:${config.port}`;
+const options = {
   transports: ['websocket'],
   'force new connection': true
 };
 
-describe("WebSocket communication", function(){
-  var host, player;
+describe("WebSocket communication", () => {
+  let host, player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     host = clientSocket.connect(socketURL, options);
     player = clientSocket.connect(socketURL, options);
   });
 
-  afterEach(function() {
+  afterEach(() => {
     host.disconnect();
     player.disconnect();
   });
 
-  it('should be able to connect to server', function(done){
-    var client = clientSocket.connect(socketURL, options);
+  it('should be able to connect to server', (done) => {
+    let client = clientSocket.connect(socketURL, options);
 
-    client.on('connect', function(data){
+    client.on('connect', (data) => {
       done();
     });
   });
 
-  describe("Host", function(){
+  describe("Host", () => {
 
-    it('should be able to create lobby', function(done){
+    it('should be able to create lobby', (done) => {
       host.on(socketEvents.server.lobbyCreated, (data) => {
         expect(data).to.have.keys("lobbyId");
         expect(data.lobbyId).to.be.a("string");
@@ -45,7 +45,7 @@ describe("WebSocket communication", function(){
     });
 
     it('should be nofified if player enters lobby', (done) => {
-      var lobbyId;
+      let lobbyId;
 
       host.on(socketEvents.server.lobbyCreated, (data) => {
         lobbyId = data.lobbyId;
@@ -71,19 +71,20 @@ describe("WebSocket communication", function(){
     });
 
     it('should get notified when player leavs/disconnects', (done) => {
-      var lobbyId;
+      let lobbyId, room;
 
       host.on(socketEvents.server.clientDisconnected, function (data) {
-        expect(Object.keys(serverSocket._getSocket().nsps['/'].adapter.rooms[lobbyId]).length).to.eql(1);
+        expect(Object.keys(room).length).to.eql(1);
         done();
       });
 
       host.on(socketEvents.server.lobbyCreated, (data) => {
         lobbyId = data.lobbyId;
-        expect(Object.keys(serverSocket._getSocket().nsps['/'].adapter.rooms[lobbyId]).length).to.eql(1);
+        room = serverSocket._getSocket().nsps['/'].adapter.rooms[lobbyId];
+        expect(Object.keys(room).length).to.eql(1);
 
         host.on(socketEvents.server.playerJoined, (data) => {
-          expect(Object.keys(serverSocket._getSocket().nsps['/'].adapter.rooms[lobbyId]).length).to.eql(2);
+          expect(Object.keys(room).length).to.eql(2);
 
           // 3. Player disconnects lobby
           player.disconnect()
@@ -101,7 +102,7 @@ describe("WebSocket communication", function(){
     });
   });
 
-  describe('Player', function () {
+  describe('Player', () => {
 
     it('should get error if trying to join lobby that does not exist', (done) => {
       player.on(socketEvents.server.playerJoined, (data) => {
@@ -116,10 +117,11 @@ describe("WebSocket communication", function(){
     });
 
     it('should be able to join created lobby', (done) => {
-      var lobbyId;
+      let lobbyId;
 
       host.on(socketEvents.server.lobbyCreated, (data) => {
-        var lobbyId = data.lobbyId;
+        let lobbyId = data.lobbyId;
+
         player.on(socketEvents.server.playerJoined, (data) => {
           expect(data).to.have.keys(['lobbyId', 'playerName', 'playerId']);
           expect(data.playerName).to.eql('Ozzy');
