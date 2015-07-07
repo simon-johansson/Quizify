@@ -1,7 +1,7 @@
 'use strict';
 
 var socketIO = require('socket.io');
-var socketEvents = require('../../../common/socketEvents');
+var socketEvents = require('../../../shared/socketEvents');
 var io;
 
 function onHostCreateLobby () {

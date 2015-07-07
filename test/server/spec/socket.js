@@ -4,7 +4,7 @@ const clientSocket = require('socket.io-client');
 const serverSocket = require('../../../server/components/socket');
 const app = require('../../../server/main');
 const config = require('../../../server/config/environment');
-const socketEvents = require('../../../common/socketEvents');
+const socketEvents = require('../../../shared/socketEvents');
 const socketURL = `http://0.0.0.0:${config.port}`;
 const options = {
   transports: ['websocket'],

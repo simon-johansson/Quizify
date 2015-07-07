@@ -60,7 +60,7 @@ module.exports = function (config) {
           'stores': path.join(process.cwd(), './client/stores/'),
           'actions': path.join(process.cwd(), './client/actions/'),
           'utils': path.join(process.cwd(), './client/utils/'),
-          'common': path.join(process.cwd(), './common/')
+          'shared': path.join(process.cwd(), './shared/')
         }
       }
     },

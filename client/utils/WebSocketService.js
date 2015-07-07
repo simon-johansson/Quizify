@@ -1,7 +1,7 @@
 'use strict';
 
 var socket = require('socket.io-client')();
-var socketEvents = require('../../common/socketEvents');
+var socketEvents = require('shared/socketEvents');
 
 var HostActions = require('actions/HostActionCreators');
 var PlayerActions = require('actions/PlayerActionCreators');

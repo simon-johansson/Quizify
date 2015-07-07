@@ -44,7 +44,8 @@ module.exports = {
       'views': __dirname + '/client/views/',
       'stores': __dirname + '/client/stores/',
       'actions': __dirname + '/client/actions/',
-      'utils': __dirname + '/client/utils/'
+      'utils': __dirname + '/client/utils/',
+      'shared': __dirname + '/shared/'
     }
   },
 
