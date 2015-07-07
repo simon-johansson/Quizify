@@ -2,4 +2,5 @@
 
 describe('Stores', () => {
   require('./HostStore');
+  require('./PlayerStore');
 });

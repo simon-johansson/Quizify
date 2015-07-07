@@ -14,6 +14,10 @@ var PlayerStore = Reflux.createStore({
     };
   },
 
+  getPlayerId(){ return this.state.playerId },
+  getPlayerName() { return this.state.playerName },
+  getLobbyId() { return this.state.lobbyId },
+
   _onPLayerJoined(data) {
     var {state} = this;
     state.lobbyId = data.lobbyId;
