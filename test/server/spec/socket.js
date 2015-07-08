@@ -1,10 +1,12 @@
 'use strict';
 
-const clientSocket = require('socket.io-client');
-const serverSocket = require('../../../server/components/socket');
-const app = require('../../../server/main');
 const config = require('../../../server/config/environment');
-const socketEvents = require('../../../shared/socketEvents');
+const server = require(`${config.root}/server/server`);
+const clientSocket = require('socket.io-client');
+const serverSocket = require(`${config.root}/server/components/socket`);
+const socketEvents = require(`${config.root}/shared/socketEvents`);
+
+require(`${config.root}/server/components/socket`).init(server);
 const socketURL = `http://0.0.0.0:${config.port}`;
 const options = {
   transports: ['websocket'],
@@ -13,6 +15,16 @@ const options = {
 
 describe("WebSocket communication", () => {
   let host, player;
+
+  before((done) => {
+    server.listen(config.port, function () {
+      done();
+    });
+  });
+
+  after(() => {
+    server.close();
+  })
 
   beforeEach(() => {
     host = clientSocket.connect(socketURL, options);
