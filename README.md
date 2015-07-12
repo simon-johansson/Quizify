@@ -17,7 +17,7 @@ To start the express server in development mode and the webpack-dev-server:
 ```bash
 $ grunt serve
 ```
-This enables livereload and hot loading for the frontend code but when making changes to the backend code the above command needs to be run again.
+This enables livereload and hot loading for the frontend code but the express server needs to be restarted when making changes to the backend code, i.e. stop the server and run the above command again.
 
 To run the project in production mode:
 ```bash
@@ -26,10 +26,10 @@ $ grunt serve:dist
 $ grunt build
 $ NODE_ENV=production node server/main.js
 ```
-Builds and compiles the webpack code into the `dist/` folder and then start the express server with production settings. Good for verifying before deploying.
+This will build and compile the webpack code into the `dist/` folder and start the express server with production settings. Good for verifying before deploying.
 
 ## Tests
-Run all tests:
+To run all tests:
 ```bash
 $ npm test
 ```
@@ -49,9 +49,9 @@ $ grunt test:watch
 
 Also possible to grep and isolate specific tests like so:
 ```bash
-$ grunt test:watch --grep=Store
+$ grunt test:watch --grep="Store"
 # or a single run
-$ grunt test --grep=Store
+$ grunt test --grep="Store"
 ```
 
 #### Backend
@@ -65,9 +65,11 @@ To grep and isolate specific tests:
 $ npm run test-backend -- --grep="Track"
 ```
 
+#### Continuous Integration
+[Travis CI](https://travis-ci.org/simon-johansson/Quizify) is used for continuously running the tests.
+
 ## Deployment
-Deployment is done by pusing to the `production` branch. This will trigger a new build on Heroku (if the tests pass on Travis-CI). Latest build can be found here:
-[https://spotifyquiz.herokuapp.com/](https://spotifyquiz.herokuapp.com/)
+[Heroku](https://www.heroku.com/) is used for hosting. Deployment is done by pusing to the `production` branch. This triggers a new build on Heroku (if the tests pass on Travis-CI).
 
 ## Noteworthy
 * **Proxy** - A proxy is needed in development mode in order to have both the express and the webpack-dev-server running properly, [info](http://www.christianalfoni.com/articles/2015_04_19_The-ultimate-webpack-setup).
