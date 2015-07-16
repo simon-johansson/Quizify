@@ -6,6 +6,8 @@ var { RouteHandler, Link } = Router;
 var React = require('react/addons');
 var Reflux = require('reflux');
 
+var FeedbackButton = require('./FeedbackButton');
+
 // CSS
 require('normalize.css');
 require('styles/main.scss');
@@ -37,6 +39,7 @@ class QuizifyApp extends React.Component {
         </ul>
 
         <RouteHandler/>
+        <FeedbackButton/>
       </div>
     );
   }
