@@ -1,6 +1,8 @@
 # Quizify
 
 [![Build Status][travis-image]][travis-url]
+[![Dependencies][david-deps-image]][david-deps-url]
+[![Development Dependencies][david-devdeps-image]][david-devdeps-url]
 
 > Web based Spotify multiplayer quiz. Use your mobile as a controller, up to 8 players.
 
@@ -96,3 +98,7 @@ $ npm run test-backend -- --grep="Track"
 
 [travis-image]: https://travis-ci.org/simon-johansson/Quizify.svg?branch=master
 [travis-url]: https://travis-ci.org/simon-johansson/Quizify
+[david-deps-image]: https://img.shields.io/david/simon-johansson/Quizify.svg
+[david-deps-url]: https://david-dm.org/simon-johansson/Quizify
+[david-devdeps-image]: https://img.shields.io/david/dev/simon-johansson/Quizify.svg
+[david-devdeps-url]: https://david-dm.org/simon-johansson/Quizify#info=devDependencies&view=table
