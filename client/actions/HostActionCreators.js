@@ -12,6 +12,9 @@ var HostActionCreators  = Reflux.createActions({
   createLobby: {
     children: ["completed", "failed"]
   },
+  listPlayers: {
+  	children: ["completed", "failed"]
+  }
 });
 // var HostActionCreators  = Reflux.createActions([
 //   "createLobby",

@@ -34,6 +34,10 @@ class HostLobby extends React.Component {
       id: data.lobbyId,
       players: data.players
     });
+    // Not effiecient? The players list will be broadcasted even if it does not change?!
+    HostActions.listPlayers({
+      players: data.players
+    });
   }
 
   render() {

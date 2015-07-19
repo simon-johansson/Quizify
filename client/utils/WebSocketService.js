@@ -25,6 +25,16 @@ function playerJoined (data) {
   return data.errorMessage ? failed(data.errorMessage) : completed(data);
 }
 
+function listPlayers (data) {
+  console.log(data);
+  socket.emit(socketEvents.client.host.listPlayers, data);
+}
+
+function playersListed (data) {
+  console.log("Players Listed");
+  console.log(data);
+}
+
 /**
  * @param  {{playerId: string}} data
  */
@@ -34,10 +44,12 @@ function clientDisconnected (data) {
 
 function bindEvents () {
   HostActions.createLobby.listenAndPromise(createLobby);
+  HostActions.listPlayers.listen(listPlayers);
   PlayerActions.joinLobby.listen(joinLobby);
 
   socket.on(socketEvents.server.playerJoined, playerJoined);
   socket.on(socketEvents.server.clientDisconnected, clientDisconnected);
+  socket.on(socketEvents.server.listPlayers, playersListed);
 }
 
 var WebSocketService = {

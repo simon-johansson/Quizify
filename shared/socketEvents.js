@@ -2,7 +2,8 @@
 var socketEvents = {
   client : {
     host: {
-      createLobby: 'host:create lobby'
+      createLobby: 'host:create lobby',
+      listPlayers: 'host:list:players'
     },
     player: {
       joinLobby: 'player:join lobby',
@@ -12,6 +13,7 @@ var socketEvents = {
     lobbyCreated: 'server:lobby created',
     playerJoined: 'server:lobby joined',
     clientDisconnected: 'server:client disconnected',
+    listPlayers: 'server:list:players'
   }
 };
 

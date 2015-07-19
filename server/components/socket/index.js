@@ -41,8 +41,13 @@ function onClientDisconnect () {
   }
 }
 
+function onListPlayers (data) {
+  this.emit(socketEvents.server.listPlayers, data);
+}
+
 function bindEvents (socket) {
   socket.on(socketEvents.client.host.createLobby, onHostCreateLobby);
+  socket.on(socketEvents.client.host.listPlayers, onListPlayers);
   socket.on(socketEvents.client.player.joinLobby, onPlayerJoinLobby);
 
   socket.on('disconnect', onClientDisconnect);
