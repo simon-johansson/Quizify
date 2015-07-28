@@ -22,7 +22,7 @@ class HostLobby extends React.Component {
 
     // Triggering of the createLobby could also be done in
     // the Home component when clicking on the "Create" button
-    HostActions.createLobby();
+    HostActions.createGame();
   }
 
   componentWillUnmount() {
@@ -31,7 +31,7 @@ class HostLobby extends React.Component {
 
   _onStoreChange(data) {
     this.setState({
-      id: data.lobbyId,
+      id: data.gameId,
       players: data.players
     });
     // Not effiecient? The players list will be broadcasted even if it does not change?!

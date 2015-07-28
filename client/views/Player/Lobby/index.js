@@ -13,7 +13,7 @@ class PlayerLobby extends React.Component {
     this.state = {
       playerId: null,
       playerName: null,
-      lobbyId: null
+      gameId: null
     };
   }
 
@@ -40,27 +40,24 @@ class PlayerLobby extends React.Component {
   }
 
   // Really need all the setter functions?
-  _onLobbyIdChange(event) {
+  _onGameIdChange(event) {
     this.setState({
-      lobbyId: event.target.value
+      gameId: event.target.value
     });
   }
 
   _onJoin(event) {
-    Actions.joinLobby({
-      playerName: this.state.playerName,
-      lobbyId: this.state.lobbyId
-    });
+    Actions.joinGame(this.state.playerName, this.state.gameId);
   }
 
   render() {
-    let {playerName, lobbyId, playerId} = this.state;
+    let {playerName, gameId, playerId} = this.state;
     return (
         <div className="PlayerLobby-view">
           <span>Name</span>
           <input type="text" value={playerName} onChange={this._onNameChange.bind(this)} />
           <span>ID</span>
-          <input type="text" value={lobbyId} onChange={this._onLobbyIdChange.bind(this)} />
+          <input type="text" value={gameId} onChange={this._onGameIdChange.bind(this)} />
           <button onClick={this._onJoin.bind(this)}>Join</button>
           <span>{playerId}</span>
         </div>

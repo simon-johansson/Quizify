@@ -20,8 +20,8 @@ describe('PlayerStore', () => {
   });
 
   it('should be able to get lobby id', () => {
-    let lobbyId = PlayerStore.getLobbyId();
-    expect(lobbyId).to.eql(null);
+    let gameId = PlayerStore.getGameId();
+    expect(gameId).to.eql(null);
   });
 
   describe('Joining lobby', () => {
@@ -36,15 +36,15 @@ describe('PlayerStore', () => {
         sandbox.restore();
       });
 
-    it('should set lobbyId, playerId and playerName when joining lobby', (done) => {
-      PlayerActions.joinLobby.completed({
-        lobbyId: '123',
+    it('should set gameId, playerId and playerName when joining lobby', (done) => {
+      PlayerActions.joinGame.completed({
+        gameId: '123',
         playerId: 'abc',
         playerName: 'James'
       });
 
       setTimeout( () => {
-        expect(PlayerStore.getLobbyId()).to.eql('123');
+        expect(PlayerStore.getGameId()).to.eql('123');
         expect(PlayerStore.getPlayerId()).to.eql('abc');
         expect(PlayerStore.getPlayerName()).to.eql('James');
         done()
@@ -52,7 +52,7 @@ describe('PlayerStore', () => {
     });
 
     it('should alert the user if lobby could not be joined', (done) => {
-      PlayerActions.joinLobby.failed('Error!');
+      PlayerActions.joinGame.failed('Error!');
 
       setTimeout( () => {
         expect(window.alert).to.have.been.calledOnce;

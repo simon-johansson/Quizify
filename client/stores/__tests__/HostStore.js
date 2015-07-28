@@ -18,16 +18,16 @@ describe('HostStore', () => {
     expect(players).to.be.empty;
   });
 
-  it('should be able to get lobby id', () => {
-    let id = HostStore.getLobbyId();
+  it('should be able to get game id', () => {
+    let id = HostStore.getGameId();
     expect(id).to.eql(null);
   });
 
-  it('should set lobbyId when lobby has been created', (done) => {
-    HostActions.createLobby.completed({lobbyId: 123});
+  it('should set gameId when game has been created', (done) => {
+    HostActions.createGame.completed({gameId: 123});
 
     setTimeout( () => {
-      expect(HostStore.getLobbyId()).to.eql(123);
+      expect(HostStore.getGameId()).to.eql(123);
       done()
     }, 200);
   });

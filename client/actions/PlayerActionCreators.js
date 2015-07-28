@@ -5,7 +5,7 @@ var service = require('../utils/WebSocketService');
 
 var PlayerActionCreators  =  Reflux.createActions({
   // called by button in PlayerLobby compenent
-  "joinLobby": {
+  "joinGame": {
     children: ["completed", "failed"]
   },
 });

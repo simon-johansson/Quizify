@@ -3,31 +3,24 @@
 var socket = require('socket.io-client')();
 var socketEvents = require('shared/socketEvents');
 
+var ClientActions = require('actions/ClientActionCreators');
 var HostActions = require('actions/HostActionCreators');
 var PlayerActions = require('actions/PlayerActionCreators');
 
-function createLobby () {
-  socket.off(socketEvents.server.lobbyCreated);
-  return new Promise ((resolve, reject) => {
-    socket.on(socketEvents.server.lobbyCreated, (data) => {
-      return data.errorMessage ? reject('Failed!') : resolve(data);
-    });
-    socket.emit(socketEvents.client.host.createLobby);
-  });
-}
-
-function joinLobby (data) {
-  socket.emit(socketEvents.client.player.joinLobby, data);
-}
-
-function playerJoined (data) {
-  let {failed, completed} = PlayerActions.joinLobby;
+/**
+ * @param  {{gameId: string}} data
+ */
+function hostCreatedGame (data) {
+  let {failed, completed} = HostActions.createGame;
   return data.errorMessage ? failed(data.errorMessage) : completed(data);
 }
 
-function listPlayers (data) {
-  console.log(data);
-  socket.emit(socketEvents.client.host.listPlayers, data);
+/**
+ * @param  {{gameId: string, playerName: string, playerId: string}} data
+ */
+function playerJoinedGame (data) {
+  let {failed, completed} = PlayerActions.joinGame;
+  return data.errorMessage ? failed(data.errorMessage) : completed(data);
 }
 
 function playersListed (data) {
@@ -36,19 +29,34 @@ function playersListed (data) {
 }
 
 /**
- * @param  {{playerId: string}} data
+ * @param  {{id: string}} data
  */
-function clientDisconnected (data) {
-  console.log('Client disconnected!');
+function clientLeftGame (data) {
+  let {failed, completed} = ClientActions.leaveGame;
+  return data.errorMessage ? failed(data.errorMessage) : completed(data);
 }
 
 function bindEvents () {
-  HostActions.createLobby.listenAndPromise(createLobby);
-  HostActions.listPlayers.listen(listPlayers);
-  PlayerActions.joinLobby.listen(joinLobby);
 
-  socket.on(socketEvents.server.playerJoined, playerJoined);
-  socket.on(socketEvents.server.clientDisconnected, clientDisconnected);
+  HostActions.createGame.listen( () => {
+    socket.emit(socketEvents.client.host.createGame);
+  });
+
+  HostActions.listPlayers.listen( (data) => {
+    socket.emit(socketEvents.client.host.listPlayers, data);
+  });
+
+  PlayerActions.joinGame.listen( (playerName, gameId) => {
+    socket.emit(socketEvents.client.player.joinGame, {playerName, gameId});
+  });
+
+  ClientActions.leaveGame.listen( (playerName, gameId) => {
+    socket.emit(socketEvents.client.leaveGame, {playerName, gameId});
+  });
+
+  socket.on(socketEvents.server.gameCreated, hostCreatedGame);
+  socket.on(socketEvents.server.playerJoined, playerJoinedGame);
+  socket.on(socketEvents.server.clientLeft, clientLeftGame);
   socket.on(socketEvents.server.listPlayers, playersListed);
 }
 

@@ -47,52 +47,52 @@ describe("WebSocket communication", () => {
   describe("Host", () => {
 
     it('should be able to create lobby', (done) => {
-      host.on(socketEvents.server.lobbyCreated, (data) => {
-        expect(data).to.have.keys("lobbyId");
-        expect(data.lobbyId).to.be.a("string");
+      host.on(socketEvents.server.gameCreated, (data) => {
+        expect(data).to.have.keys("gameId");
+        expect(data.gameId).to.be.a("string");
         done();
       });
 
-      host.emit(socketEvents.client.host.createLobby);
+      host.emit(socketEvents.client.host.createGame);
     });
 
     it('should be nofified if player enters lobby', (done) => {
-      let lobbyId;
+      let gameId;
 
-      host.on(socketEvents.server.lobbyCreated, (data) => {
-        lobbyId = data.lobbyId;
+      host.on(socketEvents.server.gameCreated, (data) => {
+        gameId = data.gameId;
 
         host.on(socketEvents.server.playerJoined, (data) => {
-          expect(Object.keys(serverSocket._getSocket().nsps['/'].adapter.rooms[lobbyId]).length).to.eql(2);
-          expect(data).to.have.keys(['lobbyId', 'playerName', 'playerId']);
+          expect(Object.keys(serverSocket._getSocket().nsps['/'].adapter.rooms[gameId]).length).to.eql(2);
+          expect(data).to.have.keys(['gameId', 'playerName', 'playerId']);
           expect(data.playerName).to.eql('Elivs');
-          expect(data.lobbyId).to.eql(lobbyId);
+          expect(data.gameId).to.eql(gameId);
           expect(data.playerId).to.be.a('string');
           done();
         });
 
         // 2. Player joins lobby
-        player.emit(socketEvents.client.player.joinLobby, {
+        player.emit(socketEvents.client.player.joinGame, {
           playerName: 'Elivs',
-          lobbyId: lobbyId
+          gameId: gameId
         });
       });
 
       // 1. Hosts creates lobby
-      host.emit(socketEvents.client.host.createLobby);
+      host.emit(socketEvents.client.host.createGame);
     });
 
     it('should get notified when player leavs/disconnects', (done) => {
-      let lobbyId, room;
+      let gameId, room;
 
-      host.on(socketEvents.server.clientDisconnected, function (data) {
+      host.on(socketEvents.server.clientLeft, function (data) {
         expect(Object.keys(room).length).to.eql(1);
         done();
       });
 
-      host.on(socketEvents.server.lobbyCreated, (data) => {
-        lobbyId = data.lobbyId;
-        room = serverSocket._getSocket().nsps['/'].adapter.rooms[lobbyId];
+      host.on(socketEvents.server.gameCreated, (data) => {
+        gameId = data.gameId;
+        room = serverSocket._getSocket().nsps['/'].adapter.rooms[gameId];
         expect(Object.keys(room).length).to.eql(1);
 
         host.on(socketEvents.server.playerJoined, (data) => {
@@ -103,14 +103,14 @@ describe("WebSocket communication", () => {
         });
 
         // 2. Player joins lobby
-        player.emit(socketEvents.client.player.joinLobby, {
+        player.emit(socketEvents.client.player.joinGame, {
           playerName: 'Ozzy',
-          lobbyId: lobbyId
+          gameId: gameId
         });
       });
 
       // 1. Hosts creates lobby
-      host.emit(socketEvents.client.host.createLobby);
+      host.emit(socketEvents.client.host.createGame);
     });
   });
 
@@ -122,31 +122,31 @@ describe("WebSocket communication", () => {
         expect(data.errorMessage).to.eql('Game 123 does not exist');;
         done();
       });
-      player.emit(socketEvents.client.player.joinLobby, {
+      player.emit(socketEvents.client.player.joinGame, {
         playerName: 'Ozzy',
-        lobbyId: 123
+        gameId: 123
       });
     });
 
     it('should be able to join created lobby', (done) => {
-      let lobbyId;
+      let gameId;
 
-      host.on(socketEvents.server.lobbyCreated, (data) => {
-        let lobbyId = data.lobbyId;
+      host.on(socketEvents.server.gameCreated, (data) => {
+        let gameId = data.gameId;
 
         player.on(socketEvents.server.playerJoined, (data) => {
-          expect(data).to.have.keys(['lobbyId', 'playerName', 'playerId']);
+          expect(data).to.have.keys(['gameId', 'playerName', 'playerId']);
           expect(data.playerName).to.eql('Ozzy');
-          expect(data.lobbyId).to.eql(lobbyId);
+          expect(data.gameId).to.eql(gameId);
           expect(data.playerId).to.be.a('string');
           done();
         });
-        player.emit(socketEvents.client.player.joinLobby, {
+        player.emit(socketEvents.client.player.joinGame, {
           playerName: 'Ozzy',
-          lobbyId: lobbyId
+          gameId: gameId
         });
       });
-      host.emit(socketEvents.client.host.createLobby);
+      host.emit(socketEvents.client.host.createGame);
     });
 
     it.skip('should be nofified if host leavs/disconnects', (done) => {});

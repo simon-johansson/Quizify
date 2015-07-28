@@ -1,15 +1,18 @@
 'use strict';
 
+var _ = require('lodash');
 var Reflux = require('reflux');
+
+var ClientActions = require('../actions/ClientActionCreators');
 var HostActions = require('../actions/HostActionCreators');
 var PlayerActions = require('../actions/PlayerActionCreators');
 
 var HostStore = Reflux.createStore({
-  listenables: [HostActions, PlayerActions],
+  listenables: [HostActions, PlayerActions, ClientActions],
 
   setInitialState() {
     this.state = {
-      lobbyId: null,
+      gameId: null,
       players: []
     };
   },
@@ -18,13 +21,13 @@ var HostStore = Reflux.createStore({
     return this.state.players;
   },
 
-  getLobbyId() {
-    return this.state.lobbyId;
+  getGameId() {
+    return this.state.gameId;
   },
 
-  onLobbyCreated(data) {
+  onGameCreated(data) {
     var {state} = this;
-    state.lobbyId = data.lobbyId;
+    state.gameId = data.gameId;
     this.trigger(state);
   },
 
@@ -33,6 +36,15 @@ var HostStore = Reflux.createStore({
     let {playerId, playerName} = data;
     state.players.push({
       playerId, playerName
+    });
+    this.trigger(state);
+  },
+
+  onPlayerLeftGame(data) {
+    let {state} = this;
+    let {clientId} = data;
+    state.players = state.players.filter(function(o) {
+      return o.playerId !== clientId;
     });
     this.trigger(state);
   },
@@ -46,10 +58,12 @@ var HostStore = Reflux.createStore({
   init() {
     this.setInitialState();
 
-    this.listenTo(HostActions.createLobby, this.setInitialState);
-    this.listenTo(HostActions.createLobby.completed, this.onLobbyCreated);
-    this.listenTo(HostActions.createLobby.failed, this.onError);
-    this.listenTo(PlayerActions.joinLobby.completed, this.onPLayerJoined);
+    this.listenTo(HostActions.createGame.completed, this.onGameCreated);
+    this.listenTo(HostActions.createGame.failed, this.onError);
+
+    this.listenTo(PlayerActions.joinGame.completed, this.onPLayerJoined);
+
+    this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
   },
 
 });

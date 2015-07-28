@@ -10,7 +10,7 @@ describe('Lobby', () => {
     HostActions = require('actions/HostActionCreators');
 
     sandbox = sinon.sandbox.create();
-    sandbox.spy(HostActions, "createLobby");
+    sandbox.spy(HostActions, "createGame");
   });
 
   afterEach(function() {
@@ -24,7 +24,7 @@ describe('Lobby', () => {
 
   it('should call createLobby action when mounted', () => {
     var render = TestUtils.renderIntoDocument(React.createElement(Lobby, {}));
-    expect(HostActions.createLobby).to.have.been.calledOnce;
+    expect(HostActions.createGame).to.have.been.calledOnce;
   });
 
 });
