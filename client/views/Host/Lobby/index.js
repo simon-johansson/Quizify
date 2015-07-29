@@ -2,6 +2,7 @@
 
 var React = require('react/addons');
 var Reflux = require('reflux');
+var QRCode = require('react-qr');
 
 var HostActions = require('actions/HostActionCreators');
 var HostStore = require('stores/HostStore');
@@ -13,7 +14,8 @@ class HostLobby extends React.Component {
     super(props);
     this.state = {
       id: '',
-      players: []
+      players: [],
+      url: ''
     };
   }
 
@@ -32,7 +34,8 @@ class HostLobby extends React.Component {
   _onStoreChange(data) {
     this.setState({
       id: data.gameId,
-      players: data.players
+      players: data.players,
+      url: `http://beta.spotifyquiz.com/#/player/lobby/${data.gameId}`
     });
     // Not effiecient? The players list will be broadcasted even if it does not change?!
     HostActions.listPlayers({
@@ -40,21 +43,35 @@ class HostLobby extends React.Component {
     });
   }
 
-  render() {
-    let {players} = this.state;
+  _getPlayerElements(players) {
     let playerElements = [];
     players.forEach(function (player, i) {
       let index = i + 1;
       let {playerName} = player;
       playerElements.push(<Player username={playerName} index={index} />);
     });
+    return playerElements;
+  }
+
+  _startGame() {
+    console.log('Start');
+  }
+
+  render() {
+    let players = this._getPlayerElements(this.state.players);
+    let button = players.length ? <button onClick={this._startGame.bind(this)}>Start game</button> : null;
+    let qrCode = this.state.url ? <QRCode text={this.state.url}/> : null;
     return (
       <div className="HostLobby-view">
-        <p>Open this site on your mobile device:</p>
+        <p>1. Open this site on your mobile device:</p>
         <h2>quizify.trol.la</h2>
-        <p>Then click JOIN and enter the following Game ID:</p>
+        <p>2. Then click JOIN and enter the following Game ID:</p>
         <h2> { this.state.id } </h2>
-        { playerElements }
+        { players }
+        { button }
+        <h1><i>OR</i></h1>
+        <p>Scan this QR-code:</p>
+        { qrCode }
       </div>
     );
   }

@@ -35,6 +35,7 @@ var routes = (
     </Route>
     <Route name="player" path="player" handler={ Player }>
       <Route name="player-lobby" path="lobby" handler={ PlayerLobby }/>
+      <Route path="lobby/:gameId" handler={ PlayerLobby }/>
     </Route>
     <NotFoundRoute handler={ NotFound } />
   </Route>

@@ -23,6 +23,8 @@ class PlayerLobby extends React.Component {
 
   componentDidMount() {
     this.unsubscribe = Store.listen(this._onStoreChange.bind(this));
+    let gameId = this.props.params ? this.props.params.gameId : null;
+    this.setState({ gameId: gameId });
   }
 
   // Really need all the setter functions?
