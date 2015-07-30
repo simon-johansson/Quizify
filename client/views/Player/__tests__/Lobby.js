@@ -20,7 +20,7 @@ describe('PlayerLobby', function () {
 
   it('should render initial spans', () => {
     var domText,
-    	labels = ['Name', 'ID', ''],
+    	labels = ['Name', 'Game ID', ''],
     	spans = TestUtils.scryRenderedDOMComponentsWithTag(doc, 'span');
 
     expect(spans.length).to.be.equal(3);

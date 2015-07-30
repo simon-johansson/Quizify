@@ -10,7 +10,8 @@ var PlayerStore = Reflux.createStore({
     this.state = {
       playerId: null,
       playerName: null,
-      gameId: null
+      gameId: null,
+      joindGame: false
     };
   },
 
@@ -23,6 +24,7 @@ var PlayerStore = Reflux.createStore({
     state.gameId = data.gameId;
     state.playerId = data.playerId;
     state.playerName = data.playerName;
+    state.joindGame = true;
     this.trigger(state);
   },
 
