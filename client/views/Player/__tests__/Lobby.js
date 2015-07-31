@@ -20,10 +20,10 @@ describe('PlayerLobby', function () {
 
   it('should render initial spans', () => {
     var domText,
-    	labels = ['Name', 'Game ID', ''],
+    	labels = ['Name', 'Game ID'],
     	spans = TestUtils.scryRenderedDOMComponentsWithTag(doc, 'span');
 
-    expect(spans.length).to.be.equal(3);
+    expect(spans.length).to.be.equal(2);
 
     for (var k = 0; k < spans.length; k++) {
     	domText = spans[k].getDOMNode().textContent;
