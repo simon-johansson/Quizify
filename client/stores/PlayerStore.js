@@ -2,6 +2,7 @@
 
 var Reflux = require('reflux');
 var PlayerActions = require('../actions/PlayerActionCreators');
+var browserStorage = require('../utils/BrowserStorage');
 
 var PlayerStore = Reflux.createStore({
   listenables: PlayerActions,
@@ -9,7 +10,7 @@ var PlayerStore = Reflux.createStore({
   setInitialState() {
     this.state = {
       playerId: null,
-      playerName: null,
+      playerName: browserStorage.getPlayerName() || null,
       gameId: null,
       joindGame: false
     };
@@ -23,8 +24,11 @@ var PlayerStore = Reflux.createStore({
     var {state} = this;
     state.gameId = data.gameId;
     state.playerId = data.playerId;
-    state.playerName = data.playerName;
     state.joindGame = true;
+    if(state.playerName !== data.playerName) {
+      state.playerName = data.playerName;
+      browserStorage.setPlayerName(data.playerName);
+    }
     this.trigger(state);
   },
 
