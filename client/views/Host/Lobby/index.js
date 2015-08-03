@@ -59,19 +59,21 @@ class HostLobby extends React.Component {
 
   render() {
     let players = this._getPlayerElements(this.state.players);
-    let button = players.length ? <button onClick={this._startGame.bind(this)}>Start game</button> : null;
+    let button = players.length ? <button onClick={this._startGame.bind(this)}>Start game<br/>(up to 8 players)</button> : null;
     let qrCode = this.state.url ? <QRCode text={this.state.url}/> : null;
     return (
       <div className="HostLobby-view">
         <p>1. Open this site on your mobile device:</p>
-        <h2>quizify.trol.la</h2>
+        <h2>spotifyquiz.com</h2>
         <p>2. Then click JOIN and enter the following Game ID:</p>
         <h2> { this.state.id } </h2>
-        { players }
-        { button }
         <h1><i>OR</i></h1>
         <p>Scan this QR-code:</p>
         { qrCode }
+        <br/>
+        <br/>
+        { players }
+        { button }
       </div>
     );
   }
