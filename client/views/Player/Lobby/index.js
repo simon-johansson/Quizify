@@ -15,6 +15,7 @@ class PlayerLobby extends React.Component {
     super(props);
     this.state = {
       joindGame: false,
+      gameId: this.props.params ? this.props.params.gameId : null,
     };
   }
 
@@ -33,10 +34,10 @@ class PlayerLobby extends React.Component {
   }
 
   render() {
-    let {joindGame} = this.state;
+    let {joindGame, gameId} = this.state;
     return (
         <div className="PlayerLobby-view">
-          { joindGame ? <JoinedGameInstructions /> : <JoinGameForm /> }
+          { joindGame ? <JoinedGameInstructions /> : <JoinGameForm id={gameId} /> }
         </div>
       );
   }

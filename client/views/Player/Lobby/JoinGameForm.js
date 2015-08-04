@@ -18,7 +18,7 @@ class JoinGameForm extends React.Component {
   }
 
   componentDidMount() {
-    let gameId = this.props.params ? this.props.params.gameId : null;
+    let gameId = this.props.id;
     this.setState({ gameId: gameId });
   }
 
