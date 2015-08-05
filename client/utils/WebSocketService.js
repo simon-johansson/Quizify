@@ -10,33 +10,33 @@ var PlayerActions = require('actions/PlayerActionCreators');
 /**
  * @param  {{gameId: string}} data
  */
-function hostCreatedGame (data) {
+var hostCreatedGame = (data) => {
   let {failed, completed} = HostActions.createGame;
   return data.errorMessage ? failed(data.errorMessage) : completed(data);
-}
+};
 
 /**
  * @param  {{gameId: string, playerName: string, playerId: string}} data
  */
-function playerJoinedGame (data) {
+var joinedGame = (data) => {
   let {failed, completed} = PlayerActions.joinGame;
   return data.errorMessage ? failed(data.errorMessage) : completed(data);
-}
+};
 
-function playersListed (data) {
+var playersListed = (data) => {
   console.log("Players Listed");
   console.log(data);
-}
+};
 
 /**
  * @param  {{id: string}} data
  */
-function clientLeftGame (data) {
+var clientLeftGame = (data) => {
   let {failed, completed} = ClientActions.leaveGame;
   return data.errorMessage ? failed(data.errorMessage) : completed(data);
-}
+};
 
-function bindEvents () {
+var bindEvents = () => {
 
   HostActions.createGame.listen( () => {
     socket.emit(socketEvents.client.host.createGame);
@@ -58,7 +58,7 @@ function bindEvents () {
   socket.on(socketEvents.server.playerJoined, playerJoinedGame);
   socket.on(socketEvents.server.clientLeft, clientLeftGame);
   socket.on(socketEvents.server.listPlayers, playersListed);
-}
+};
 
 var WebSocketService = {
   connect() {
