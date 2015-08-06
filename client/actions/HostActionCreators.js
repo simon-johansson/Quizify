@@ -10,9 +10,9 @@ var HostActionCreators  = Reflux.createActions({
   createGame: {
     children: ["completed", "failed"]
   },
-  listPlayers: {
-  	children: ["completed", "failed"]
-  }
 });
+
+HostActionCreators.listPlayers = Reflux.createAction();
+HostActionCreators.playerJoinGame = Reflux.createAction();
 
 module.exports = HostActionCreators;

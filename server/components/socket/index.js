@@ -1,7 +1,8 @@
 'use strict';
 
 var socketIO = require('socket.io');
-var socketEvents = require('../../../shared/socketEvents');
+var ev = require('../../../shared/socketEvents');
+var config = require('../../config/environment');
 var io;
 
 function onHostCreateGame () {
@@ -10,8 +11,9 @@ function onHostCreateGame () {
     return onHostCreateGame();
   }
   this.join(gameId);
+  this.gameId = gameId;
   // console.log(`new game created with ID: ${gameId}`);
-  this.emit(socketEvents.server.gameCreated, { gameId });
+  this.emit(ev.fromServer.toHost.gameCreated, { gameId, url: config.url });
 }
 
 /**
@@ -24,13 +26,14 @@ function onPlayerJoinGame (data) {
     this.join(gameId);
     this.gameId = gameId;
     // console.log(`New player (${playerName}) joined game: ${gameId}`);
-    io.to(gameId).emit(socketEvents.server.playerJoined, { gameId, playerName, playerId });
+    var obj = { gameId, playerName, playerId }
+    io.to(gameId).emit(ev.fromServer.toHost.playerJoined, obj);
   } else {
     let errorMessage = `Game ${gameId} does not exist`;
     var obj = { errorMessage };
     // console.log(`Error: Player attempted to join room (${errorMessage}) that could not be found`);
-    this.emit(socketEvents.server.playerJoined, obj);
   }
+  this.emit(ev.fromServer.toPlayer.joinGame, obj);
 }
 
 function onClientLeave () {
@@ -42,26 +45,32 @@ function onClientLeave () {
       this.gameId = null;
     }
     // console.log(`Client (${id}) disconnected from game: ${gameId}`);
-    io.to(gameId).emit(socketEvents.server.clientLeft, { clientId });
+    io.to(gameId).emit(ev.fromServer.toClient.leaveGame, { clientId });
   }
 }
 
 function onListPlayers (data) {
-  this.emit(socketEvents.server.listPlayers, data);
+  let gameId = this.gameId;
+  if(io.nsps['/'].adapter.rooms[gameId]) {
+    io.to(gameId).emit(ev.fromServer.toPlayer.listPlayers, data);
+  }
 }
 
 function bindEvents (socket) {
-  socket.on(socketEvents.client.host.createGame, onHostCreateGame);
-  socket.on(socketEvents.client.host.listPlayers, onListPlayers);
-  socket.on(socketEvents.client.player.joinGame, onPlayerJoinGame);
-  socket.on(socketEvents.client.leaveGame, onClientLeave);
+  let {fromHost, fromPlayer, fromClient} = ev.toServer;
+  socket.on(fromHost.createGame, onHostCreateGame);
+  socket.on(fromHost.listPlayers, onListPlayers);
+  socket.on(fromPlayer.joinGame, onPlayerJoinGame);
+  socket.on(fromClient.leaveGame, onClientLeave);
   socket.on('disconnect', onClientLeave);
 }
 
 module.exports = {
   init(server) {
     io = socketIO(server);
-    io.on('connection', bindEvents);
+    io.on('connection', (socket) => {
+      bindEvents(socket);
+    });
   },
   _getSocket() {
     return io;

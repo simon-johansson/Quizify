@@ -1,20 +1,29 @@
 
 var socketEvents = {
-  client : {
-    leaveGame: 'client:leaveGame',
-    host: {
+  toServer: {
+    fromClient: {
+      leaveGame: 'client:leaveGame',
+    },
+    fromHost: {
       createGame: 'host:createGame',
       listPlayers: 'host:list:players'
     },
-    player: {
+    fromPlayer: {
       joinGame: 'player:joinGame',
     },
   },
-  server : {
-    gameCreated: 'server:gameCreated',
-    playerJoined: 'server:gameJoined',
-    clientLeft: 'server:clientLeft',
-    listPlayers: 'server:list:players'
+  fromServer: {
+    toClient: {
+      leaveGame: 'server:leaveGame',
+    },
+    toHost: {
+      gameCreated: 'server:createGame',
+      playerJoined: 'server:playerJoined',
+    },
+    toPlayer: {
+      joinGame: 'server:joinGame',
+      listPlayers: 'server:listPlayers'
+    }
   }
 };
 

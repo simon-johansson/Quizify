@@ -6,6 +6,7 @@ var { RouteHandler, Link } = Router;
 var React = require('react/addons');
 var Reflux = require('reflux');
 
+var ServerCommunication = require('utils/ServerCommunication');
 var FeedbackButton = require('./FeedbackButton');
 
 // CSS
@@ -19,6 +20,8 @@ class QuizifyApp extends React.Component {
   }
 
   componentDidMount() {
+    ServerCommunication.connect();
+    ServerCommunication.bindClientEvents();
   }
 
   render() {

@@ -6,6 +6,7 @@ var { RouteHandler, Link } = Router;
 var React = require('react/addons');
 var Reflux = require('reflux');
 
+var ServerCommunication = require('utils/ServerCommunication');
 var Actions = require('actions/ClientActionCreators');
 var Store = require('stores/PlayerStore');
 
@@ -22,6 +23,7 @@ class Player extends React.Component {
   }
 
   componentDidMount() {
+    ServerCommunication.bindPlayerEvents();
     this.unsubscribe = Store.listen(this._onStoreChange.bind(this));
   }
 

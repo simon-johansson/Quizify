@@ -15,7 +15,8 @@ class HostLobby extends React.Component {
     this.state = {
       id: '',
       players: [],
-      url: ''
+      url: HostStore.getUrl(),
+      deepLink: ''
     };
   }
 
@@ -35,7 +36,8 @@ class HostLobby extends React.Component {
     this.setState({
       id: data.gameId,
       players: data.players,
-      url: `http://beta.spotifyquiz.com/#/player/lobby/${data.gameId}`
+      url: data.url,
+      deepLink: `${data.url}/#/player/lobby/${data.gameId}`
     });
     // Not effiecient? The players list will be broadcasted even if it does not change?!
     HostActions.listPlayers({
@@ -60,11 +62,11 @@ class HostLobby extends React.Component {
   render() {
     let players = this._getPlayerElements(this.state.players);
     let button = players.length ? <button onClick={this._startGame.bind(this)}>Start game<br/>(up to 8 players)</button> : null;
-    let qrCode = this.state.url ? <QRCode text={this.state.url}/> : null;
+    let qrCode = this.state.deepLink ? <QRCode text={this.state.deepLink}/> : null;
     return (
       <div className="HostLobby-view">
         <p>1. Open this site on your mobile device:</p>
-        <h2>spotifyquiz.com</h2>
+        <h2>{ this.state.url }</h2>
         <p>2. Then click JOIN and enter the following Game ID:</p>
         <h2> { this.state.id } </h2>
         <h1><i>OR</i></h1>

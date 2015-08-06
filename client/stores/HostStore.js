@@ -12,6 +12,7 @@ var HostStore = Reflux.createStore({
 
   setInitialState() {
     this.state = {
+      url: "",
       gameId: null,
       players: []
     };
@@ -25,9 +26,14 @@ var HostStore = Reflux.createStore({
     return this.state.gameId;
   },
 
+  getUrl() {
+    return this.state.url;
+  },
+
   onGameCreated(data) {
     var {state} = this;
     state.gameId = data.gameId;
+    state.url = data.url;
     this.trigger(state);
   },
 
@@ -60,8 +66,7 @@ var HostStore = Reflux.createStore({
 
     this.listenTo(HostActions.createGame.completed, this.onGameCreated);
     this.listenTo(HostActions.createGame.failed, this.onError);
-
-    this.listenTo(PlayerActions.joinGame.completed, this.onPLayerJoined);
+    this.listenTo(HostActions.playerJoinGame, this.onPLayerJoined);
 
     this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
   },

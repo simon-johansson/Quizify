@@ -20,7 +20,7 @@ var PlayerStore = Reflux.createStore({
   getPlayerName() { return this.state.playerName; },
   getGameId() { return this.state.gameId; },
 
-  _onPLayerJoined(data) {
+  _onJoinedGame(data) {
     var {state} = this;
     state.gameId = data.gameId;
     state.playerId = data.playerId;
@@ -40,7 +40,7 @@ var PlayerStore = Reflux.createStore({
     this.setInitialState();
 
     this.listenTo(PlayerActions.joinGame.failed, this._onError);
-    this.listenTo(PlayerActions.joinGame.completed, this._onPLayerJoined);
+    this.listenTo(PlayerActions.joinGame.completed, this._onJoinedGame);
   },
 
 });
