@@ -5,7 +5,7 @@ var ev = require('../../../shared/socketEvents');
 var config = require('../../config/environment');
 var io;
 
-function onHostCreateGame () {
+var onHostCreateGame = () => {
   let gameId = `${Math.floor(Math.random() * 100000)}`;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     return onHostCreateGame();
@@ -19,7 +19,7 @@ function onHostCreateGame () {
 /**
  * @param  {{gameId: string, playerName: string}} data
  */
-function onPlayerJoinGame (data) {
+var onPlayerJoinGame = (data) => {
   let {gameId, playerName} = data;
   let playerId = this.id;
   if(io.nsps['/'].adapter.rooms[gameId]) {
@@ -36,7 +36,7 @@ function onPlayerJoinGame (data) {
   this.emit(ev.fromServer.toPlayer.joinGame, obj);
 }
 
-function onClientLeave () {
+var onClientLeave = () => {
   let clientId = this.id;
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {
@@ -49,14 +49,14 @@ function onClientLeave () {
   }
 }
 
-function onListPlayers (data) {
+var onListPlayers = (data) => {
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     io.to(gameId).emit(ev.fromServer.toPlayer.listPlayers, data);
   }
 }
 
-function bindEvents (socket) {
+var bindEvents = (socket) => {
   let {fromHost, fromPlayer, fromClient} = ev.toServer;
   socket.on(fromHost.createGame, onHostCreateGame);
   socket.on(fromHost.listPlayers, onListPlayers);
