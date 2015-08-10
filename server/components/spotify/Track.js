@@ -4,12 +4,31 @@ var utils = require('./utils');
 
 class Track {
   constructor(track) {
-    this.audioUrl = track.preview_url;
-    this.songTitle = track.name;
-    this.imageUrl = track.album.images[0].url;
-    this.spotifySongUrl = track.external_urls.spotify;
-    this.artist = utils.extractArtistNames(track.artists);
-    this.id = track.artists[0].id;
+    this.audio = track.preview_url;
+    this.title = track.name;
+
+    this.images = track.album.images;
+
+    this.artist = {};
+    this.artist.name = track.artists[0].name;
+    this.artist.id = track.artists[0].id;
+
+    this.meta = {};
+    this.meta.id = track.artists[0].id;
+    this.meta.httpLink = track.external_urls.spotify;
+    this.meta.uriLink = track.uri;
+  }
+
+  getArtist() {
+    return this.artist.name;
+  }
+
+  getRelatedArtists() {
+    return this.artist.related;
+  }
+
+  setRelatedArtists(artists) {
+    this.artist.related = artists;
   }
 }
 
