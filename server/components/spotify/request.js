@@ -1,7 +1,7 @@
 'use strict';
 
 // Ideas:
-// * Cache the top artist, no need to request each time.
+// * Cache playlist results, no need to request each time.
 
 var _ = require('lodash');
 var client = require('./api-client');

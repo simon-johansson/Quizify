@@ -6,7 +6,8 @@ var socketEvents = {
     },
     fromHost: {
       createGame: 'host:createGame',
-      listPlayers: 'host:list:players'
+      listPlayers: 'host:listPlayers',
+      requestNewRound: 'host:requestNewRound'
     },
     fromPlayer: {
       joinGame: 'player:joinGame',
@@ -15,6 +16,7 @@ var socketEvents = {
   fromServer: {
     toClient: {
       leaveGame: 'server:leaveGame',
+      newRound: 'server:newRound'
     },
     toHost: {
       gameCreated: 'server:createGame',

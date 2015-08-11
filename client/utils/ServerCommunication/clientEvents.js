@@ -16,6 +16,7 @@ var outgoing = () => {
 var incoming = () => {
   let ev = events.fromServer.toClient;
   socket.on(ev.leaveGame, data => wrapper(ClientActions.leaveGame, data));
+  socket.on(ev.newRound, data => wrapper(ClientActions.newRound, data));
 };
 
 module.exports = {

@@ -14,5 +14,6 @@ var HostActionCreators  = Reflux.createActions({
 
 HostActionCreators.listPlayers = Reflux.createAction();
 HostActionCreators.playerJoinGame = Reflux.createAction();
+HostActionCreators.requestNewRound = Reflux.createAction();
 
 module.exports = HostActionCreators;

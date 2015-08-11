@@ -57,6 +57,7 @@ class HostLobby extends React.Component {
 
   _startGame() {
     console.log('Start');
+    HostActions.requestNewRound();
   }
 
   render() {

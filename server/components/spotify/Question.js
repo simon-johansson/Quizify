@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var request = require('./request');
 
 class Question {
   constructor(track) {

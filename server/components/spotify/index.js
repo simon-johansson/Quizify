@@ -9,5 +9,10 @@ module.exports = {
       let q = new Question(track);
       return clb(q);
     });
+  },
+  getTrack(clb) {
+    request.getTrack(track => {
+      return clb(track);
+    });
   }
 };

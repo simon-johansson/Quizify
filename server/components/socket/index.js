@@ -3,6 +3,7 @@
 var socketIO = require('socket.io');
 var ev = require('../../../shared/socketEvents');
 var config = require('../../config/environment');
+var spotify = require('../spotify');
 var io;
 
 function onHostCreateGame () {
@@ -56,10 +57,20 @@ function onListPlayers (data) {
   }
 }
 
+function onRequestNewRound (data) {
+  let gameId = this.gameId;
+  if(io.nsps['/'].adapter.rooms[gameId]) {
+    spotify.getTrack(track => {
+      io.to(gameId).emit(ev.fromServer.toClient.newRound, track);
+    });
+  }
+}
+
 function bindEvents (socket) {
   let {fromHost, fromPlayer, fromClient} = ev.toServer;
   socket.on(fromHost.createGame, onHostCreateGame);
   socket.on(fromHost.listPlayers, onListPlayers);
+  socket.on(fromHost.requestNewRound, onRequestNewRound);
   socket.on(fromPlayer.joinGame, onPlayerJoinGame);
   socket.on(fromClient.leaveGame, onClientLeave);
   socket.on('disconnect', onClientLeave);

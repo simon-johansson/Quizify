@@ -9,6 +9,7 @@ var {wrapper} = require('./utils');
 var outgoing = () => {
   let ev = events.toServer.fromHost;
   HostActions.createGame.listen(() => socket.emit(ev.createGame));
+  HostActions.requestNewRound.listen(() => socket.emit(ev.requestNewRound));
   HostActions.listPlayers.listen(data => socket.emit(ev.listPlayers, data));
 };
 
