@@ -6,11 +6,6 @@ var events = require('shared/socketEvents');
 var PlayerActions = require('actions/PlayerActionCreators');
 var {wrapper} = require('./utils');
 
-var listPlayers = (data) => {
-  console.log("Players Listed");
-  console.log(data);
-};
-
 var outgoing = () => {
   let ev = events.toServer.fromPlayer;
   PlayerActions.joinGame.listen((playerName, gameId) => {
@@ -21,7 +16,7 @@ var outgoing = () => {
 var incoming = () => {
   let ev = events.fromServer.toPlayer;
   socket.on(ev.joinGame, data => wrapper(PlayerActions.joinGame, data));
-  socket.on(ev.listPlayers, listPlayers);
+  socket.on(ev.listPlayers, PlayerActions.listPlayers);
 };
 
 module.exports = {
