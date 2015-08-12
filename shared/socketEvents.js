@@ -23,7 +23,7 @@ var socketEvents = {
       playerJoined: 'server:playerJoined',
     },
     toPlayer: {
-      joinGame: 'server:joinGame',
+      joinedGame: 'server:joinedGame',
       listPlayers: 'server:listPlayers'
     }
   }

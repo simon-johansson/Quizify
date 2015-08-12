@@ -34,7 +34,7 @@ function onPlayerJoinGame (data) {
     var obj = { errorMessage };
     // console.log(`Error: Player attempted to join room (${errorMessage}) that could not be found`);
   }
-  this.emit(ev.fromServer.toPlayer.joinGame, obj);
+  this.emit(ev.fromServer.toPlayer.joinedGame, obj);
 }
 
 function onClientLeave () {

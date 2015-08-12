@@ -20,7 +20,7 @@ var outgoing = () => {
 
 var incoming = () => {
   let ev = events.fromServer.toPlayer;
-  socket.on(ev.joinGame, data => wrapper(PlayerActions.joinGame, data));
+  socket.on(ev.joinedGame, data => wrapper(PlayerActions.joinGame, data));
   socket.on(ev.listPlayers, listPlayers);
 };
 
