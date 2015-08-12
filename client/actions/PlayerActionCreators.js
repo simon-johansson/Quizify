@@ -9,4 +9,6 @@ var PlayerActionCreators  =  Reflux.createActions({
   },
 });
 
+PlayerActionCreators.listPlayers = Reflux.createAction();
+
 module.exports = PlayerActionCreators;

@@ -12,7 +12,8 @@ var PlayerStore = Reflux.createStore({
       playerId: null,
       playerName: browserStorage.getPlayerName() || null,
       gameId: null,
-      joindGame: false
+      joindGame: false,
+      players: []
     };
   },
 
@@ -32,6 +33,12 @@ var PlayerStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  _listPlayers(data) {
+    var {state} = this;
+    state.players = data.players;
+    this.trigger(state);
+  },
+
   _onError(err) {
     window.alert(err);
   },
@@ -41,6 +48,7 @@ var PlayerStore = Reflux.createStore({
 
     this.listenTo(PlayerActions.joinGame.failed, this._onError);
     this.listenTo(PlayerActions.joinGame.completed, this._onJoinedGame);
+    this.listenTo(PlayerActions.listPlayers, this._listPlayers);
   },
 
 });

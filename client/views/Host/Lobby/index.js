@@ -7,7 +7,7 @@ var QRCode = require('react-qr');
 var HostActions = require('actions/HostActionCreators');
 var HostStore = require('stores/HostStore');
 
-var Player = require('./Player');
+var PlayerHelpers = require('../../helpers/Player');
 
 class HostLobby extends React.Component {
   constructor(props) {
@@ -46,13 +46,7 @@ class HostLobby extends React.Component {
   }
 
   _getPlayerElements(players) {
-    let playerElements = [];
-    players.forEach(function (player, i) {
-      let index = i + 1;
-      let {playerName} = player;
-      playerElements.push(<Player username={playerName} index={index} />);
-    });
-    return playerElements;
+    return PlayerHelpers.getPlayerElements(players);
   }
 
   _startGame() {
