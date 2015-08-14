@@ -5,6 +5,8 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, NotFoundRoute, HashLocation, DefaultRoute } = Router;
 
+var ga = require('react-ga');
+
 var QuizifyApp = require('./QuizifyApp');
 var Home = require('./Home');
 var About = require('./About');
@@ -39,6 +41,9 @@ var routes = (
   </Route>
 );
 
-Router.run(routes, HashLocation, (Root) => {
+ga.initialize('UA-000000-01', {debug: true});
+
+Router.run(routes, HashLocation, (Root, state) => {
+  ga.pageview(state.pathname);
   React.render(<Root/>, document.getElementById('content'));
 });
