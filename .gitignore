@@ -17,5 +17,4 @@ npm-debug.log
 .tmp
 dist
 /src/main.js
-/server/config/secrets.js
 coverage/
