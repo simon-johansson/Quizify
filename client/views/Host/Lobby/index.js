@@ -29,7 +29,7 @@ class HostLobby extends React.Component {
   }
 
   componentWillUnmount() {
-      this.unsubscribe();
+    this.unsubscribe();
   }
 
   _onStoreChange(data) {
