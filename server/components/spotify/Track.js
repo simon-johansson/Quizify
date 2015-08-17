@@ -12,6 +12,7 @@ class Track {
     this.artist = {};
     this.artist.name = track.artists[0].name;
     this.artist.id = track.artists[0].id;
+    this.artist.related = [];
 
     this.meta = {};
     this.meta.id = track.artists[0].id;
