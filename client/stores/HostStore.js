@@ -18,17 +18,9 @@ var HostStore = Reflux.createStore({
     };
   },
 
-  getPlayers() {
-    return this.state.players;
-  },
-
-  getGameId() {
-    return this.state.gameId;
-  },
-
-  getUrl() {
-    return this.state.url;
-  },
+  getPlayers() { return this.state.players; },
+  getGameId() { return this.state.gameId; },
+  getSiteUrl() { return this.state.url; },
 
   onGameCreated(data) {
     var {state} = this;
