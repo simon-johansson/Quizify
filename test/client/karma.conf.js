@@ -32,7 +32,7 @@ module.exports = function (config) {
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
           test: /\.js$/,
-          loader: 'babel-loader',
+          loader: 'babel-loader?plugins=babel-plugin-rewire',
           exclude: /node_modules/
         }, {
           test: /\.scss/,
