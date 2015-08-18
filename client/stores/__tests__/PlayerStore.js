@@ -10,18 +10,15 @@ describe('PlayerStore', () => {
   });
 
   it('should be able to get player id', () => {
-    let playerId = PlayerStore.getPlayerId();
-    expect(playerId).to.eql(null);
+    expect(PlayerStore.getPlayerId).to.a('function');
   });
 
   it('should be able to get player name', () => {
-    let name = PlayerStore.getPlayerName();
-    expect(name).to.eql(null);
+    expect(PlayerStore.getPlayerName).to.a('function');
   });
 
   it('should be able to get lobby id', () => {
-    let gameId = PlayerStore.getGameId();
-    expect(gameId).to.eql(null);
+    expect(PlayerStore.getGameId).to.a('function');
   });
 
   describe('Joining lobby', () => {
