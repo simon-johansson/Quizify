@@ -13,18 +13,15 @@ class HostLobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      players: [],
-      url: HostStore.getUrl(),
-      deepLink: ''
+      id: props.gameId || '',
+      players: props.players || [],
+      url: props.url || '',
+      deepLink: props.deepLink || ''
     };
   }
 
   componentDidMount() {
     this.unsubscribe = HostStore.listen(this._onStoreChange.bind(this));
-
-    // Triggering of the createLobby could also be done in
-    // the Home component when clicking on the "Create" button
     HostActions.createGame();
   }
 
@@ -34,14 +31,15 @@ class HostLobby extends React.Component {
 
   _onStoreChange(data) {
     this.setState({
-      id: data.gameId,
-      players: data.players,
-      url: data.url,
-      deepLink: `${data.url}/#/player/lobby/${data.gameId}`
+      id: HostStore.getGameId(),
+      players: HostStore.getPlayers(),
+      url: HostStore.getSiteUrl(),
+      deepLink: HostStore.getGameDeepLink(),
     });
+
     // Not effiecient? The players list will be broadcasted even if it does not change?!
     HostActions.listPlayers({
-      players: data.players
+      players: HostStore.getPlayers()
     });
   }
 
@@ -51,25 +49,28 @@ class HostLobby extends React.Component {
 
   _startGame() {
     console.log('Start');
+    // Maybe this should be a redirect to a new page insted
     HostActions.requestNewRound();
   }
 
   render() {
     let players = this._getPlayerElements(this.state.players);
-    let button = players.length ? <button onClick={this._startGame.bind(this)}>Start game<br/>(up to 8 players)</button> : null;
+    let button = players.length ? <button className="start-game-btn" onClick={this._startGame.bind(this)}>Start game<br/>(up to 8 players)</button> : null;
     let qrCode = this.state.deepLink ? <QRCode text={this.state.deepLink}/> : null;
     return (
       <div className="HostLobby-view">
         <p>1. Open this site on your mobile device:</p>
-        <h2>{ this.state.url }</h2>
+        <h2 className="site-url">{ this.state.url }</h2>
         <p>2. Then click JOIN and enter the following Game ID:</p>
-        <h2> { this.state.id } </h2>
+        <h2 className="game-id">{ this.state.id }</h2>
         <h1><i>OR</i></h1>
         <p>Scan this QR-code:</p>
         { qrCode }
         <br/>
         <br/>
-        { players }
+        <div className="players">
+          { players }
+        </div>
         { button }
       </div>
     );
