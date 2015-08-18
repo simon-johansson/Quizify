@@ -7,12 +7,15 @@ var ClientActions = require('../actions/ClientActionCreators');
 var HostActions = require('../actions/HostActionCreators');
 var PlayerActions = require('../actions/PlayerActionCreators');
 
+const createDeepLink = (url, id) => `${url}/#/player/lobby/${id}`;
+
 var HostStore = Reflux.createStore({
   listenables: [HostActions, PlayerActions, ClientActions],
 
   setInitialState() {
     this.state = {
       url: "",
+      deepLink: "",
       gameId: null,
       players: []
     };
@@ -21,11 +24,13 @@ var HostStore = Reflux.createStore({
   getPlayers() { return this.state.players; },
   getGameId() { return this.state.gameId; },
   getSiteUrl() { return this.state.url; },
+  getGameDeepLink() { return this.state.deepLink; },
 
   onGameCreated(data) {
     var {state} = this;
     state.gameId = data.gameId;
     state.url = data.url;
+    state.deepLink = createDeepLink(data.url, data.gameId);
     this.trigger(state);
   },
 
