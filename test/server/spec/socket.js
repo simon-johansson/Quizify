@@ -47,29 +47,29 @@ describe("WebSocket communication", () => {
   describe("Host", () => {
 
     it('should be able to create lobby', (done) => {
-      host.on(ev.fromServer.toHost.gameCreated, (data) => {
+
+      host.emit(ev.toServer.fromHost.createGame, (data) => {
         expect(data).to.have.keys("gameId");
         expect(data.gameId).to.be.a("string");
         done();
       });
-
-      host.emit(ev.toServer.fromHost.createGame);
     });
 
     it('should be nofified if player enters lobby', (done) => {
       let gameId;
 
-      host.on(ev.fromServer.toHost.gameCreated, (data) => {
-        gameId = data.gameId;
+      host.on(ev.fromServer.toHost.playerJoined, (data) => {
+        expect(serverSocket.getClientsInRoom(gameId)).to.eql(2);
+        expect(data).to.have.keys(['gameId', 'playerName', 'playerId']);
+        expect(data.playerName).to.eql('Elivs');
+        expect(data.gameId).to.eql(gameId);
+        expect(data.playerId).to.be.a('string');
+        done();
+      });
 
-        host.on(ev.fromServer.toHost.playerJoined, (data) => {
-          expect(Object.keys(serverSocket._getSocket().nsps['/'].adapter.rooms[gameId]).length).to.eql(2);
-          expect(data).to.have.keys(['gameId', 'playerName', 'playerId']);
-          expect(data.playerName).to.eql('Elivs');
-          expect(data.gameId).to.eql(gameId);
-          expect(data.playerId).to.be.a('string');
-          done();
-        });
+      // 1. Hosts creates lobby
+      host.emit(ev.toServer.fromHost.createGame, (data) => {
+        gameId = data.gameId;
 
         // 2. Player joins lobby
         player.emit(ev.toServer.fromPlayer.joinGame, {
@@ -77,32 +77,30 @@ describe("WebSocket communication", () => {
           gameId: gameId
         });
       });
-
-      // 1. Hosts creates lobby
-      host.emit(ev.toServer.fromHost.createGame);
     });
 
     it('should get notified when player leavs/disconnects', (done) => {
-      let gameId, playerId, room;
+      let gameId, playerId;
 
       host.on(ev.fromServer.toClient.leaveGame, function (data) {
         expect(playerId).to.eql(data.clientId);
-        expect(Object.keys(room).length).to.eql(1);
+        expect(serverSocket.getClientsInRoom(gameId)).to.eql(1);
         done();
       });
 
-      host.on(ev.fromServer.toHost.gameCreated, (data) => {
+      host.on(ev.fromServer.toHost.playerJoined, (data) => {
+        playerId = data.playerId;
+        expect(serverSocket.getClientsInRoom(gameId)).to.eql(2);
+
+        // 3. Player disconnects lobby
+        player.disconnect()
+      });
+
+      // 1. Hosts creates lobby
+      host.emit(ev.toServer.fromHost.createGame, data => {
         gameId = data.gameId;
-        room = serverSocket._getSocket().nsps['/'].adapter.rooms[gameId];
-        expect(Object.keys(room).length).to.eql(1);
+        expect(serverSocket.getClientsInRoom(gameId)).to.eql(1);
 
-        host.on(ev.fromServer.toHost.playerJoined, (data) => {
-          playerId = data.playerId;
-          expect(Object.keys(room).length).to.eql(2);
-
-          // 3. Player disconnects lobby
-          player.disconnect()
-        });
 
         // 2. Player joins lobby
         player.emit(ev.toServer.fromPlayer.joinGame, {
@@ -110,45 +108,40 @@ describe("WebSocket communication", () => {
           gameId: gameId
         });
       });
-
-      // 1. Hosts creates lobby
-      host.emit(ev.toServer.fromHost.createGame);
     });
   });
 
   describe('Player', () => {
 
     it('should get error if trying to join lobby that does not exist', (done) => {
-      player.on(ev.fromServer.toPlayer.joinedGame, (data) => {
-        expect(data).to.have.keys(['errorMessage']);
-        expect(data.errorMessage).to.eql('Game 123 does not exist');;
-        done();
-      });
+
       player.emit(ev.toServer.fromPlayer.joinGame, {
         playerName: 'Ozzy',
         gameId: 123
+      }, data => {
+        expect(data).to.have.keys(['errorMessage']);
+        expect(data.errorMessage).to.eql('Game 123 does not exist');;
+        done();
       });
     });
 
     it('should be able to join created lobby', (done) => {
       let gameId;
 
-      host.on(ev.fromServer.toHost.gameCreated, (data) => {
+      host.emit(ev.toServer.fromHost.createGame, data => {
         let gameId = data.gameId;
 
-        player.on(ev.fromServer.toPlayer.joinedGame, (data) => {
+        player.emit(ev.toServer.fromPlayer.joinGame, {
+          playerName: 'Ozzy',
+          gameId: gameId
+        }, data => {
           expect(data).to.have.keys(['gameId', 'playerName', 'playerId']);
           expect(data.playerName).to.eql('Ozzy');
           expect(data.gameId).to.eql(gameId);
           expect(data.playerId).to.be.a('string');
           done();
         });
-        player.emit(ev.toServer.fromPlayer.joinGame, {
-          playerName: 'Ozzy',
-          gameId: gameId
-        });
       });
-      host.emit(ev.toServer.fromHost.createGame);
     });
 
     it.skip('should be nofified if host leavs/disconnects', (done) => {});

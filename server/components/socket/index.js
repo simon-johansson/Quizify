@@ -6,7 +6,9 @@ var config = require('../../config/environment');
 var spotify = require('../spotify');
 var io;
 
-function onHostCreateGame () {
+const nop = () => {};
+
+function onHostCreateGame (callback = nop) {
   let gameId = `${Math.floor(Math.random() * 100000)}`;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     return onHostCreateGame();
@@ -14,13 +16,16 @@ function onHostCreateGame () {
   this.join(gameId);
   this.gameId = gameId;
   // console.log(`new game created with ID: ${gameId}`);
-  this.emit(ev.fromServer.toHost.gameCreated, { gameId, url: config.url });
+  callback({
+    gameId,
+    url: config.url
+  });
 }
 
 /**
  * @param  {{gameId: string, playerName: string}} data
  */
-function onPlayerJoinGame (data) {
+function onPlayerJoinGame (data, callback = nop) {
   let {gameId, playerName} = data;
   let playerId = this.id;
   if(io.nsps['/'].adapter.rooms[gameId]) {
@@ -34,7 +39,7 @@ function onPlayerJoinGame (data) {
     var obj = { errorMessage };
     // console.log(`Error: Player attempted to join room (${errorMessage}) that could not be found`);
   }
-  this.emit(ev.fromServer.toPlayer.joinedGame, obj);
+  callback(obj);
 }
 
 function onClientLeave () {
@@ -83,7 +88,13 @@ module.exports = {
       bindEvents(socket);
     });
   },
-  _getSocket() {
-    return io;
+  getClientsInRoom(gameId) {
+    const {rooms} = io.nsps['/'].adapter;
+
+    if(rooms[gameId]) {
+      return Object.keys(rooms[gameId]).length;
+    } else {
+      return 0;
+    }
   }
 };

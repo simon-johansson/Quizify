@@ -19,11 +19,9 @@ var socketEvents = {
       newRound: 'server:newRound'
     },
     toHost: {
-      gameCreated: 'server:createGame',
       playerJoined: 'server:playerJoined',
     },
     toPlayer: {
-      joinedGame: 'server:joinedGame',
       listPlayers: 'server:listPlayers'
     }
   }
