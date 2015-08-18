@@ -4,7 +4,7 @@ var React = require('react/addons');
 var Player = require('../shared/Player');
 
 var helpers = {
-	
+
 	getPlayerElements: function (players) {
    		let playerElements = [];
    		players.forEach(function (player, i) {
