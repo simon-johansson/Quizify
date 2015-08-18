@@ -1,21 +1,22 @@
 'use strict';
 
-var React = require('react/addons');
-var Reflux = require('reflux');
+const React = require('react/addons');
+const Reflux = require('reflux');
 
-var Actions = require('actions/PlayerActionCreators');
-var Store = require('stores/PlayerStore');
+const Actions = require('actions/PlayerActionCreators');
+const Store = require('stores/PlayerStore');
 
-var JoinGameForm = require('./JoinGameForm');
-var JoinedGameInstructions = require('./JoinedGameInstructions');
+const JoinGameForm = require('./JoinGameForm');
+const JoinedGameInstructions = require('./JoinedGameInstructions');
 
 class PlayerLobby extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       joindGame: false,
       gameId: this.props.params ? this.props.params.gameId : null,
+      players: [],
+      playerName: Store.getPlayerName() || '',
     };
   }
 
@@ -29,15 +30,20 @@ class PlayerLobby extends React.Component {
 
   _onStoreChange(data) {
     this.setState({
-      joindGame: data.joindGame
+      joindGame: Store.hasJoinedGame(),
+      players: Store.getPlayers(),
+      playerName: Store.getPlayerName(),
     });
   }
 
   render() {
-    let {joindGame, gameId} = this.state;
+    let {joindGame, gameId, players, playerName} = this.state;
     return (
         <div className="PlayerLobby-view">
-          { joindGame ? <JoinedGameInstructions /> : <JoinGameForm id={gameId} /> }
+          { joindGame ?
+            <JoinedGameInstructions playerName={playerName} players={players} /> :
+            <JoinGameForm playerName={playerName} gameId={gameId} />
+          }
         </div>
       );
   }

@@ -1,25 +1,15 @@
 'use strict';
 
-var React = require('react/addons');
-var Reflux = require('reflux');
-
-var Actions = require('actions/PlayerActionCreators');
-var Store = require('stores/PlayerStore');
+const React = require('react/addons');
+const Actions = require('actions/PlayerActionCreators');
 
 class JoinGameForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      // playerId: null,
-      playerName: Store.getPlayerName(),
-      gameId: null,
+      playerName: props.playerName,
+      gameId: props.gameId,
     };
-  }
-
-  componentDidMount() {
-    let gameId = this.props.id;
-    this.setState({ gameId: gameId });
   }
 
   _onNameChange(event) {
