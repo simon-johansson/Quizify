@@ -33,15 +33,25 @@ class JoinGameForm extends React.Component {
     return (
         <div className="JoinGameForm">
           <span>Name</span>
-          <input type="text" value={playerName} onChange={this._onNameChange.bind(this)} />
+          <input className="player-name-input" type="text" value={playerName} onChange={this._onNameChange.bind(this)} />
           <br/>
           <span>Game ID</span>
-          <input type="text" value={gameId} onChange={this._onGameIdChange.bind(this)} />
+          <input className="game-id-input" type="text" value={gameId} onChange={this._onGameIdChange.bind(this)} />
           <br/>
           <button onClick={this._onJoin.bind(this)}>Join game</button>
         </div>
       );
   }
 }
+
+JoinGameForm.propTypes = {
+  playerName: React.PropTypes.string.isRequired,
+  gameId: React.PropTypes.string.isRequired,
+};
+
+JoinGameForm.defaultProps = {
+  playerName: '',
+  gameId: '',
+};
 
 module.exports = JoinGameForm;
