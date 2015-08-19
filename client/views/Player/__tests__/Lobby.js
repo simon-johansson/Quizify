@@ -1,46 +1,44 @@
 'use strict';
 
+const React = require('react/addons');
+const TestUtils = React.addons.TestUtils;
+const PlayerLobby = require('../Lobby/index');
+
+var JoinGameFormMock = React.createClass({
+  render: function () {
+    return <div className="form-mock-component" />;
+  }
+});
+
+var JoinedGameInstructionsMock = React.createClass({
+  render: function () {
+    return <div className="instructions-mock-component" />;
+  }
+});
+
 describe('PlayerLobby', function () {
-  var React = require('react/addons');
-  var io = require('socket.io-client');
-  var TestUtils = React.addons.TestUtils;
+  const formType = React.renderToStaticMarkup(<JoinGameFormMock />);
+  const instructionsType = React.renderToStaticMarkup(<JoinedGameInstructionsMock />);
 
-  var PlayerLobby, component, doc;
-
-  beforeEach(function () {
-    PlayerLobby = require('views/Player/Lobby');
-
-    // component = React.createElement(PlayerLobby);
-    doc = TestUtils.renderIntoDocument( <PlayerLobby /> );
+  beforeEach( () => {
+    PlayerLobby.__Rewire__('JoinGameForm', JoinGameFormMock);
+    PlayerLobby.__Rewire__('JoinedGameInstructions', JoinedGameInstructionsMock);
   });
 
   it('should create a new instance of PlayerLobby', () => {
-    expect(doc).to.exist;
+    let render = TestUtils.renderIntoDocument(<PlayerLobby />);
+    expect(render).to.exist;
   });
 
-  it('should render initial spans', () => {
-    var domText,
-    	labels = ['Name', 'Game ID'],
-    	spans = TestUtils.scryRenderedDOMComponentsWithTag(doc, 'span');
-
-    expect(spans.length).to.be.equal(2);
-
-    for (var k = 0; k < spans.length; k++) {
-    	domText = spans[k].getDOMNode().textContent;
-    	expect(domText).to.equal(labels[k]);
-    }
+  it('should show JoinGameForm component before a game has been joined', () => {
+    let markup = React.renderToStaticMarkup(<PlayerLobby />);
+    expect(markup).to.contain(formType);
+    expect(markup).to.not.contain(instructionsType);
   });
 
-  it('should render initial inputs', () => {
-  	var domText,
-    	inputs = TestUtils.scryRenderedDOMComponentsWithTag(doc, 'input');
-
-    expect(inputs.length).to.be.equal(2);
-
-    for (var k = 0; k < inputs.length; k++) {
-    	domText = inputs[k].getDOMNode().textContent;
-    	expect(domText).to.be.empty;
-    }
+  it('should show JoinedGameInstructions when a game has been joined', () => {
+    let markup = React.renderToStaticMarkup(<PlayerLobby joinedGame={true} />);
+    expect(markup).to.contain(instructionsType);
+    expect(markup).to.not.contain(formType);
   });
-
 });
