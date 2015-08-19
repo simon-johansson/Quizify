@@ -8,21 +8,26 @@ require('styles/components/Player.scss');
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render () {
+    let {playerName, index} = this.props;
     return (
       <div>
-        Player { this.props.index } - { this.props.username }
+        Player { index } - { playerName }
       </div>
     );
   }
 }
 
 Player.propTypes = {
-  index: React.PropTypes.number,
-  username: React.PropTypes.string,
+  playerName: React.PropTypes.string.isRequired,
+  index: React.PropTypes.number.isRequired,
+};
+
+Player.defaultProps = {
+  playerName: '',
+  index: '',
 };
 
 module.exports = Player;

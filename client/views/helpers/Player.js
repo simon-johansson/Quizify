@@ -10,7 +10,7 @@ var helpers = {
    		players.forEach(function (player, i) {
      			let index = i + 1;
      			let {playerName} = player;
-     			playerElements.push(<Player username={playerName} index={index} />);
+     			playerElements.push(<Player playerName={playerName} index={index} />);
    		});
    		return playerElements;
 	}
