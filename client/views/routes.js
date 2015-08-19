@@ -1,19 +1,19 @@
 'use strict';
 
-var React = require('react');
+const React = require('react');
 
-var Router = require('react-router');
-var { Route, NotFoundRoute, HashLocation, DefaultRoute } = Router;
+const Router = require('react-router');
+const { Route, NotFoundRoute, HashLocation, DefaultRoute } = Router;
 
-var ga = require('react-ga');
+const ga = require('react-ga');
 
-var QuizifyApp = require('./QuizifyApp');
-var Home = require('./Home');
-var About = require('./About');
-var Host = require('./Host');
-var HostLobby = require('./Host/Lobby');
-var Player = require('./Player');
-var PlayerLobby = require('./Player/Lobby');
+const QuizifyApp = require('./QuizifyApp');
+const Home = require('./Home');
+const About = require('./About');
+const Host = require('./Host');
+const HostLobby = require('./Host/Lobby');
+const Player = require('./Player');
+const PlayerLobby = require('./Player/Lobby');
 
 class NotFound extends React.Component {
   render () {
@@ -25,17 +25,17 @@ class NotFound extends React.Component {
   }
 }
 
-var routes = (
+const routes = (
   <Route path="/" handler={ QuizifyApp }>
     <DefaultRoute name="home" handler={ Home }/>
     <Route name="about" path="about" handler={ About }/>
 
-    <Route name="host" path="host" handler={ Host }>
-      <Route name="host-lobby" path="lobby" handler={ HostLobby }/>
+    <Route name="host" path="create" handler={ Host }>
+      <DefaultRoute name="host-lobby" handler={ HostLobby }/>
     </Route>
-    <Route name="player" path="player" handler={ Player }>
-      <Route name="player-lobby" path="lobby" handler={ PlayerLobby }/>
-      <Route path="lobby/:gameId" handler={ PlayerLobby }/>
+    <Route name="player" path="join" handler={ Player }>
+      <DefaultRoute name="player-lobby" handler={ PlayerLobby }/>
+      <Route path=":gameId" handler={ PlayerLobby }/>
     </Route>
     <NotFoundRoute handler={ NotFound } />
   </Route>
