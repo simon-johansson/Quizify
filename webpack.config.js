@@ -8,6 +8,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
+var secrets = require('./server/config/secrets');
+
 var buildPath = path.resolve(__dirname, 'client', 'build');
 var mainPath = path.resolve(__dirname, 'client', 'views', 'main.js');
 
@@ -73,7 +75,13 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV:  JSON.stringify("development"),
+        GA_TRACKING_ID: JSON.stringify(secrets.googleAnalytics),
+      }
+    })
   ]
 
 };

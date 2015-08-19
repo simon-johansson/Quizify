@@ -9,6 +9,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
+var secrets = require('./server/config/secrets');
+
 var buildPath = path.resolve(__dirname, 'dist', 'build');
 var mainPath = path.resolve(__dirname, 'client', 'views', 'main.js');
 
@@ -33,7 +35,13 @@ module.exports = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
+        GA_TRACKING_ID: JSON.stringify(secrets.googleAnalytics),
+      }
+    })
   ],
 
   resolve: {

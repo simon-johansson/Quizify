@@ -1,6 +1,9 @@
 'use strict';
 
 var path = require('path');
+var webpack = require('webpack');
+
+var secrets = require('../../server/config/secrets');
 
 module.exports = function (config) {
   config.set({
@@ -62,7 +65,15 @@ module.exports = function (config) {
           'utils': path.join(process.cwd(), './client/utils/'),
           'shared': path.join(process.cwd(), './shared/')
         }
-      }
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          "process.env": {
+            NODE_ENV: JSON.stringify("test"),
+            GA_TRACKING_ID: JSON.stringify(secrets.googleAnalytics),
+          }
+        })
+      ]
     },
     webpackServer: {
       noInfo: true, //please don't spam the console when running in karma!
