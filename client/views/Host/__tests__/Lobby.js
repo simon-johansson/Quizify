@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Lobby', () => {
-  var React, TestUtils, Lobby, HostActions, sandbox;
+const React = require('react/addons');
+const TestUtils = React.addons.TestUtils;
+const Lobby = require('views/Host/Lobby');
+const HostActions = require('actions/HostActionCreators');
+
+describe('HostLobby', () => {
+  var sandbox;
 
   beforeEach( () => {
-    React = require('react/addons');
-    TestUtils = React.addons.TestUtils;
-    Lobby = require('views/Host/Lobby');
-    HostActions = require('actions/HostActionCreators');
-
     Lobby.__Rewire__('PlayerHelpers', {
       getPlayerElements: players => {
         return players.map((player, i) =>
@@ -22,7 +22,7 @@ describe('Lobby', () => {
     sandbox.spy(HostActions, "requestNewRound");
   });
 
-  afterEach(function() {
+  afterEach(() => {
     sandbox.restore();
   });
 
