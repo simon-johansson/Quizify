@@ -41,7 +41,11 @@ const routes = (
   </Route>
 );
 
-ga.initialize('UA-000000-01', {debug: true});
+if(process.env.NODE_ENV === 'production') {
+  ga.initialize(process.env.GA_TRACKING_ID);
+} else {
+  ga.initialize('UA-000000-01', {debug: true});
+}
 
 Router.run(routes, HashLocation, (Root, state) => {
   ga.pageview(state.pathname);
