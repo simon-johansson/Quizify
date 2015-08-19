@@ -4,8 +4,6 @@ var React = require('react/addons');
 var Router = require('react-router');
 var { Link } = Router;
 
-//var Actions = require('actions/xxx')
-
 require('styles/views/Home.scss');
 
 class Home extends React.Component {
