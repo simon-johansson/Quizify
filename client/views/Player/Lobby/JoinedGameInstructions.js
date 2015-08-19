@@ -13,18 +13,30 @@ class JoinedGameInstructions extends React.Component {
   }
 
   render() {
-    let {playerName} = this.props;
-    let players = this._getPlayerElements(this.props.players);
+    let {playerName, players} = this.props;
+    let playerElements = this._getPlayerElements(players);
     return (
         <div className="JoinedGameInstructions">
           <h2>Hello {playerName}</h2>
           <h3>Wait for host to start the game</h3>
           <br/>
           <p>Players already connected:</p>
-          { players }
+          <div className="players">
+            { playerElements }
+          </div>
         </div>
       );
   }
 }
+
+JoinedGameInstructions.propTypes = {
+  playerName: React.PropTypes.string.isRequired,
+  players: React.PropTypes.array.isRequired,
+};
+
+JoinedGameInstructions.defaultProps = {
+  playerName: '',
+  players: [],
+};
 
 module.exports = JoinedGameInstructions;
