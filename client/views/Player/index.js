@@ -4,7 +4,6 @@ var Router = require('react-router');
 var { RouteHandler, Link } = Router;
 
 var React = require('react/addons');
-var Reflux = require('reflux');
 
 var ServerCommunication = require('utils/ServerCommunication');
 var Actions = require('actions/ClientActionCreators');
@@ -13,13 +12,14 @@ var Store = require('stores/PlayerStore');
 require('styles/views/Player/Player.scss');
 
 class Player extends React.Component {
-
   constructor(props, context) {
-     super(props, context);
-     this.state = {
-       playerId: null,
-       gameId: null
-     };
+    super(props, context);
+    this.state = {
+      joinedGame: false,
+      gameId: props.params.gameId,
+      players: [],
+      playerName: Store.getPlayerName() || '',
+    };
   }
 
   componentDidMount() {
@@ -34,18 +34,31 @@ class Player extends React.Component {
 
   _onStoreChange(data) {
     this.setState({
-      playerId: data.playerId,
-      gameId: data.gameId,
+      joinedGame: Store.hasJoinedGame(),
+      players: Store.getPlayers(),
+      playerName: Store.getPlayerName(),
     });
   }
 
   render() {
+    console.log('test');
     return (
       <div className='Player-view'>
-        <RouteHandler/>
+        <RouteHandler
+          joinedGame={this.state.joinedGame}
+          players={this.state.players}
+          playerName={this.state.playerName}
+          gameId={this.state.gameId}
+        />
       </div>
     );
   }
 }
+
+Player.defaultProps = {
+  params: React.PropTypes.shape({
+    gameId: '',
+  })
+};
 
 module.exports = Player;

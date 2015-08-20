@@ -8,32 +8,16 @@ const JoinedGameInstructions = require('./JoinedGameInstructions');
 class PlayerLobby extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      joinedGame: props.joinedGame || false,
-      gameId: props.params ? props.params.gameId : null,
-      players: [],
-      playerName: Store.getPlayerName() || '',
-    };
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  componentDidMount() {
-    this.unsubscribe = Store.listen(this._onStoreChange.bind(this));
-  }
-
-  _onStoreChange(data) {
-    this.setState({
-      joinedGame: Store.hasJoinedGame(),
-      players: Store.getPlayers(),
-      playerName: Store.getPlayerName(),
-    });
+    // this.state = {
+    //   joinedGame: props.joinedGame,
+    //   gameId: props.gameId,
+    //   players: props.players,
+    //   playerName: props.playerName,
+    // };
   }
 
   render() {
-    let {joinedGame, gameId, players, playerName} = this.state;
+    let {joinedGame, gameId, players, playerName} = this.props;
     return (
         <div className="PlayerLobby-view">
           { joinedGame ?
@@ -44,5 +28,19 @@ class PlayerLobby extends React.Component {
       );
   }
 }
+
+PlayerLobby.propTypes = {
+  joinedGame: React.PropTypes.bool.isRequired,
+  gameId: React.PropTypes.string.isRequired,
+  players: React.PropTypes.array.isRequired,
+  playerName: React.PropTypes.string.isRequired,
+};
+
+PlayerLobby.defaultProps = {
+  joinedGame: false,
+  gameId: '',
+  players: [],
+  playerName: ''
+};
 
 module.exports = PlayerLobby;
