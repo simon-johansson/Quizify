@@ -7,7 +7,7 @@ var ClientActions = require('../actions/ClientActionCreators');
 var HostActions = require('../actions/HostActionCreators');
 var PlayerActions = require('../actions/PlayerActionCreators');
 
-const createDeepLink = (url, id) => `${url}/#/player/lobby/${id}`;
+const createDeepLink = (url, id) => `${url}/#/join/${id}`;
 
 var HostStore = Reflux.createStore({
   listenables: [HostActions, PlayerActions, ClientActions],
