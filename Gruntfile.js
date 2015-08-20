@@ -78,6 +78,12 @@ module.exports = function (grunt) {
             expand: true,
             src: ['<%= paths.dev %>/images/*'],
             dest: '<%= paths.dist %>/images/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: ['<%= paths.dev %>/favicons/*'],
+            dest: '<%= paths.dist %>/favicons/'
           }
         ]
       }

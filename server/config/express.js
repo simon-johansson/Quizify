@@ -28,7 +28,7 @@ module.exports = app => {
 
   if(env === 'production') {
     app.use(express.static(path.join(config.root, 'dist')));
-    app.use(favicon(path.join(config.root, 'dist', 'favicon.ico')));
+    app.use(favicon(path.join(config.root, 'dist', 'favicons', 'favicon.ico')));
     // app.use(morgan('dev'));
   }
 
