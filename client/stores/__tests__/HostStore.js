@@ -1,11 +1,22 @@
 'use strict';
 
+const HostStore = require('stores/HostStore');
+const HostActions = require('actions/HostActionCreators');
+const ClientActions = require('actions/ClientActionCreators');
+
 describe('HostStore', () => {
-  var HostStore, HostActions, sandbox;
+
+  const player1 = {
+    playerId: 'abc123',
+    playerName: 'Simon'
+  };
+  const player2 = {
+    playerId: 'def456',
+    playerName: 'James'
+  };
 
   beforeEach( () => {
-    HostStore = require('stores/HostStore');
-    HostActions = require('actions/HostActionCreators');
+    HostStore.setInitialState();
   });
 
   it('should be defined', () => {
@@ -23,12 +34,51 @@ describe('HostStore', () => {
     expect(id).to.eql(null);
   });
 
-  it('should set gameId when game has been created', (done) => {
-    HostActions.createGame.completed({gameId: 123});
+  it('should set gameId, url and deeplink when game has been created', (done) => {
+    HostActions.createGame.completed({
+      gameId: 123,
+      url: 'http://spotifyquiz.com'
+    });
 
     setTimeout( () => {
       expect(HostStore.getGameId()).to.eql(123);
+      expect(HostStore.getSiteUrl()).to.eql('http://spotifyquiz.com');
+      expect(HostStore.getGameDeepLink()).to.eql('http://spotifyquiz.com/#/join/123');
       done()
-    }, 200);
+    }, 10);
   });
+
+  it('should push new player into players array upon joining the game', (done) => {
+    HostActions.playerJoinGame(player1);
+    HostActions.playerJoinGame(player2);
+
+    setTimeout( () => {
+      expect(HostStore.getPlayers()).to.be.an('array');
+      expect(HostStore.getPlayers()).to.have.length(2);
+      expect(HostStore.getPlayers()[0]).to.eql(player1);
+      expect(HostStore.getPlayers()[1]).to.eql(player2);
+      done()
+    }, 10);
+  });
+
+  it('should remove player from players array upon leaving the game', (done) => {
+    HostActions.playerJoinGame(player1);
+    HostActions.playerJoinGame(player2);
+
+    setTimeout( () => {
+      expect(HostStore.getPlayers()).to.have.length(2);
+      expect(HostStore.getPlayers()[0]).to.eql(player1);
+      ClientActions.leaveGame.completed({
+        clientId: player1.playerId
+      });
+
+        setTimeout( () => {
+          expect(HostStore.getPlayers()).to.have.length(1);
+          expect(HostStore.getPlayers()[0]).to.eql(player2);
+          done()
+        }, 10);
+    }, 10);
+  });
+
+  it.skip('should increment round when new round data has been recived', () => {});
 });
