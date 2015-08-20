@@ -1,26 +1,37 @@
 'use strict';
 
+const React = require('react/addons');
+const TestUtils = React.addons.TestUtils;
+const stubContext = require('react-stub-context');
+var ServerCommunication = require('utils/ServerCommunication');
+var QuizifyApp = require('views/QuizifyApp.js');
+
 function noop() {}
 
+var Router = function() {};
+Router.makeHref = function () { return 'link'; };
+Router.setRouteComponentAtDepth = Router.isActive = Router.getRouteAtDepth = noop;
+QuizifyApp = stubContext(QuizifyApp, { router: Router });
+
 describe('QuizifyApp', () => {
-  var React, Router, TestUtils, stubContext, QuizifyApp;
+  const sandbox = sinon.sandbox.create();
 
   beforeEach( () => {
-    React = require('react/addons');
-    TestUtils = React.addons.TestUtils;
-    stubContext = require('react-stub-context');
-    QuizifyApp = require('views/QuizifyApp.js');
-
-    Router = function() {};
-    Router.makeHref = function () { return 'link'; };
-    Router.setRouteComponentAtDepth = Router.isActive = Router.getRouteAtDepth = noop;
-
-    QuizifyApp = stubContext(QuizifyApp, { router: Router });
+    sandbox.spy(ServerCommunication, "connect");
+    sandbox.spy(ServerCommunication, "bindClientEvents");
   });
+
+  afterEach(() => sandbox.restore());
 
   it('should create a new instance of QuizifyApp', () => {
     var render = TestUtils.renderIntoDocument(React.createElement(QuizifyApp, {}));
     expect(render).to.exist;
+  });
+
+  it('should connect to server on mount', () => {
+    var render = TestUtils.renderIntoDocument(React.createElement(QuizifyApp, {}));
+    expect(ServerCommunication.connect).to.have.been.calledOnce;
+    expect(ServerCommunication.bindClientEvents).to.have.been.calledOnce;
   });
 
   it('view should contain links to "Home" and "About"', () => {
