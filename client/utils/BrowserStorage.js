@@ -8,7 +8,7 @@ var generateStorageKey = (key) => {
 };
 
 var get = (key) => {
-  return store.get(generateStorageKey(key));
+  return store.get(generateStorageKey(key)) || '';
 };
 
 var set = (key, value) => {
