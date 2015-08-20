@@ -1,12 +1,10 @@
 'use strict';
 
-const socket = require('socket.io-client')();
 const events = require('shared/socketEvents');
-
 const PlayerActions = require('actions/PlayerActionCreators');
 const {wrapper} = require('./utils');
 
-const bouncing = () => {
+const bouncing = (socket) => {
   let ev = events.toServer.fromPlayer;
 
   PlayerActions.joinGame.listen((playerName, gameId) => {
@@ -18,20 +16,20 @@ const bouncing = () => {
   });
 };
 
-const outgoing = () => {
+const outgoing = (socket) => {
 };
 
-const incoming = () => {
+const incoming = (socket) => {
   let ev = events.fromServer.toPlayer;
 
   socket.on(ev.listPlayers, PlayerActions.listPlayers);
 };
 
 module.exports = {
-  bind() {
-    bouncing();
-    outgoing();
-    incoming();
+  bind(socket) {
+    bouncing(socket);
+    outgoing(socket);
+    incoming(socket);
   },
   unbind() {}
 };
