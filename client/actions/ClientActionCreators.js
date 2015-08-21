@@ -6,7 +6,7 @@ var ClientActionCreators  =  Reflux.createActions({
   "leaveGame": {
     children: ["completed", "failed"]
   },
-  "newRound": {
+  "startNewRound": {
     children: ["completed", "failed"]
   },
 });
