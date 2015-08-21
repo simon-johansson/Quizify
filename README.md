@@ -1,4 +1,4 @@
-# Quizify
+# SpotifyQuiz
 
 [![Build Status][travis-image]][travis-url]
 [![Dependencies][david-deps-image]][david-deps-url]

@@ -12,7 +12,7 @@ var FeedbackButton = require('./FeedbackButton');
 require('normalize.css');
 require('styles/main.scss');
 
-class QuizifyApp extends React.Component {
+class SpotifyQuizApp extends React.Component {
   constructor(props, context) {
      super(props, context);
   }
@@ -24,8 +24,8 @@ class QuizifyApp extends React.Component {
 
   render() {
     return (
-      <div className='QuizifyApp'>
-        <h1>Quizify</h1>
+      <div className='SpotifyQuizApp'>
+        <h1>SpotifyQuiz</h1>
         <ul>
           <li>
             <Link to="home">
@@ -46,8 +46,8 @@ class QuizifyApp extends React.Component {
   }
 }
 
-QuizifyApp.contextTypes = {
+SpotifyQuizApp.contextTypes = {
   router: React.PropTypes.func.isRequired
 };
 
-module.exports = QuizifyApp;
+module.exports = SpotifyQuizApp;

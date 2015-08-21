@@ -7,7 +7,7 @@ const { Route, NotFoundRoute, HashLocation, DefaultRoute } = Router;
 
 const ga = require('react-ga');
 
-const QuizifyApp = require('./QuizifyApp');
+const SpotifyQuizApp = require('./SpotifyQuizApp');
 const Home = require('./Home');
 const About = require('./About');
 const Host = require('./Host');
@@ -27,7 +27,7 @@ class NotFound extends React.Component {
 }
 
 const routes = (
-  <Route path="/" handler={ QuizifyApp }>
+  <Route path="/" handler={ SpotifyQuizApp }>
     <DefaultRoute name="home" handler={ Home }/>
     <Route name="about" path="about" handler={ About }/>
 

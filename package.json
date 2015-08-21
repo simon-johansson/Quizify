@@ -1,5 +1,5 @@
 {
-  "name": "quizify",
+  "name": "spotifyquiz",
   "version": "0.0.0",
   "dependencies": {
     "babel-core": "^5.8.22",
