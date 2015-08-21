@@ -14,6 +14,7 @@ const Host = require('./Host');
 const HostLobby = require('./Host/Lobby');
 const Player = require('./Player');
 const PlayerLobby = require('./Player/Lobby');
+const HostRound = require('./Host/Round');
 
 class NotFound extends React.Component {
   render () {
@@ -32,6 +33,8 @@ const routes = (
 
     <Route name="host" path="create" handler={ Host }>
       <DefaultRoute name="host-lobby" handler={ HostLobby }/>
+    </Route>
+    <Route name="host-game" path="game" handler={ HostRound }>
     </Route>
     <Route name="player" path="join" handler={ Player }>
       <DefaultRoute name="player-lobby" handler={ PlayerLobby }/>

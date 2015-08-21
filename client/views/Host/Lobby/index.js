@@ -9,6 +9,9 @@ var HostStore = require('stores/HostStore');
 
 var PlayerHelpers = require('../../helpers/Player');
 
+var Router = require('react-router');
+var { Link } = Router;
+
 class HostLobby extends React.Component {
   constructor(props) {
     super(props);
@@ -48,14 +51,14 @@ class HostLobby extends React.Component {
   }
 
   _startGame() {
-    console.log('Start');
+    
     // Maybe this should be a redirect to a new page insted
-    HostActions.requestNewRound();
+    // HostActions.requestNewRound();
   }
 
   render() {
     let players = this._getPlayerElements(this.state.players);
-    let button = players.length ? <button className="start-game-btn" onClick={this._startGame.bind(this)}>Start game<br/>(up to 8 players)</button> : null;
+    let button = players.length ? <button className="start-game-btn" onClick={this._startGame.bind(this)}><Link to="host-game" >Start game<br/>(up to 8 players)</Link></button> : null;
     let qrCode = this.state.deepLink ? <QRCode text={this.state.deepLink}/> : null;
     return (
       <div className="HostLobby-view">
