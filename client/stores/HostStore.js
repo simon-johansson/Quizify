@@ -17,7 +17,9 @@ var HostStore = Reflux.createStore({
       url: "",
       deepLink: "",
       gameId: null,
-      players: []
+      players: [],
+      track: null,
+      countdown: 10
     };
   },
 
@@ -25,6 +27,8 @@ var HostStore = Reflux.createStore({
   getGameId() { return this.state.gameId; },
   getSiteUrl() { return this.state.url; },
   getGameDeepLink() { return this.state.deepLink; },
+  getTrack() { return this.state.track; },
+  getCountdown() { return this.state.countdown; },
 
   onGameCreated(data) {
     var {state} = this;
@@ -52,8 +56,11 @@ var HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
-  onNewRound(data) {
+  onStartNewRound(data) {
+    let {state} = this;
     console.log(data);
+    state.track = data;
+    this.trigger(state);
   },
 
   // Maybe a good idea to move all the errors out to
@@ -69,7 +76,8 @@ var HostStore = Reflux.createStore({
     this.listenTo(HostActions.createGame.failed, this.onError);
     this.listenTo(HostActions.playerJoinGame, this.onPLayerJoined);
 
-    this.listenTo(ClientActions.newRound.completed, this.onNewRound);
+    this.listenTo(ClientActions.startNewRound.completed, this.onStartNewRound);
+    this.listenTo(ClientActions.startNewRound.failed, this.onStartNewRound);
     this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
   },
 
