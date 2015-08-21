@@ -6,6 +6,7 @@ var { RouteHandler, Link } = Router;
 var React = require('react/addons');
 var Reflux = require('reflux');
 
+var HostStore = require('stores/HostStore');
 var ServerCommunication = require('utils/ServerCommunication');
 
 require('styles/views/Host/Host.scss');
@@ -18,6 +19,11 @@ class Host extends React.Component {
   }
 
   componentDidMount() {
+  }
+
+  componentWillUnmount() {
+    ServerCommunication.unbindHostEvents();
+    HostStore.setInitialState();
   }
 
   render() {
