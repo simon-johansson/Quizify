@@ -17,6 +17,7 @@ module.exports = {
   },
   bindClientEvents: () => clientEvents.bind(socket),
   bindHostEvents: () => hostEvents.bind(socket),
+  unbindHostEvents: () => hostEvents.unbind(socket),
   bindPlayerEvents: () => playerEvents.bind(socket),
 };
 

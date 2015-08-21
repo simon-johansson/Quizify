@@ -1,5 +1,6 @@
 'use strict';
 
+const nop = require('nop');
 const events = require('shared/socketEvents');
 const HostActions = require('actions/HostActionCreators');
 const {wrapper} = require('./utils');
@@ -34,5 +35,11 @@ module.exports = {
     outgoing(socket);
     incoming(socket);
   },
-  unbind() {}
+
+  unbind(socket) {
+    HostActions.createGame.listen = nop;
+    HostActions.requestNewRound.listen = nop;
+    HostActions.listPlayers.listen = nop;
+    socket.off(events.fromServer.toHost.playerJoined);
+  }
 };
