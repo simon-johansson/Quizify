@@ -46,6 +46,18 @@ class HostLobby extends React.Component {
     });
   }
 
+  _developmentHelpers() {
+    if(process.env.NODE_ENV === 'development') {
+      return (
+        <div className="fake-player-helpers">
+          <p>Host lobby dev helpers</p>
+          <button onClick={window.addPlayers}>Add player to game</button>
+          <button onClick={window.removePlayer}>Remove player from game</button>
+        </div>
+      );
+    }
+  }
+
   _getPlayerElements(players) {
     return PlayerHelpers.getPlayerElements(players);
   }
@@ -62,6 +74,7 @@ class HostLobby extends React.Component {
     let qrCode = this.state.deepLink ? <QRCode text={this.state.deepLink}/> : null;
     return (
       <div className="HostLobby-view">
+        { this._developmentHelpers() }
         <p>1. Open this site on your mobile device:</p>
         <h2 className="site-url">{ this.state.url }</h2>
         <p>2. Then click JOIN and enter the following Game ID:</p>

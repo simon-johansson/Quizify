@@ -16,10 +16,24 @@ class PlayerLobby extends React.Component {
     // };
   }
 
+  _developmentHelpers() {
+    if(process.env.NODE_ENV === 'development') {
+      return (
+        <div className="fake-player-helpers">
+          <p>Player lobby dev helpers</p>
+          <button onClick={window.joinFakeGame}>Join game</button>
+          <button onClick={window.listPlayer}>Add player to game</button>
+          <button onClick={window.startGame}>Start game</button>
+        </div>
+      );
+    }
+  }
+
   render() {
     let {joinedGame, gameId, players, playerName} = this.props;
     return (
         <div className="PlayerLobby-view">
+          { this._developmentHelpers() }
           { joinedGame ?
             <JoinedGameInstructions playerName={playerName} players={players} /> :
             <JoinGameForm playerName={playerName} gameId={gameId} />

@@ -41,7 +41,6 @@ class Player extends React.Component {
   }
 
   render() {
-    console.log('test');
     return (
       <div className='Player-view'>
         <RouteHandler
