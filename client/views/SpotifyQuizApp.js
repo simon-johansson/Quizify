@@ -5,8 +5,12 @@ var { RouteHandler, Link } = Router;
 
 var React = require('react/addons');
 
+var MobileDetect = require('mobile-detect');
+var md = new MobileDetect(window.navigator.userAgent);
+
 var ServerCommunication = require('utils/ServerCommunication');
 var FeedbackButton = require('./FeedbackButton');
+var RotateDevice = require('./RotateDevice');
 
 // CSS
 require('normalize.css');
@@ -20,11 +24,20 @@ class SpotifyQuizApp extends React.Component {
   componentDidMount() {
     ServerCommunication.connect();
     ServerCommunication.bindClientEvents();
+    if(md.mobile()) {
+      this.context.router.transitionTo('player-lobby');
+      window.onresize = () => this.forceUpdate();
+    }
   }
 
   render() {
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let mobile = md.mobile();
+
     return (
       <div className='SpotifyQuizApp'>
+        <RotateDevice width={width} height={height} mobile={mobile} />
         <h1>SpotifyQuiz</h1>
         <ul>
           <li>
