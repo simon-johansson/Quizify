@@ -1,6 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
+var ClientActions = require('../actions/ClientActionCreators');
 var PlayerActions = require('../actions/PlayerActionCreators');
 var browserStorage = require('../utils/BrowserStorage');
 
@@ -13,7 +14,8 @@ var PlayerStore = Reflux.createStore({
       playerName: browserStorage.getPlayerName() || null,
       gameId: null,
       joindGame: false,
-      players: []
+      players: [],
+      latency: 0,
     };
   },
 
@@ -22,6 +24,13 @@ var PlayerStore = Reflux.createStore({
   getGameId() { return this.state.gameId; },
   getPlayers() { return this.state.players; },
   hasJoinedGame() { return this.state.joindGame; },
+  getLatency() { return this.state.latency; },
+
+  _onLatency(data) {
+    var {state} = this;
+    state.latency = data;
+    this.trigger(state);
+  },
 
   _onJoinedGame(data) {
     var {state} = this;
@@ -47,6 +56,8 @@ var PlayerStore = Reflux.createStore({
 
   init() {
     this.setInitialState();
+
+    this.listenTo(ClientActions.latency, this._onLatency);
 
     this.listenTo(PlayerActions.joinGame.failed, this._onError);
     this.listenTo(PlayerActions.joinGame.completed, this._onJoinedGame);

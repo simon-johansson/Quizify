@@ -4,6 +4,18 @@ var events = require('shared/socketEvents');
 var ClientActions = require('actions/ClientActionCreators');
 var {wrapper} = require('./utils');
 
+var bouncing = (socket) => {
+  let ev = events.toServer.fromClient;
+
+  setInterval(() => {
+    let startTime = Date.now();
+    socket.emit(ev.ping, () => {
+      let latency = Date.now() - startTime;
+      ClientActions.latency(latency);
+    });
+  }, 2000);
+};
+
 var outgoing = (socket) => {
   let ev = events.toServer.fromClient;
   ClientActions.leaveGame.listen( (playerName, gameId) => {
@@ -19,6 +31,7 @@ var incoming = (socket) => {
 
 module.exports = {
   bind(socket) {
+    bouncing(socket);
     outgoing(socket);
     incoming(socket);
   },

@@ -1,0 +1,53 @@
+.latency-indicator {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  font-size: 10px;
+  span {
+  }
+  .latency-numbers {
+  }
+  .latency-figures {
+    figure {
+      width: 3px;
+      background: black;
+      display: inline-block;
+      margin: 0 2px;
+      border: 1px solid darkgray;
+      &:nth-child(1) {
+        height: 5px;
+        background: white;
+      }
+      &:nth-child(2) {
+        height: 9px;
+      }
+      &:nth-child(3) {
+        height: 13px;
+      }
+      &:nth-child(4) {
+        height: 17px;
+      }
+    }
+    &.level-2 {
+      figure {
+        &:nth-child(2) {
+          background: white;
+        }
+      }
+    }
+    &.level-3 {
+      figure {
+        &:nth-child(3) {
+          background: white;
+        }
+      }
+    }
+    &.level-4 {
+      figure {
+        &:nth-child(4) {
+          background: white;
+        }
+      }
+    }
+  }
+}

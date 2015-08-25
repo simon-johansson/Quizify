@@ -11,4 +11,6 @@ var ClientActionCreators  =  Reflux.createActions({
   },
 });
 
+ClientActionCreators.latency = Reflux.createAction();
+
 module.exports = ClientActionCreators;

@@ -3,6 +3,7 @@ var socketEvents = {
   toServer: {
     fromClient: {
       leaveGame: 'client:leaveGame',
+      ping: 'client:ping',
     },
     fromHost: {
       createGame: 'host:createGame',

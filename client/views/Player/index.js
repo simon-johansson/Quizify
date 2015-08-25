@@ -8,6 +8,7 @@ var React = require('react/addons');
 var ServerCommunication = require('utils/ServerCommunication');
 var Actions = require('actions/ClientActionCreators');
 var Store = require('stores/PlayerStore');
+var Latency = require('./Latency');
 
 require('styles/views/Player/Player.scss');
 
@@ -37,6 +38,7 @@ class Player extends React.Component {
       joinedGame: Store.hasJoinedGame(),
       players: Store.getPlayers(),
       playerName: Store.getPlayerName(),
+      latency: Store.getLatency()
     });
   }
 
@@ -49,6 +51,7 @@ class Player extends React.Component {
           playerName={this.state.playerName}
           gameId={this.state.gameId}
         />
+      <Latency latency={this.state.latency} />
       </div>
     );
   }

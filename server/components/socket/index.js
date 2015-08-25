@@ -79,6 +79,12 @@ function bindEvents (socket) {
   socket.on(fromPlayer.joinGame, onPlayerJoinGame);
   socket.on(fromClient.leaveGame, onClientLeave);
   socket.on('disconnect', onClientLeave);
+
+  socket.on(fromClient.ping, function(callback = nop) {
+    setTimeout(() => {
+      callback();
+    }, 0)
+  });
 }
 
 module.exports = {
