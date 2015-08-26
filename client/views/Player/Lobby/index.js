@@ -8,12 +8,6 @@ const JoinedGameInstructions = require('./JoinedGameInstructions');
 class PlayerLobby extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   joinedGame: props.joinedGame,
-    //   gameId: props.gameId,
-    //   players: props.players,
-    //   playerName: props.playerName,
-    // };
   }
 
   _developmentHelpers() {
