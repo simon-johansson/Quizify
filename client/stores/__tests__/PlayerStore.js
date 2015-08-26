@@ -1,7 +1,8 @@
 'use strict';
 
-var PlayerStore = require('stores/PlayerStore');
-var PlayerActions = require('actions/PlayerActionCreators');
+const PlayerStore = require('stores/PlayerStore');
+const PlayerActions = require('actions/PlayerActionCreators');
+const ClientActions = require('actions/ClientActionCreators');
 
 describe('PlayerStore', () => {
 
@@ -54,6 +55,25 @@ describe('PlayerStore', () => {
       setTimeout( () => {
         expect(window.alert).to.have.been.calledOnce;
         expect(window.alert).to.have.been.calledWith("Error!");
+        done()
+      }, 0);
+    });
+
+    it('should set latency upon reciving new latency data', (done) => {
+      ClientActions.latency(432);
+
+      setTimeout( () => {
+        expect(PlayerStore.getLatency()).to.eql(432);
+        done()
+      }, 0);
+    });
+
+    it('should update player array when new player enters game', (done) => {
+      let players = [{name: 'Simon'}, {name: 'David'}];
+      PlayerActions.listPlayers({players});
+
+      setTimeout( () => {
+        expect(PlayerStore.getPlayers()).to.eql(players);
         done()
       }, 0);
     });
