@@ -4,7 +4,6 @@ var Router = require('react-router');
 var { RouteHandler, Link } = Router;
 
 var React = require('react/addons');
-var Reflux = require('reflux');
 
 var HostStore = require('stores/HostStore');
 var ServerCommunication = require('utils/ServerCommunication');
