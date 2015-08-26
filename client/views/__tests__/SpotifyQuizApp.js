@@ -3,14 +3,13 @@
 const React = require('react/addons');
 const TestUtils = React.addons.TestUtils;
 const stubContext = require('react-stub-context');
+const nop = require('nop');
 var ServerCommunication = require('utils/ServerCommunication');
 var SpotifyQuizApp = require('views/SpotifyQuizApp');
 
-function noop() {}
-
 var Router = function() {};
 Router.makeHref = function () { return 'link'; };
-Router.setRouteComponentAtDepth = Router.isActive = Router.getRouteAtDepth = noop;
+Router.setRouteComponentAtDepth = Router.isActive = Router.getRouteAtDepth = nop;
 SpotifyQuizApp = stubContext(SpotifyQuizApp, { router: Router });
 
 describe('SpotifyQuizApp', () => {
