@@ -1,10 +1,10 @@
-# SpotifyQuiz
+# MusicQuiz
 
 [![Build Status][travis-image]][travis-url]
 [![Dependencies][david-deps-image]][david-deps-url]
 [![Development Dependencies][david-devdeps-image]][david-devdeps-url]
 
-> Web based Spotify multiplayer quiz. Use your mobile as a controller, up to 8 players.
+> Web based realtime multiplayer quiz. Use your mobile as a controller, up to 8 players.
 
 ## Install
 Make sure you have Node.js and npm installed.
