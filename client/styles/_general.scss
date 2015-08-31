@@ -1,6 +1,7 @@
 
 /* Stiziles */
 html, body {
+  // background: #2e2f33;
   background: #222222;
   font-family: $main-font;
 }
@@ -14,8 +15,36 @@ html, body {
   color: #fff;
 }
 
+*:focus {
+  outline: 0;
+}
+
 button {
   color: black;
+}
+
+.fake-player-helpers {
+  position: fixed;
+  padding: 0 5px;
+  top: 10px;
+  right: 10px;
+  // border: 1px dashed gray;
+  background: lightgray;
+  p {
+    font-size: 12px;
+    font-family: Consolas, monaco, monospace;
+    margin: 5px 0 0 0;
+    color: black;
+  }
+  button {
+    width: 200px;
+    display: block;
+    margin: 5px auto;
+    background: salmon;
+    font-family: Consolas, monaco, monospace;
+    font-size: 12px;
+    border: 0px;
+  }
 }
 
 /* transitions */
