@@ -31,12 +31,12 @@ const routes = (
     <DefaultRoute name="home" handler={ Home }/>
     <Route name="about" path="about" handler={ About }/>
 
-    <Route name="host" path="create" handler={ Host }>
+    <Route name="host" path="host" handler={ Host }>
       <DefaultRoute name="host-lobby" handler={ HostLobby }/>
+      <Route name="host-game" path="start" handler={ HostRound }>
     </Route>
-    <Route name="host-game" path="game" handler={ HostRound }>
     </Route>
-    <Route name="player" path="join" handler={ Player }>
+    <Route name="player" path="player" handler={ Player }>
       <DefaultRoute name="player-lobby" handler={ PlayerLobby }/>
       <Route path=":gameId" handler={ PlayerLobby }/>
     </Route>
