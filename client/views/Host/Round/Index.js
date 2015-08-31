@@ -9,7 +9,7 @@ var HostStore = require('stores/HostStore');
 
 var PlayerHelpers = require('../../helpers/Player');
 
-class HostLobby extends React.Component {
+class Round extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ class HostLobby extends React.Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = HostStore.onStartNewRound.listen(this._onStoreChange.bind(this));
+    this.unsubscribe = HostStore.listen(this._onStoreChange.bind(this));
     HostActions.requestNewRound();
   }
 
@@ -28,11 +28,9 @@ class HostLobby extends React.Component {
   }
 
   _onStoreChange(data) {
-    console.log(HostStore.getTrack());
     this.setState({
       track: HostStore.getTrack()
     });
-
   }
 
 
@@ -40,12 +38,12 @@ class HostLobby extends React.Component {
     let { track, countdown } = this.state;
     let question = countdown === 0 ? "Who plays the song" + track.title + "?" : "";
     return (
-      <div className="HostLobby-view">
+      <div className="Round-view">
         { question }
       </div>
     );
   }
 }
 
-module.exports = HostLobby;
+module.exports = Round;
 
