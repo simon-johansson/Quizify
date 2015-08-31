@@ -14,12 +14,18 @@ const bouncing = (socket) => {
       data => wrapper(HostActions.createGame, data)
     );
   });
+
+  HostActions.requestNewRound.listen(() => {
+    socket.emit(
+      ev.requestNewRound,
+      data => wrapper(HostActions.requestNewRound, data)
+    );
+  });
 };
 
 const outgoing = (socket) => {
   let ev = events.toServer.fromHost;
 
-  HostActions.requestNewRound.listen(() => socket.emit(ev.requestNewRound));
   HostActions.listPlayers.listen(data => socket.emit(ev.listPlayers, data));
 };
 

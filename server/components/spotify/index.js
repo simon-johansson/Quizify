@@ -11,8 +11,6 @@ module.exports = {
     });
   },
   getTrack(clb) {
-    request.getTrack(track => {
-      return clb(track);
-    });
+    request.getTrack((err, track) => clb(err, track));
   }
 };

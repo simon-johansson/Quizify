@@ -62,11 +62,17 @@ function onListPlayers (data) {
   }
 }
 
-function onRequestNewRound (data) {
+function onRequestNewRound (callback = nop) {
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {
-    spotify.getTrack(track => {
-      io.to(gameId).emit(ev.fromServer.toClient.newRound, track);
+    spotify.getTrack((err, track) => {
+      if(err) {
+        var obj = { errorMessage: err.message };
+      } else {
+        var obj = { track }
+        io.to(gameId).emit(ev.fromServer.toPlayer.newRound, track);
+      }
+      callback(obj);
     });
   }
 }

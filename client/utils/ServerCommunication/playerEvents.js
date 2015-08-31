@@ -23,6 +23,7 @@ const incoming = (socket) => {
   let ev = events.fromServer.toPlayer;
 
   socket.on(ev.listPlayers, PlayerActions.listPlayers);
+  socket.on(ev.newRound, data => wrapper(PlayerActions.newRound, data));
 };
 
 module.exports = {

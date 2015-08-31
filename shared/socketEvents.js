@@ -17,13 +17,13 @@ var socketEvents = {
   fromServer: {
     toClient: {
       leaveGame: 'server:leaveGame',
-      newRound: 'server:newRound'
     },
     toHost: {
       playerJoined: 'server:playerJoined',
     },
     toPlayer: {
-      listPlayers: 'server:listPlayers'
+      listPlayers: 'server:listPlayers',
+      newRound: 'server:newRound'
     }
   }
 };

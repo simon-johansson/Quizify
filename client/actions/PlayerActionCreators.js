@@ -10,5 +10,6 @@ var PlayerActionCreators  =  Reflux.createActions({
 });
 
 PlayerActionCreators.listPlayers = Reflux.createAction();
+PlayerActionCreators.newRound = Reflux.createAction();
 
 module.exports = PlayerActionCreators;

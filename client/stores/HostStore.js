@@ -7,7 +7,7 @@ var ClientActions = require('../actions/ClientActionCreators');
 var HostActions = require('../actions/HostActionCreators');
 var PlayerActions = require('../actions/PlayerActionCreators');
 
-const createDeepLink = (url, id) => `${url}/#/join/${id}`;
+const createDeepLink = (url, id) => `${url}/#/player/${id}`;
 
 var HostStore = Reflux.createStore({
   listenables: [HostActions, PlayerActions, ClientActions],
@@ -58,8 +58,7 @@ var HostStore = Reflux.createStore({
 
   onStartNewRound(data) {
     let {state} = this;
-    console.log(data);
-    state.track = data;
+    state.track = data.track;
     this.trigger(state);
   },
 
@@ -75,9 +74,9 @@ var HostStore = Reflux.createStore({
     this.listenTo(HostActions.createGame.completed, this.onGameCreated);
     this.listenTo(HostActions.createGame.failed, this.onError);
     this.listenTo(HostActions.playerJoinGame, this.onPLayerJoined);
+    this.listenTo(HostActions.requestNewRound.completed, this.onStartNewRound);
+    this.listenTo(HostActions.requestNewRound.failed, this.onStartNewRound);
 
-    this.listenTo(ClientActions.startNewRound.completed, this.onStartNewRound);
-    this.listenTo(ClientActions.startNewRound.failed, this.onStartNewRound);
     this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
   },
 
