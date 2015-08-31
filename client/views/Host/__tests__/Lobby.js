@@ -2,24 +2,29 @@
 
 const React = require('react/addons');
 const TestUtils = React.addons.TestUtils;
-const Lobby = require('views/Host/Lobby');
+const stubContext = require('react-stub-context');
+const nop = require('nop');
 const HostActions = require('actions/HostActionCreators');
+
+let Lobby = require('views/Host/Lobby');
+Lobby.__Rewire__('PlayerHelpers', {
+  getPlayerElements: players => {
+    return players.map((player, i) =>
+      <div key={i} >{player}</div>
+    );
+  }
+});
+var Router = function() {};
+Router.transitionTo = nop;
+Lobby = stubContext(Lobby, { router: Router });
 
 describe('HostLobby', () => {
   var sandbox;
 
   beforeEach( () => {
-    Lobby.__Rewire__('PlayerHelpers', {
-      getPlayerElements: players => {
-        return players.map((player, i) =>
-          <div key={i} >{player}</div>
-        );
-      }
-    });
-
     sandbox = sinon.sandbox.create();
     sandbox.spy(HostActions, "createGame");
-    sandbox.spy(HostActions, "requestNewRound");
+    sandbox.spy(Router, "transitionTo");
   });
 
   afterEach(() => {
@@ -76,7 +81,8 @@ describe('HostLobby', () => {
     const button = TestUtils.findRenderedDOMComponentWithClass(markup, 'start-game-btn');
     TestUtils.Simulate.click(button);
     expect(button.getDOMNode().textContent).to.eql('Start game(up to 8 players)');
-    expect(HostActions.requestNewRound).to.have.been.calledOnce;
+    expect(Router.transitionTo).to.have.been.calledOnce;
+    expect(Router.transitionTo).to.have.been.calledWith('host-game');
   });
 
 });
