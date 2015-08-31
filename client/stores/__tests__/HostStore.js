@@ -43,7 +43,7 @@ describe('HostStore', () => {
     setTimeout( () => {
       expect(HostStore.getGameId()).to.eql(123);
       expect(HostStore.getSiteUrl()).to.eql('http://spotifyquiz.com');
-      expect(HostStore.getGameDeepLink()).to.eql('http://spotifyquiz.com/#/join/123');
+      expect(HostStore.getGameDeepLink()).to.eql('http://spotifyquiz.com/#/player/123');
       done()
     }, 10);
   });
