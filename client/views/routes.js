@@ -14,7 +14,7 @@ const Host = require('./Host');
 const HostLobby = require('./Host/Lobby');
 const Player = require('./Player');
 const PlayerLobby = require('./Player/Lobby');
-const HostRound = require('./Host/Round');
+const HostGame = require('./Host/Game');
 
 class NotFound extends React.Component {
   render () {
@@ -33,7 +33,7 @@ const routes = (
 
     <Route name="host" path="host" handler={ Host }>
       <DefaultRoute name="host-lobby" handler={ HostLobby }/>
-      <Route name="host-game" path="start" handler={ HostRound }>
+      <Route name="host-game" path="start" handler={ HostGame }>
     </Route>
     </Route>
     <Route name="player" path="player" handler={ Player }>
@@ -47,7 +47,7 @@ const routes = (
 if(process.env.NODE_ENV === 'production') {
   ga.initialize(process.env.GA_TRACKING_ID);
 } else {
-  ga.initialize('UA-000000-01', {debug: true});
+  ga.initialize('UA-000000-01', {debug: false});
 }
 
 Router.run(routes, HashLocation, (Root, state) => {
