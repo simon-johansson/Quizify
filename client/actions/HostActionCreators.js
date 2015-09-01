@@ -12,10 +12,18 @@ var HostActionCreators  = Reflux.createActions({
   },
   requestNewRound: {
     children: ["completed", "failed"]
+  },
+  startGame: {
+    children: ["completed", "failed"]
+  },
+  endRound: {
+    children: ["completed", "failed"]
   }
 });
 
 HostActionCreators.listPlayers = Reflux.createAction();
 HostActionCreators.playerJoinGame = Reflux.createAction();
+HostActionCreators.showQuestion = Reflux.createAction();
+HostActionCreators.givePoints = Reflux.createAction();
 
 module.exports = HostActionCreators;

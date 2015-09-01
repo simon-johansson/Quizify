@@ -8,10 +8,15 @@ var socketEvents = {
     fromHost: {
       createGame: 'host:createGame',
       listPlayers: 'host:listPlayers',
-      requestNewRound: 'host:requestNewRound'
+      requestNewRound: 'host:requestNewRound',
+      startGame: 'host:startGame',
+      showQuestion: 'host:showQuestion',
+      givePoints: 'host:givePoints',
+      endRound: 'host:endRound',
     },
     fromPlayer: {
       joinGame: 'player:joinGame',
+      giveAnswer: 'player:giveAnswer',
     },
   },
   fromServer: {
@@ -20,10 +25,15 @@ var socketEvents = {
     },
     toHost: {
       playerJoined: 'server:playerJoined',
+      playerAnswered: 'server:giveAnswered',
     },
     toPlayer: {
       listPlayers: 'server:listPlayers',
-      newRound: 'server:newRound'
+      newRound: 'server:newRound',
+      startGame: 'server:startGame',
+      showQuestion: 'server:showQuestion',
+      getPoints: 'server:getPoints',
+      roundEnded: 'server:roundEnded',
     }
   }
 };

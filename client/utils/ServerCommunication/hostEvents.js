@@ -21,12 +21,28 @@ const bouncing = (socket) => {
       data => wrapper(HostActions.requestNewRound, data)
     );
   });
+
+  HostActions.startGame.listen(() => {
+    socket.emit(
+      ev.startGame,
+      data => wrapper(HostActions.startGame, data)
+    );
+  });
+
+  HostActions.endRound.listen(() => {
+    socket.emit(
+      ev.endRound,
+      data => wrapper(HostActions.endRound, data)
+    );
+  });
 };
 
 const outgoing = (socket) => {
   let ev = events.toServer.fromHost;
 
   HostActions.listPlayers.listen(data => socket.emit(ev.listPlayers, data));
+  HostActions.showQuestion.listen(() => socket.emit(ev.showQuestion));
+  HostActions.givePoints.listen(data => socket.emit(ev.givePoints, data));
 };
 
 const incoming = (socket) => {
@@ -46,6 +62,10 @@ module.exports = {
     HostActions.createGame.listen = nop;
     HostActions.requestNewRound.listen = nop;
     HostActions.listPlayers.listen = nop;
+    HostActions.startGame.listen = nop;
+    HostActions.endRound.listen = nop;
+    HostActions.showQuestion.listen = nop;
+    HostActions.givePoints.listen = nop;
     socket.off(events.fromServer.toHost.playerJoined);
   }
 };

@@ -62,6 +62,22 @@ var HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  onStartGame(data) {
+    if(data) {
+      let {state} = this;
+      state.track = data.track;
+      state.round = 0;
+      this.trigger(state);
+    }
+  },
+
+  onEndRound(data) {
+    let {state} = this;
+    state.track = data.track;
+    state.round = state.round + 1;
+    this.trigger(state);
+  },
+
   // Maybe a good idea to move all the errors out to
   // a seperate store?
   onError(err) {
@@ -73,9 +89,13 @@ var HostStore = Reflux.createStore({
 
     this.listenTo(HostActions.createGame.completed, this.onGameCreated);
     this.listenTo(HostActions.createGame.failed, this.onError);
-    this.listenTo(HostActions.playerJoinGame, this.onPLayerJoined);
     this.listenTo(HostActions.requestNewRound.completed, this.onStartNewRound);
-    this.listenTo(HostActions.requestNewRound.failed, this.onStartNewRound);
+    this.listenTo(HostActions.requestNewRound.failed, this.onError);
+    this.listenTo(HostActions.startGame.completed, this.onStartGame);
+    this.listenTo(HostActions.startGame.failed, this.onError);
+    this.listenTo(HostActions.endRound.completed, this.onEndRound);
+    this.listenTo(HostActions.endRound.failed, this.onError);
+    this.listenTo(HostActions.playerJoinGame, this.onPLayerJoined);
 
     this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
   },

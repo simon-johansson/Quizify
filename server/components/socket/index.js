@@ -1,14 +1,13 @@
 'use strict';
 
 var socketIO = require('socket.io');
+var nop = require('nop');
 var ev = require('../../../shared/socketEvents');
 var config = require('../../config/environment');
 var spotify = require('../spotify');
 var io;
 
-const nop = () => {};
-
-function onHostCreateGame (callback = nop) {
+function onHostCreateGame(callback = nop) {
   let gameId = `${Math.floor(Math.random() * 100000)}`;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     return onHostCreateGame();
@@ -22,10 +21,7 @@ function onHostCreateGame (callback = nop) {
   });
 }
 
-/**
- * @param  {{gameId: string, playerName: string}} data
- */
-function onPlayerJoinGame (data, callback = nop) {
+function onPlayerJoinGame(data, callback = nop) {
   let {gameId, playerName} = data;
   let playerId = this.id;
   if(io.nsps['/'].adapter.rooms[gameId]) {
@@ -42,7 +38,7 @@ function onPlayerJoinGame (data, callback = nop) {
   callback(obj);
 }
 
-function onClientLeave () {
+function onClientLeave() {
   let clientId = this.id;
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {
@@ -55,14 +51,14 @@ function onClientLeave () {
   }
 }
 
-function onListPlayers (data) {
+function onListPlayers(data) {
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     io.to(gameId).emit(ev.fromServer.toPlayer.listPlayers, data);
   }
 }
 
-function onRequestNewRound (callback = nop) {
+function onRequestNewRound(callback = nop) {
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     spotify.getTrack((err, track) => {
@@ -77,20 +73,70 @@ function onRequestNewRound (callback = nop) {
   }
 }
 
+function onStartGame(callback = nop) {
+  let gameId = this.gameId;
+  if(io.nsps['/'].adapter.rooms[gameId]) {
+    spotify.getTrack((err, track) => {
+      if(err) {
+        var obj = { errorMessage: err.message };
+      } else {
+        var obj = { track }
+        io.to(gameId).emit(ev.fromServer.toPlayer.newRound, track);
+      }
+      callback(obj);
+    });
+  }
+}
+
+function onEndRound(callback = nop) {
+  let gameId = this.gameId;
+  if(io.nsps['/'].adapter.rooms[gameId]) {
+    spotify.getTrack((err, track) => {
+      if(err) {
+        var obj = { errorMessage: err.message };
+      } else {
+        var obj = { track }
+        io.to(gameId).emit(ev.fromServer.toPlayer.newRound, track);
+      }
+      callback(obj);
+    });
+  }
+}
+
+function onShowQuestion() {
+  let gameId = this.gameId;
+  if(io.nsps['/'].adapter.rooms[gameId]) {
+    io.to(gameId).emit(ev.fromServer.toPlayer.showQuestion, data);
+  }
+}
+
+function onGivePoints(data) {
+  // let gameId = this.gameId;
+  let playerId = data.playerId;
+  if(io.nsps['/'].adapter.rooms[playerId]) {
+    io.to(playerId).emit(ev.fromServer.toPlayer.getPoints, {points: 300});
+  }
+}
+
 function bindEvents (socket) {
   let {fromHost, fromPlayer, fromClient} = ev.toServer;
   socket.on(fromHost.createGame, onHostCreateGame);
   socket.on(fromHost.listPlayers, onListPlayers);
   socket.on(fromHost.requestNewRound, onRequestNewRound);
-  socket.on(fromPlayer.joinGame, onPlayerJoinGame);
-  socket.on(fromClient.leaveGame, onClientLeave);
-  socket.on('disconnect', onClientLeave);
+  socket.on(fromHost.startGame, onStartGame);
+  socket.on(fromHost.endRound, onEndRound);
+  socket.on(fromHost.showQuestion, onShowQuestion);
+  socket.on(fromHost.givePoints, onGivePoints);
 
+  socket.on(fromPlayer.joinGame, onPlayerJoinGame);
+
+  socket.on(fromClient.leaveGame, onClientLeave);
   socket.on(fromClient.ping, function(callback = nop) {
     setTimeout(() => {
       callback();
     }, 0)
   });
+  socket.on('disconnect', onClientLeave);
 }
 
 module.exports = {
