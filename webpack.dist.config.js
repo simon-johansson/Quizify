@@ -14,6 +14,8 @@ var secrets = require('./server/config/secrets');
 var buildPath = path.resolve(__dirname, 'dist', 'build');
 var mainPath = path.resolve(__dirname, 'client', 'views', 'main.js');
 
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
 
   output: {
@@ -41,6 +43,9 @@ module.exports = {
         NODE_ENV: JSON.stringify("production"),
         GA_TRACKING_ID: JSON.stringify(secrets.googleAnalytics),
       }
+    }),
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
     })
   ],
 
@@ -70,7 +75,7 @@ module.exports = {
       loader: 'babel-loader'
     }, {
       test: /\.css$/,
-      loader: 'style-loader!css-loader'
+      loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
     }, {
       test: /\.scss/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'

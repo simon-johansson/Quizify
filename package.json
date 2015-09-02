@@ -19,6 +19,7 @@
     "nop": "^1.0.0",
     "normalize.css": "~3.0.3",
     "react": "~0.13.3",
+    "react-css-modules": "^3.0.3",
     "react-ga": "^1.1.0",
     "react-qr": "0.0.2",
     "react-router": "^0.13.3",

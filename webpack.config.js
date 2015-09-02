@@ -7,6 +7,7 @@
 'use strict';
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var secrets = require('./server/config/secrets');
 
@@ -66,7 +67,7 @@ module.exports = {
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
     }, {
       test: /\.css$/,
-      loader: 'style-loader!css-loader'
+      loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
     }, {
       test: /\.(png|jpg|woff|woff2)$/,
       loader: 'url-loader?limit=8192'
@@ -81,6 +82,9 @@ module.exports = {
         NODE_ENV:  JSON.stringify("development"),
         GA_TRACKING_ID: JSON.stringify(secrets.googleAnalytics),
       }
+    }),
+    new ExtractTextPlugin('content.css', {
+      allChunks: true
     })
   ]
 

@@ -4,6 +4,9 @@ var React = require('react/addons');
 var Reflux = require('reflux');
 var QRCode = require('react-qr');
 
+import styles from 'styles/views/Host/Host.css';
+import CSSModules from 'react-css-modules';
+
 var HostActions = require('actions/HostActionCreators');
 var HostStore = require('stores/HostStore');
 
@@ -75,7 +78,7 @@ class HostLobby extends React.Component {
     return (
       <div className="HostLobby-view">
         { this._developmentHelpers() }
-        <p>1. Open this site on your mobile device:</p>
+        <p styleName='black'>1. Open this site on your mobile device:</p>
         <h2 className="site-url">{ this.state.url }</h2>
         <p>2. Then click JOIN and enter the following Game ID:</p>
         <h2 className="game-id">{ this.state.id }</h2>
@@ -97,5 +100,4 @@ HostLobby.contextTypes = {
   router: React.PropTypes.func.isRequired
 };
 
-module.exports = HostLobby;
-
+export default CSSModules(HostLobby, styles);
