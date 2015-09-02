@@ -14,10 +14,10 @@ class Host extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    ServerCommunication.bindHostEvents();
   }
 
   componentDidMount() {
+    ServerCommunication.bindHostEvents();
   }
 
   componentWillUnmount() {
