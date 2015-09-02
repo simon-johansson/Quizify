@@ -37,6 +37,22 @@ module.exports = function (grunt) {
       },
     },
 
+    watch: {
+      options: {
+        livereload: true,
+        spawn: false
+      },
+      express: {
+        files: [
+          'server/**/*.js',
+        ],
+        tasks: [
+          'express:dev',
+          // 'wait',
+        ],
+      }
+    },
+
     open: {
       options: {
         delay: 500
@@ -62,17 +78,25 @@ module.exports = function (grunt) {
       }
     },
 
+    processhtml: {
+      dist: {
+        files: {
+          '<%= paths.dist %>/index.html': ['<%= paths.dev %>/index.html']
+        }
+      }
+    },
+
     copy: {
       dist: {
         files: [
           // includes files within path
-          {
-            flatten: true,
-            expand: true,
-            src: ['<%= paths.dev %>/*'],
-            dest: '<%= paths.dist %>/',
-            filter: 'isFile'
-          },
+          // {
+          //   flatten: true,
+          //   expand: true,
+          //   src: ['<%= paths.dev %>/*'],
+          //   dest: '<%= paths.dist %>/',
+          //   filter: 'isFile'
+          // },
           {
             flatten: true,
             expand: true,
@@ -105,6 +129,16 @@ module.exports = function (grunt) {
     this.async();
   });
 
+  grunt.registerTask('wait', function () {
+    grunt.log.ok('Waiting for server reload...');
+    var done = this.async();
+    setTimeout(function () {
+      grunt.log.writeln('Done waiting!');
+      done()
+    }, 1500);
+  });
+
+
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run([
@@ -119,7 +153,9 @@ module.exports = function (grunt) {
     grunt.task.run([
       'express',
       'open',
-      'express-keepalive',
+      // 'express-keepalive',
+      // 'wait',
+      'watch'
     ]);
   });
 
@@ -137,6 +173,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean',
+    'processhtml',
     'copy',
     'webpack'
   ]);
