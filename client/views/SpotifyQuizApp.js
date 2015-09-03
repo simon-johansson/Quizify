@@ -19,12 +19,15 @@ require('styles/main.scss');
 class SpotifyQuizApp extends React.Component {
   constructor(props, context) {
      super(props, context);
+     this.state = {
+      isMobile: md.mobile() || false,
+     };
   }
 
   componentDidMount() {
     ServerCommunication.connect();
     ServerCommunication.bindClientEvents();
-    if(md.mobile()) {
+    if(this.state.isMobile) {
       this.context.router.transitionTo('player-lobby');
       window.onresize = () => this.forceUpdate();
     }
@@ -33,11 +36,10 @@ class SpotifyQuizApp extends React.Component {
   render() {
     let width = window.innerWidth;
     let height = window.innerHeight;
-    let mobile = md.mobile();
 
     return (
       <div className='SpotifyQuizApp'>
-        <RotateDevice width={width} height={height} mobile={mobile} />
+        <RotateDevice width={width} height={height} mobile={this.state.isMobile} />
         <h1>SpotifyQuiz</h1>
         <ul>
           <li>
