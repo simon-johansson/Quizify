@@ -36,6 +36,10 @@ window.giveAnswer = () => {
   console.log('not yet implemented');
 };
 
+window.endRound = () => {
+  HostActions.endRound();
+};
+
 // ----------------
 // Player helpers
 // ----------------

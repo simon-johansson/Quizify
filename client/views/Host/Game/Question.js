@@ -17,14 +17,18 @@ class Question extends React.Component {
   }
 
   render() {
-    let {showTrackDetails} = this.props;
-    let {title, images} = this.props.track;
+    let {track, showTrackDetails} = this.props;
     return (
         <div className="Question">
-          { showTrackDetails ?
-            this._trackDetails(title, images) :
+
+          {  track && !showTrackDetails &&
             <h2>Name the artist</h2>
           }
+
+          { showTrackDetails && track &&
+            this._trackDetails(track.title, track.images)
+          }
+
         </div>
       );
   }
@@ -36,7 +40,10 @@ Question.propTypes = {
 };
 
 Question.defaultProps = {
-  track: {},
+  track: {
+    title: '',
+    images: []
+  },
 };
 
 module.exports = Question;

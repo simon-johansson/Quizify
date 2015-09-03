@@ -9,6 +9,14 @@ var PlayerActions = require('../actions/PlayerActionCreators');
 
 const createDeepLink = (url, id) => `${url}/#/player/${id}`;
 
+class Round {
+  constructor(track) {
+    this.hasEnded = false;
+    this.isShowing = false;
+    this.track = track;
+  }
+}
+
 var HostStore = Reflux.createStore({
   listenables: [HostActions, PlayerActions, ClientActions],
 
@@ -18,8 +26,14 @@ var HostStore = Reflux.createStore({
       deepLink: "",
       gameId: null,
       players: [],
-      track: null,
-      countdown: 10
+      countdown: 10,
+      rounds: [],
+      currentRound: {
+        hasEnded: false,
+        isShowing: false,
+        track: {}
+      },
+      roundsPlayed: 0,
     };
   },
 
@@ -29,8 +43,11 @@ var HostStore = Reflux.createStore({
   getGameDeepLink() { return this.state.deepLink; },
   getTrack() { return this.state.track; },
   getCountdown() { return this.state.countdown; },
+  getRounds() { return this.state.rounds; },
+  getCurrentRound() { return this.state.currentRound; },
+  getRoundsPlayed() { return this.state.roundsPlayed; },
 
-  onGameCreated(data) {
+  _onGameCreated(data) {
     var {state} = this;
     state.gameId = data.gameId;
     state.url = data.url;
@@ -38,7 +55,7 @@ var HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
-  onPLayerJoined(data) {
+  _onPLayerJoined(data) {
     let {state} = this;
     let {playerId, playerName} = data;
     state.players.push({
@@ -47,7 +64,7 @@ var HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
-  onPlayerLeftGame(data) {
+  _onPlayerLeftGame(data) {
     let {state} = this;
     let {clientId} = data;
     state.players = state.players.filter(function(o) {
@@ -56,25 +73,29 @@ var HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
-  onStartNewRound(data) {
+  _onStartNewRound(data) {
     let {state} = this;
     state.track = data.track;
     this.trigger(state);
   },
 
-  onStartGame(data) {
-    if(data) {
-      let {state} = this;
-      state.track = data.track;
-      state.round = 0;
-      this.trigger(state);
-    }
+  _onStartGame(data) {
+    let {state} = this;
+    let round = new Round(data.track);
+    state.rounds.push(round);
   },
 
-  onEndRound(data) {
+  _onEndRound() {
     let {state} = this;
-    state.track = data.track;
-    state.round = state.round + 1;
+    state.currentRound.hasEnded = true;
+    state.roundsPlayed += 1;
+    this.trigger(state);
+  },
+
+  _onShowQuestion() {
+    let {state} = this;
+    state.currentRound = state.rounds[state.rounds.length - 1];
+    state.currentRound.isShowing = true;
     this.trigger(state);
   },
 
@@ -87,15 +108,17 @@ var HostStore = Reflux.createStore({
   init() {
     this.setInitialState();
 
-    this.listenTo(HostActions.createGame.completed, this.onGameCreated);
-    this.listenTo(HostActions.createGame.failed, this.onError);
-    this.listenTo(HostActions.requestNewRound.completed, this.onStartNewRound);
-    this.listenTo(HostActions.requestNewRound.failed, this.onError);
-    this.listenTo(HostActions.startGame.completed, this.onStartGame);
-    this.listenTo(HostActions.startGame.failed, this.onError);
-    this.listenTo(HostActions.endRound.completed, this.onEndRound);
-    this.listenTo(HostActions.endRound.failed, this.onError);
-    this.listenTo(HostActions.playerJoinGame, this.onPLayerJoined);
+    this.listenTo(HostActions.createGame.completed, this._onGameCreated);
+    this.listenTo(HostActions.createGame.failed, this._onError);
+    this.listenTo(HostActions.requestNewRound.completed, this._onStartNewRound);
+    this.listenTo(HostActions.requestNewRound.failed, this._onError);
+    this.listenTo(HostActions.startGame.completed, this._onStartGame);
+    this.listenTo(HostActions.startGame.failed, this._onError);
+    this.listenTo(HostActions.endRound, this._onEndRound);
+    this.listenTo(HostActions.endRound.completed, this._onStartGame);
+    this.listenTo(HostActions.endRound.failed, this._onError);
+    this.listenTo(HostActions.playerJoinGame, this._onPLayerJoined);
+    this.listenTo(HostActions.showQuestion, this._onShowQuestion);
 
     this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
   },
