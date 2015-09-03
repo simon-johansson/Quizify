@@ -32,7 +32,7 @@ class RotateDevice extends React.Component {
 RotateDevice.propTypes = {
   width: React.PropTypes.number.isRequired,
   height: React.PropTypes.number.isRequired,
-  mobile: React.PropTypes.string.isRequired,
+  mobile: React.PropTypes.bool.isRequired,
 };
 
 RotateDevice.defaultProps = {
