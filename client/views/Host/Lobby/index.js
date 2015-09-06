@@ -100,4 +100,4 @@ HostLobby.contextTypes = {
   router: React.PropTypes.func.isRequired
 };
 
-export default CSSModules(HostLobby, styles);
+module.exports = HostLobby;
