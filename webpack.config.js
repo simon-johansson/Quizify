@@ -83,7 +83,7 @@ module.exports = {
         GA_TRACKING_ID: JSON.stringify(secrets.googleAnalytics),
       }
     }),
-    new ExtractTextPlugin('content.css', {
+    new ExtractTextPlugin('app.css', {
       allChunks: true
     })
   ]
