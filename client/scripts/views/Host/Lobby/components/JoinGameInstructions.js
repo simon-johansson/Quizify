@@ -1,11 +1,10 @@
 'use strict';
 
-var React = require('react/addons');
-var QRCode = require('react-qr');
+import React from 'react/addons';
+import QRCode from 'react-qr';
+import PlayerHelpers from 'views/shared/helpers/Player';
 
-var PlayerHelpers = require('views/shared/helpers/Player');
-
-class JoinGameInstructions extends React.Component {
+export default class JoinGameInstructions extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -38,5 +37,3 @@ JoinGameInstructions.defaultProps = {
   gameId: '...',
   deepLink: null,
 };
-
-module.exports = JoinGameInstructions;

@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react/addons';
-
 import 'styles/views/RotateDevice.scss';
 
 export default class RotateDevice extends React.Component {

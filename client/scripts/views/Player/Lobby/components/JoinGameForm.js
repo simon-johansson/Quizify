@@ -1,9 +1,9 @@
 'use strict';
 
-const React = require('react/addons');
-const Actions = require('actions/PlayerActionCreators');
+import React from 'react/addons';
+import Actions from 'actions/PlayerActionCreators';
 
-class JoinGameForm extends React.Component {
+export default class JoinGameForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,5 +53,3 @@ JoinGameForm.defaultProps = {
   playerName: '',
   gameId: '',
 };
-
-module.exports = JoinGameForm;

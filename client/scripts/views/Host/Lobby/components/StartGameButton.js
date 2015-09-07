@@ -1,10 +1,9 @@
 'use strict';
 
-var React = require('react/addons');
-var Router = require('react-router');
-var { Link } = Router;
+import React from 'react/addons';
+import { Link } from 'react-router';
 
-class StartGameButton extends React.Component {
+export default class StartGameButton extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -33,5 +32,3 @@ StartGameButton.defaultProps = {
   canStartGame: false,
   link: '',
 };
-
-module.exports = StartGameButton;

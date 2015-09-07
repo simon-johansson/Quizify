@@ -1,22 +1,19 @@
 'use strict';
 
-var React = require('react/addons');
-var Reflux = require('reflux');
+import React from 'react/addons';
+import {Link} from 'react-router';
 
 import styles from 'styles/views/Host/Host.css';
 import CSSModules from 'react-css-modules';
 
-var HostActions = require('actions/HostActionCreators');
-var HostStore = require('stores/HostStore');
+import HostActions from 'actions/HostActionCreators';
+import HostStore from 'stores/HostStore';
 
-var PlayerHelpers = require('views/shared/helpers/Player');
-var JoinGameInstructions = require('./components/JoinGameInstructions');
-var StartGameButton = require('./components/StartGameButton');
+import PlayerHelpers from 'views/shared/helpers/Player';
+import JoinGameInstructions from './components/JoinGameInstructions';
+import StartGameButton from './components/StartGameButton';
 
-var Router = require('react-router');
-var { Link } = Router;
-
-class HostLobby extends React.Component {
+export default class HostLobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,4 +76,4 @@ HostLobby.contextTypes = {
   router: React.PropTypes.func.isRequired
 };
 
-export default CSSModules(HostLobby, styles);
+// export default CSSModules(HostLobby, styles);

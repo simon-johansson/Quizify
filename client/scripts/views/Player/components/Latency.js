@@ -1,10 +1,9 @@
 'use strict';
 
-var React = require('react/addons');
+import React from 'react/addons';
+import 'styles/components/Latency.scss';
 
-require('styles/components/Latency.scss');
-
-class Latency extends React.Component {
+export default class Latency extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,5 +57,3 @@ Latency.propTypes = {
 Latency.defaultProps = {
   latency: 0,
 };
-
-module.exports = Latency;

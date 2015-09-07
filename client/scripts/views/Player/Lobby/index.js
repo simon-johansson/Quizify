@@ -1,11 +1,11 @@
 'use strict';
 
-const React = require('react/addons');
-const Store = require('stores/PlayerStore');
-const JoinGameForm = require('./components/JoinGameForm');
-const JoinedGameInstructions = require('./components/JoinedGameInstructions');
+import React from 'react/addons';
+import Store from 'stores/PlayerStore';
+import JoinGameForm from './components/JoinGameForm';
+import JoinedGameInstructions from './components/JoinedGameInstructions';
 
-class PlayerLobby extends React.Component {
+export default class PlayerLobby extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -50,5 +50,3 @@ PlayerLobby.defaultProps = {
   players: [],
   playerName: ''
 };
-
-module.exports = PlayerLobby;

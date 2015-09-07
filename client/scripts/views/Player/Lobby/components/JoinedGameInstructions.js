@@ -1,9 +1,9 @@
 'use strict';
 
-var React = require('react/addons');
-var PlayerHelpers = require('views/shared/helpers/Player');
+import React from 'react/addons';
+import PlayerHelpers from 'views/shared/helpers/Player';
 
-class JoinedGameInstructions extends React.Component {
+export default class JoinedGameInstructions extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -38,5 +38,3 @@ JoinedGameInstructions.defaultProps = {
   playerName: '',
   players: [],
 };
-
-module.exports = JoinedGameInstructions;

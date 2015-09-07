@@ -1,13 +1,12 @@
 'use strict';
 
-var React = require('react/addons');
-var CSSModules = require('react-css-modules');
-var styles = require('styles/views/About.scss');
+import React from 'react/addons';
+import 'styles/views/About.scss';
 
-class About extends React.Component {
+export default class About extends React.Component {
   render () {
     return (
-      <div className="About-view" styleName="About-view bg">
+      <div className="About-view">
         <h2>About</h2>
         <h3>Made by:</h3>
         <p>Jose Granjo & Simon Johansson</p>
@@ -15,7 +14,4 @@ class About extends React.Component {
     );
   }
 }
-
-// module.exports = CSSModules(About, styles, {allowMultiple: true});
-module.exports = About;
 
