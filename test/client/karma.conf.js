@@ -59,10 +59,10 @@ module.exports = function (config) {
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './client/styles/'),
-          'views': path.join(process.cwd(), './client/views/'),
-          'stores': path.join(process.cwd(), './client/stores/'),
-          'actions': path.join(process.cwd(), './client/actions/'),
-          'utils': path.join(process.cwd(), './client/utils/'),
+          'views': path.join(process.cwd(), './client/scripts/views/'),
+          'stores': path.join(process.cwd(), './client/scripts/stores/'),
+          'actions': path.join(process.cwd(), './client/scripts/actions/'),
+          'utils': path.join(process.cwd(), './client/scripts/utils/'),
           'shared': path.join(process.cwd(), './shared/')
         }
       },

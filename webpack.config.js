@@ -12,7 +12,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var secrets = require('./server/config/secrets');
 
 var buildPath = path.resolve(__dirname, 'client', 'build');
-var mainPath = path.resolve(__dirname, 'client', 'views', 'main.js');
+var mainPath = path.resolve(__dirname, 'client', 'scripts', 'main.js');
 
 module.exports = {
 
@@ -44,11 +44,11 @@ module.exports = {
     extensions: ['', '.js'],
     alias: {
       'styles': __dirname + '/client/styles',
-      'mixins': __dirname + '/client/mixins',
-      'views': __dirname + '/client/views/',
-      'stores': __dirname + '/client/stores/',
-      'actions': __dirname + '/client/actions/',
-      'utils': __dirname + '/client/utils/',
+      'mixins': __dirname + '/client/scripts/mixins',
+      'views': __dirname + '/client/scripts/views/',
+      'stores': __dirname + '/client/scripts/stores/',
+      'actions': __dirname + '/client/scripts/actions/',
+      'utils': __dirname + '/client/scripts/utils/',
       'shared': __dirname + '/shared/'
     }
   },
@@ -64,7 +64,8 @@ module.exports = {
       loader: 'react-hot!babel-loader'
     }, {
       test: /\.scss/,
-      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded',
+      // loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass')
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
