@@ -65,7 +65,9 @@ export default class HostLobby extends React.Component {
       <div className="HostLobby-view">
         { this._developmentHelpers() }
         <JoinGameInstructions url={url} deepLink={deepLink} gameId={gameId} />
-        { players }
+        <div className="players">
+          { players }
+        </div>
         <StartGameButton canStartGame={!!players.length} link={'HostGame'} />
       </div>
     );

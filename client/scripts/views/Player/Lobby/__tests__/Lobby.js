@@ -2,7 +2,7 @@
 
 const React = require('react/addons');
 const TestUtils = React.addons.TestUtils;
-const PlayerLobby = require('../Lobby/index');
+const PlayerLobby = require('../index');
 
 var JoinGameFormMock = React.createClass({
   render: function () {

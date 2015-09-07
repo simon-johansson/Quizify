@@ -1,9 +1,9 @@
 'use strict';
 
-const Emitter = require('component-emitter');
-const events = require('shared/socketEvents');
-const ServerCommunication = require('../ServerCommunication');
-const utils = require('../ServerCommunication/utils');
+import Emitter from 'component-emitter';
+import events from 'shared/socketEvents';
+import ServerCommunication from '../ServerCommunication';
+import utils from '../ServerCommunication/utils';
 
 const socket = {};
 Emitter(socket);
@@ -143,7 +143,7 @@ describe('ServerCommunication', () => {
       sandbox.spy(socket, "emit");
       sandbox.spy(HostActions.createGame, "completed");
       sandbox.spy(HostActions, "requestNewRound");
-      sandbox.spy(HostActions, "playerJoinGame");
+      sandbox.spy(HostActions, "playerJoinedGame");
       sandbox.spy(HostActions, "listPlayers");
     });
 
@@ -197,15 +197,15 @@ describe('ServerCommunication', () => {
       }, 10);
     });
 
-    it('should call playerJoinGame action when playerJoined socket event is recived', () => {
+    it('should call playerJoinedGame action when playerJoined socket event is recived', () => {
       const data = {playerName: 'Mr. Sam Cooke'};
       const ev = incoming.playerJoined;
 
       ServerCommunication.bindHostEvents();
       socket.emit(ev, data);
 
-      expect(HostActions.playerJoinGame).to.have.been.called;
-      expect(HostActions.playerJoinGame).to.have.been.calledWith(data);
+      expect(HostActions.playerJoinedGame).to.have.been.called;
+      expect(HostActions.playerJoinedGame).to.have.been.calledWith(data);
     });
   });
 
