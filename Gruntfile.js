@@ -1,7 +1,6 @@
 'use strict';
 
-var webpackDistConfig = require('./webpack.dist.config.js'),
-    webpackDevConfig = require('./webpack.config.js');
+var webpackDistConfig = require('./webpack.dist.config.js');
 
 module.exports = function (grunt) {
   // Let *load-grunt-tasks* require everything
