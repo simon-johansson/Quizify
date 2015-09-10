@@ -57,7 +57,8 @@ module.exports = function (grunt) {
         delay: 500
       },
       dev: {
-        path: 'http://localhost:<%= express.options.port %>/'
+        path: 'http://localhost:<%= express.options.port %>/',
+        app: 'Google Chrome'
       },
     },
 
