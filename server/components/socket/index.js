@@ -15,10 +15,7 @@ function onHostCreateGame(callback = nop) {
   this.join(gameId);
   this.gameId = gameId;
   // console.log(`new game created with ID: ${gameId}`);
-  callback({
-    gameId,
-    url: config.url
-  });
+  callback({gameId, url: config.url});
 }
 
 function onPlayerJoinGame(data, callback = nop) {
@@ -38,7 +35,7 @@ function onPlayerJoinGame(data, callback = nop) {
   callback(obj);
 }
 
-function onClientLeave() {
+function onClientLeave(callback = nop) {
   let clientId = this.id;
   let gameId = this.gameId;
   if(io.nsps['/'].adapter.rooms[gameId]) {

@@ -3,9 +3,6 @@
 import React from 'react/addons';
 import {Link} from 'react-router';
 
-import styles from 'styles/views/Host/Host.css';
-import CSSModules from 'react-css-modules';
-
 import HostActions from 'actions/HostActionCreators';
 import HostStore from 'stores/HostStore';
 
@@ -13,6 +10,10 @@ import PlayerHelpers from 'views/shared/helpers/Player';
 import JoinGameInstructions from './components/JoinGameInstructions';
 import StartGameButton from './components/StartGameButton';
 
+import styles from 'styles/views/Host/Lobby.css';
+import CSSModules from 'react-css-modules';
+
+@CSSModules(styles)
 export default class HostLobby extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +46,7 @@ export default class HostLobby extends React.Component {
   _developmentHelpers() {
     if(process.env.NODE_ENV === 'development') {
       return (
-        <div className="fake-player-helpers">
+        <div styleName="dev-helpers">
           <p>Host lobby dev helpers</p>
           <button onClick={window.addPlayers}>Add player to game</button>
           <button onClick={window.removePlayer}>Remove player from game</button>
@@ -62,10 +63,10 @@ export default class HostLobby extends React.Component {
     const {url, gameId, deepLink} = this.state;
     const players = this._getPlayerElements(this.state.players);
     return (
-      <div className="HostLobby-view">
+      <div styleName="styles">
         { this._developmentHelpers() }
         <JoinGameInstructions url={url} deepLink={deepLink} gameId={gameId} />
-        <div className="players">
+        <div styleName="players">
           { players }
         </div>
         <StartGameButton canStartGame={!!players.length} link={'HostGame'} />
@@ -73,9 +74,3 @@ export default class HostLobby extends React.Component {
     );
   }
 }
-
-HostLobby.contextTypes = {
-  router: React.PropTypes.func.isRequired
-};
-
-// export default CSSModules(HostLobby, styles);

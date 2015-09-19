@@ -12,6 +12,10 @@ import 'normalize.css';
 import 'styles/main.scss';
 
 export default class SpotifyQuizApp extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.func.isRequired
+  }
+
   constructor(props, context) {
     super(props, context);
   }
@@ -48,7 +52,3 @@ export default class SpotifyQuizApp extends React.Component {
     );
   }
 }
-
-SpotifyQuizApp.contextTypes = {
-  router: React.PropTypes.func.isRequired
-};
