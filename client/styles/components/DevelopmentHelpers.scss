@@ -1,0 +1,37 @@
+
+$padding-margin: 5px;
+@mixin font {
+  font-size: 12px;
+  font-family: Consolas, monaco, monospace;
+}
+
+.styles {
+  position: fixed;
+  padding: 0 $padding-margin;
+  top: 10px;
+  right: 10px;
+  background: lightgray;
+  p {
+    @include font;
+    margin-top: $padding-margin;
+    color: black;
+  }
+  button {
+    @include font;
+    width: 200px;
+    display: block;
+    margin: $padding-margin auto;
+    background: salmon;
+    border: 0;
+  }
+  label {
+    @include font;
+    color: black;
+    margin-right: $padding-margin;
+  }
+  input {
+    @include font;
+    width: 100px;
+    margin-bottom: $padding-margin;
+  }
+}

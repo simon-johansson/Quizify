@@ -1,0 +1,44 @@
+
+.font {
+  font-size: 12px;
+  font-family: Consolas, monaco, monospace;
+}
+
+.styles {
+  position: fixed;
+  padding: 0 5px;
+  top: 10px;
+  right: 10px;
+  background: lightgray;
+}
+
+/*.styles p,
+.styles button,
+.styles label,
+.styles input {
+  composes: font;
+}
+
+.styles p {
+  margin-top: 5px;
+  color: black;
+}
+
+.styles button {
+  width: 200px;
+  display: block;
+  margin: 5px auto;
+  background: salmon;
+  border: 0;
+}
+
+.styles label {
+  color: black;
+  margin-right: 5px;
+}
+
+.styles input {
+  width: 100px;
+  margin-bottom: 5px;
+}
+*/
