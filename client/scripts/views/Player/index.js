@@ -34,13 +34,21 @@ class Player extends React.Component {
     Actions.leaveGame(this.state.playerId, this.state.gameId);
   }
 
-  _onStoreChange(state) {
+  _onStoreChange(state, change) {
     this.setState({
       joinedGame: PlayerStore.hasJoinedGame(),
       players: PlayerStore.getPlayers(),
       playerName: PlayerStore.getPlayerName(),
       latency: PlayerStore.getLatency()
     });
+
+    if (change === 'newRound') {
+      this._onRoundChange();
+    }
+  }
+
+  _onRoundChange() {
+    this.context.router.transitionTo('PlayerGame');
   }
 
   render() {
@@ -63,6 +71,10 @@ Player.defaultProps = {
   params: React.PropTypes.shape({
     gameId: '',
   })
+};
+
+Player.contextTypes = {
+  router: React.PropTypes.func.isRequired
 };
 
 module.exports = Player;

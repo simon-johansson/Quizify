@@ -56,6 +56,10 @@ var PlayerStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  _newRound(data) {
+    this.trigger(this.state, 'newRound');
+  },
+
   _onError(err) {
     window.alert(err);
   },
@@ -68,6 +72,7 @@ var PlayerStore = Reflux.createStore({
     this.listenTo(PlayerActions.joinGame.failed, this._onError);
     this.listenTo(PlayerActions.joinGame.completed, this._onJoinedGame);
     this.listenTo(PlayerActions.listPlayers, this._listPlayers);
+    this.listenTo(PlayerActions.newRound, this._newRound);
   },
 
 });
