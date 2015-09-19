@@ -10,6 +10,11 @@ var PlayerActionCreators  =  Reflux.createActions({
 });
 
 PlayerActionCreators.listPlayers = Reflux.createAction();
+PlayerActionCreators.startGame = Reflux.createAction();
 PlayerActionCreators.newRound = Reflux.createAction();
+PlayerActionCreators.answer = Reflux.createAction();
+PlayerActionCreators.answerReceived = Reflux.createAction();
+PlayerActionCreators.endRound = Reflux.createAction();
+PlayerActionCreators.endGame = Reflux.createAction();
 
 module.exports = PlayerActionCreators;

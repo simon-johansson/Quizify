@@ -5,19 +5,21 @@ import React from 'react/addons';
 import Actions from 'actions/PlayerActionCreators';
 import Store from 'stores/PlayerStore';
 
+import GameEnd from './components/GameEnd';
+import Round from './components/Round';
+
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      countdown: 5,
-      currentRound: {},
-      roundsPlayed: 0,
-      totalNumberOfRounds: 3,
+      game: {
+        points: null,
+        hasEnded: null
+      }
     };
   }
 
   componentDidMount() {
-    console.log("mounted game");
     this.unsubscribe = Store.listen(this._onStoreChange.bind(this));
   }
 
@@ -25,21 +27,11 @@ export default class Game extends React.Component {
     this.unsubscribe();
   }
 
-  _onStoreChange() {
-    this.setState({
-      currentRound: Store.getState().currentRound,
-      roundsPlayed: Store.getState().roundsPlayed,
-    });
-  }
-
-  _startNewRound() {
-    // const {roundsPlayed, totalNumberOfRounds} = this.state;
-    // if(roundsPlayed < totalNumberOfRounds) {
-    //   this.setState({countdown: 0});
-    //   HostActions.showQuestion();
-    // } else {
-    //   console.log('End game!');
-    // }
+  _onStoreChange(state, change) {
+    if (change !== 'latency') { // REMOVE !!!
+      console.log(state);
+      this.setState(state);
+    }
   }
 
   _developmentHelpers() {
@@ -47,25 +39,31 @@ export default class Game extends React.Component {
       return (
         <div className="fake-player-helpers">
           <p>Player game dev helpers</p>
-          <button onClick={window.newRound}>End round</button>
-          <button onClick={window.endGame}>End game</button>
+          <button onClick={window.newRound}>New round</button>
+          <button onClick={window.answerReceivedPlayer}>Receive Answer</button>
+          <button onClick={window.endRoundPlayer}>End round</button>
+          <button onClick={window.endGamePlayer}>End game</button>
+          <button onClick={window.startGame}>Start game</button>
         </div>
       );
     }
   }
 
   render() {
-    const {currentRound, countdown} = this.state;
-
+    let { hasEnded, points } = this.state.game;
+    
     return (
        <div className="Game-view">
         { this._developmentHelpers() }
-
-        
-
+        { 
+          hasEnded ?
+          <GameEnd points={points} /> :
+          <Round />
+        }
       </div>
     );
   }
+
 }
 
 

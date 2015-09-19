@@ -41,13 +41,12 @@ class Player extends React.Component {
       playerName: PlayerStore.getPlayerName(),
       latency: PlayerStore.getLatency()
     });
-
-    if (change === 'newRound') {
-      this._onRoundChange();
+    if (change === 'startGame') {
+      this.onStartGame();
     }
   }
 
-  _onRoundChange() {
+  onStartGame() {
     this.context.router.transitionTo('PlayerGame');
   }
 
@@ -61,7 +60,7 @@ class Player extends React.Component {
           playerName={this.state.playerName}
           gameId={this.state.gameId}
         />
-      <Latency latency={this.state.latency} />
+        <Latency latency={this.state.latency} />
       </div>
     );
   }

@@ -55,11 +55,27 @@ window.listPlayer = () => {
 };
 
 window.startGame = () => {
-  PlayerActions.newRound({
-    message: 'startGame'
-  });
+  PlayerActions.startGame();
 };
 
 window.newRound = () => {
-  PlayerActions.newRound({"track":{"audio":"https://p.scdn.co/mp3-preview/75b9334c1cf0da6e62a86d4d5719645d472213f2","title":"Ghost Town","images":[{"height":640,"url":"https://i.scdn.co/image/7631f246135ce27dadba72b40238855a4b323078","width":640},{"height":300,"url":"https://i.scdn.co/image/aa82e12fe28ea0602243644271309503d396ae7d","width":300},{"height":64,"url":"https://i.scdn.co/image/d5aaa9d80e249bba88a6ec7e5d5fd9f507b26d3d","width":64}],"artist":{"name":"Adam Lambert","id":"6prmLEyn4LfHlD9NnXWlf7","related":["Kelly Clarkson","Kris Allen","Blake Lewis","Katy Perry","Allison Iraheta","David Archuleta","Jordin Sparks","Ke$ha","Lady Gaga","Carly Rae Jepsen","David Cook","Elliott Yamin","Katharine McPhee","Justin Bieber","Ace Young","P!nk","Britney Spears","Maroon 5","Taylor Swift","Jason Castro"]},"meta":{"id":"6prmLEyn4LfHlD9NnXWlf7","httpLink":"https://open.spotify.com/track/44aN5xKL3kGHvQ5bXVk6B8","uriLink":"spotify:track:44aN5xKL3kGHvQ5bXVk6B8"}}});
+  PlayerActions.newRound({
+    alternatives: [ "Adam Lambert", "Rabbii", "The Knife", "Gorillaz" ]
+  });
+};
+
+window.answerReceivedPlayer = () => {
+  PlayerActions.answerReceived({
+    points: Math.floor(Math.random(20)*100)
+  });
+};
+
+window.endRoundPlayer = () => {
+  PlayerActions.endRound({
+    correct: (Math.random() > 0.5) ? true : false
+  });
+};
+
+window.endGamePlayer = () => {
+  PlayerActions.endGame();
 };
