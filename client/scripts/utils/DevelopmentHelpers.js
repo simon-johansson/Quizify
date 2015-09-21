@@ -1,4 +1,3 @@
-'use strict';
 
 const _ = require('lodash');
 const HostActions = require('actions/HostActionCreators');
@@ -6,11 +5,13 @@ const ClientActions = require('actions/ClientActionCreators');
 const PlayerActions = require('actions/PlayerActionCreators');
 const HostStore = require('stores/HostStore');
 const PlayerStore = require('stores/PlayerStore');
-let names = ['Bret', 'Antonette', 'Samantha', 'Karianne', 'Kamren', 'Leopoldo', 'Elwyn', 'Maxime', 'Delphine', 'Moriah'];
+let names = ['Bret', 'Antonette', 'Samantha', 'Karianne', 'Kamren', 'Leopoldo',
+             'Elwyn', 'Maxime', 'Delphine', 'Moriah'];
 
 class Player {
   constructor(playerName) {
-    this.playerName = playerName || names.splice(_.random(0, (names.length - 1)), 1)[0];
+    this.playerName = playerName ||
+                      names.splice(_.random(0, (names.length - 1)), 1)[0];
     this.playerId = `${Math.floor(Math.random() * 100000)}`;
     this.gameId = '1234';
   }
@@ -22,7 +23,7 @@ class Player {
 window.addPlayers = (num) => {
   let times = typeof num === 'number' ? num : 1;
   for (let i = 0; i < times; i++) {
-    HostActions.playerJoinedGame(new Player());
+    HostActions.playerJoined(new Player());
   }
 };
 
@@ -60,7 +61,7 @@ window.startGame = () => {
 
 window.newRound = () => {
   PlayerActions.newRound({
-    alternatives: [ "Adam Lambert", "Rabbii", "The Knife", "Gorillaz" ]
+    alternatives: [ 'Adam Lambert', 'Rabbii', 'The Knife', 'Gorillaz' ]
   });
 };
 

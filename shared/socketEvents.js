@@ -1,5 +1,5 @@
 
-var socketEvents = {
+export default {
   toServer: {
     fromClient: {
       leaveGame: 'client:leaveGame',
@@ -8,15 +8,14 @@ var socketEvents = {
     fromHost: {
       createGame: 'host:createGame',
       listPlayers: 'host:listPlayers',
-      requestNewRound: 'host:requestNewRound',
       startGame: 'host:startGame',
-      showQuestion: 'host:showQuestion',
-      givePoints: 'host:givePoints',
+      newRound: 'host:newRound',
+      answerReceived: 'host:answerReceived',
       endRound: 'host:endRound',
     },
     fromPlayer: {
       joinGame: 'player:joinGame',
-      giveAnswer: 'player:giveAnswer',
+      answer: 'player:answer',
     },
   },
   fromServer: {
@@ -25,17 +24,14 @@ var socketEvents = {
     },
     toHost: {
       playerJoined: 'server:playerJoined',
-      playerAnswered: 'server:giveAnswered',
+      answer: 'server:answer',
     },
     toPlayer: {
       listPlayers: 'server:listPlayers',
       newRound: 'server:newRound',
       startGame: 'server:startGame',
-      showQuestion: 'server:showQuestion',
-      getPoints: 'server:getPoints',
-      roundEnded: 'server:roundEnded',
+      answerReceived: 'server:answerReceived',
+      endRound: 'server:roundEnded',
     }
   }
 };
-
-module.exports = socketEvents;

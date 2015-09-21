@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 
@@ -42,7 +41,9 @@ export default class Game extends React.Component {
     const {roundsPlayed, totalNumberOfRounds} = this.state;
     if(roundsPlayed < totalNumberOfRounds) {
       this.setState({countdown: 0});
-      HostActions.showQuestion();
+      HostActions.newRound({
+        alternatives: [ 'Adam Lambert', 'Rabbii', 'The Knife', 'Gorillaz' ]
+      });
     } else {
       console.log('End game!');
     }

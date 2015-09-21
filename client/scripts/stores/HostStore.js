@@ -1,4 +1,3 @@
-'use strict';
 
 import Reflux from 'reflux';
 
@@ -9,13 +8,13 @@ import Round from 'utils/models/Round';
 
 const createDeepLink = (url, id) => `${url}/#/player/${id}`;
 
-var HostStore = Reflux.createStore({
+const HostStore = Reflux.createStore({
   listenables: [HostActions, PlayerActions, ClientActions],
 
   setInitialState() {
     this.state = {
-      url: "",
-      deepLink: "",
+      url: '',
+      deepLink: '',
       gameId: null,
       players: [],
       countdown: 10,
@@ -41,32 +40,24 @@ var HostStore = Reflux.createStore({
   getRoundsPlayed() { return this.state.roundsPlayed; },
 
   onCreateGameCompleted(data) {
-    var {state} = this;
+    let {state} = this;
     state.gameId = data.gameId;
     state.url = data.url;
     state.deepLink = createDeepLink(data.url, data.gameId);
     this.trigger(state);
   },
 
-  onPlayerJoinedGame(data) {
+  onPlayerJoined(data) {
     let {state} = this;
     let {playerId, playerName} = data;
     state.players.push({playerId, playerName});
     this.trigger(state, 'playerJoinedGame');
   },
 
-  onPlayerLeftGame(data) {
+  onPlayerLeft(data) {
     let {state} = this;
     let {clientId} = data;
-    state.players = state.players.filter(function(o) {
-      return o.playerId !== clientId;
-    });
-    this.trigger(state);
-  },
-
-  onRequestNewRoundCompleted(data) {
-    let {state} = this;
-    state.track = data.track;
+    state.players = state.players.filter( o => o.playerId !== clientId );
     this.trigger(state);
   },
 
@@ -89,7 +80,7 @@ var HostStore = Reflux.createStore({
     state.rounds.push(round);
   },
 
-  onShowQuestion() {
+  onNewRound() {
     let {state} = this;
     state.currentRound = state.rounds[state.rounds.length - 1];
     state.currentRound.isShowing = true;
@@ -105,13 +96,12 @@ var HostStore = Reflux.createStore({
   init() {
     this.setInitialState();
 
-    this.listenTo(HostActions.createGame.failed, this._onError);
-    this.listenTo(HostActions.requestNewRound.failed, this._onError);
-    this.listenTo(HostActions.startGame.failed, this._onError);
-    this.listenTo(HostActions.endRound.failed, this._onError);
-    this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeftGame);
+    // this.listenTo(HostActions.createGame.failed, this._onError);
+    // this.listenTo(HostActions.startGame.failed, this._onError);
+    // this.listenTo(HostActions.endRound.failed, this._onError);
+    this.listenTo(ClientActions.leaveGame.completed, this.onPlayerLeft);
   },
 
 });
 
-module.exports = HostStore;
+export default HostStore;
