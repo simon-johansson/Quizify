@@ -7,7 +7,7 @@ var config = require('../../config/environment');
 var spotify = require('../spotify');
 var io;
 
-function onHostCreateGame(callback = nop) {
+function onHostCreateGame(data, callback = nop) {
   let gameId = `${Math.floor(Math.random() * 100000)}`;
   if(io.nsps['/'].adapter.rooms[gameId]) {
     return onHostCreateGame();
@@ -67,13 +67,13 @@ const getTrack = (gameId, event, callback) => {
   });
 };
 
-function onEndRound(callback = nop) {
+function onEndRound(data, callback = nop) {
   let gameId = this.gameId;
   let event = ev.fromServer.toPlayer.endRound;
   getTrack(gameId, event, callback);
 }
 
-function onStartGame(callback = nop) {
+function onStartGame(data, callback = nop) {
   let gameId = this.gameId;
   let event = ev.fromServer.toPlayer.startGame;
   getTrack(gameId, event, callback);
@@ -109,7 +109,7 @@ function bindEvents(socket) {
   socket.on(fromClient.ping, function(callback = nop) {
     setTimeout(() => {
       callback();
-    }, 0)
+    }, 0);
   });
   socket.on('disconnect', onClientLeave);
 }

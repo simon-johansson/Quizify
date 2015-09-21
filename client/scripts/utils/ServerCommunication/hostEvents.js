@@ -13,11 +13,12 @@ const bouncing = (socket) => {
   let ev = events.toServer.fromHost;
 
   bouncingListeners.forEach(listener => {
-    HostActions[listener].listen(() => {
+    HostActions[listener].listen((dataToServer = {}) => {
       // console.log('emitting ', listener);
       socket.emit(
         ev[listener],
-        data => wrapper(HostActions[listener], data)
+        dataToServer,
+        dataFromServer => wrapper(HostActions[listener], dataFromServer)
       );
     });
   });

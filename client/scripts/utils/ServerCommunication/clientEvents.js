@@ -1,10 +1,15 @@
-'use strict';
 
-var events = require('shared/socketEvents');
-var ClientActions = require('actions/ClientActionCreators');
-var {wrapper} = require('./utils');
+import {merge} from 'lodash';
+import nop from 'nop';
+import events from 'shared/socketEvents';
+import ClientActions from 'actions/ClientActionCreators';
+import {wrapper} from './utils';
 
-var bouncing = (socket) => {
+const bouncingListeners = [];
+const outgoingListeners = ['leaveGame'];
+const incomingListeners = ['leaveGame'];
+
+const bouncing = (socket) => {
   let ev = events.toServer.fromClient;
 
   setInterval(() => {
@@ -16,23 +21,28 @@ var bouncing = (socket) => {
   }, 2000);
 };
 
-var outgoing = (socket) => {
+const outgoing = (socket) => {
   let ev = events.toServer.fromClient;
-  ClientActions.leaveGame.listen( (playerName, gameId) => {
-    socket.emit(ev.leaveGame, {playerName, gameId});
+
+  outgoingListeners.forEach(listener => {
+    ClientActions[listener].listen(data => {
+      // console.log('emitting ', listener, data);
+      socket.emit(ev[listener], data);
+    });
   });
 };
 
-var incoming = (socket) => {
+const incoming = (socket) => {
   let ev = events.fromServer.toClient;
-  socket.on(ev.leaveGame, data => wrapper(ClientActions.leaveGame, data));
+
+  incomingListeners.forEach(listener => {
+    socket.on(ev[listener], data => wrapper(ClientActions[listener], data));
+  });
 };
 
 module.exports = {
   bind(socket) {
-    bouncing(socket);
-    outgoing(socket);
-    incoming(socket);
+    [bouncing, outgoing, incoming].forEach(fn => fn(socket));
   },
   unbind() {}
 };

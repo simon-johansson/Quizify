@@ -25,7 +25,8 @@ export default class JoinGameForm extends React.Component {
   }
 
   _onJoin(event) {
-    Actions.joinGame(this.state.playerName, this.state.gameId);
+    const {playerName, gameId} = this.state;
+    Actions.joinGame({playerName, gameId});
   }
 
   render() {

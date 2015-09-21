@@ -1,18 +1,27 @@
-'use strict';
 
-var React = require('react/addons');
-var Router = require('react-router');
-var { RouteHandler, Link } = Router;
+import React from 'react/addons';
+import Router from 'react-router';
+const { RouteHandler, Link } = Router;
 
-var ServerCommunication = require('utils/ServerCommunication');
-var Actions = require('actions/ClientActionCreators');
-var PlayerStore = require('stores/PlayerStore');
-var Latency = require('./components/Latency');
-var RotateDevice = require('./components/RotateDevice');
+import ServerCommunication from 'utils/ServerCommunication';
+import Actions from 'actions/ClientActionCreators';
+import PlayerStore from 'stores/PlayerStore';
+import Latency from './components/Latency';
+import RotateDevice from './components/RotateDevice';
 
-require('styles/views/Player/Player.scss');
+import 'styles/views/Player/Player.scss';
 
-class Player extends React.Component {
+export default class Player extends React.Component {
+  static defaultProps = {
+    params: React.PropTypes.shape({
+      gameId: '',
+    })
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.func.isRequired
+  }
+
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -31,7 +40,8 @@ class Player extends React.Component {
 
   componentWillUnmount() {
     this.unsubscribe();
-    Actions.leaveGame(this.state.playerId, this.state.gameId);
+    const {playerId, gameId} = this.state;
+    Actions.leaveGame({playerId, gameId});
   }
 
   _onStoreChange(state, change) {
@@ -65,15 +75,3 @@ class Player extends React.Component {
     );
   }
 }
-
-Player.defaultProps = {
-  params: React.PropTypes.shape({
-    gameId: '',
-  })
-};
-
-Player.contextTypes = {
-  router: React.PropTypes.func.isRequired
-};
-
-module.exports = Player;
