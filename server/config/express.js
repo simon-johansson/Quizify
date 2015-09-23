@@ -30,6 +30,8 @@ module.exports = app => {
 
   if(env === 'development') {
 
+    app.use(express.static(path.join(config.root, 'client')));
+
     app.use(require('webpack-dev-middleware')(compiler, {
       noInfo: true,
       publicPath: webpackconfig.output.publicPath,
@@ -40,7 +42,7 @@ module.exports = app => {
       log: console.log
     }));
 
-    app.get('*', function (req, res) {
+    app.get('/', function (req, res) {
       res.sendFile(path.join(config.root, 'client', 'index.html'));
     });
   }
