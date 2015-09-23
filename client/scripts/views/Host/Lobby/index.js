@@ -45,7 +45,7 @@ export default class HostLobby extends React.Component {
   _developmentHelpers() {
     if(process.env.NODE_ENV === 'development') {
       return (
-        <div styleName="dev-helpers">
+        <div className="development-helpers">
           <p>Host lobby dev helpers</p>
           <button onClick={window.addPlayers}>Add player to game</button>
           <button onClick={window.removePlayer}>Remove player from game</button>

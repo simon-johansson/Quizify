@@ -36,7 +36,7 @@ export default class Game extends React.Component {
   _developmentHelpers() {
     if(process.env.NODE_ENV === 'development') {
       return (
-        <div className="fake-player-helpers">
+        <div className="development-helpers">
           <p>Player game dev helpers</p>
           <button onClick={window.newRound}>New round</button>
           <button onClick={window.answerReceivedPlayer}>Receive Answer</button>

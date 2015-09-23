@@ -1,16 +1,14 @@
 @import '../variables';
 
-.RotateDevice-view {
-  .rotate-device-instructions {
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: $spotify-sand;
-    color: $spotify-gray;
-    text-align: center;
-    font-size: 20px;
-  }
+.styles > div {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $spotify-sand;
+  color: $spotify-gray;
+  text-align: center;
+  font-size: 20px;
 }

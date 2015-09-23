@@ -26,7 +26,7 @@ export default class PlayerLobby extends React.Component {
   _developmentHelpers() {
     if(process.env.NODE_ENV === 'development') {
       return (
-        <div className="fake-player-helpers">
+        <div className="development-helpers">
           <p>Player lobby dev helpers</p>
           <button onClick={window.joinFakeGame}>Join game</button>
           <button onClick={window.listPlayer}>Add player to game</button>

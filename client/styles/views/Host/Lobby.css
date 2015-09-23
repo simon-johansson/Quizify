@@ -6,7 +6,3 @@
 .players {
   color: red;
 }
-
-.dev-helpers {
-  composes: styles from "./test.css";
-}

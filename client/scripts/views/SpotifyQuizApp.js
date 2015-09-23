@@ -8,8 +8,12 @@ import FeedbackButton from './shared/components/FeedbackButton';
 
 // CSS
 import 'normalize.css';
-import 'styles/main.scss';
+import 'styles/general.scss';
 
+import styles from 'styles/views/SpotifyQuizApp.scss';
+import CSSModules from 'react-css-modules';
+
+@CSSModules(styles)
 export default class SpotifyQuizApp extends React.Component {
   static contextTypes = {
     router: React.PropTypes.func.isRequired
@@ -30,7 +34,7 @@ export default class SpotifyQuizApp extends React.Component {
 
   render() {
     return (
-      <div className='SpotifyQuizApp'>
+      <div styleName='app'>
         <h1>SpotifyQuiz</h1>
         <ul>
           <li>

@@ -1,7 +1,10 @@
 
 import React from 'react/addons';
-import 'styles/views/RotateDevice.scss';
 
+import styles from 'styles/views/RotateDevice.scss';
+import CSSModules from 'react-css-modules';
+
+@CSSModules(styles)
 export default class RotateDevice extends React.Component {
   static propTypes = {
     mobile: React.PropTypes.bool.isRequired,
@@ -21,25 +24,23 @@ export default class RotateDevice extends React.Component {
     }
   }
 
-  _instructions() {
-    return (
-      <div className="rotate-device-instructions">
-        <h2>Please rotate your device!</h2>
-        <img src="images/rotate.png" />
-      </div>
-    );
-  }
-
   render() {
-    let {mobile} = this.props;
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    const {mobile} = this.props;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    let instructions = null;
+    if(width > height && mobile) {
+      instructions = (
+        <div>
+          <h2>Please rotate your device!</h2>
+          <img src="images/rotate.png" />
+        </div>
+      );
+    }
 
     return (
-      <div className="RotateDevice-view">
-        { width > height && mobile &&
-          this._instructions()
-        }
+      <div styleName="styles">
+        { instructions }
       </div>
     );
   }

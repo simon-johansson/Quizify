@@ -1,18 +1,12 @@
 @import '../variables';
 
-.About-view {
+.styles {
   border: 1px dashed #FFFF00;
-}
 
-.black {
-  // color: #000;
-  color: $spotify-green;
-  background: #EEE;
-  font-size: 40px;
-}
-
-:global {
   .black {
-    color: red;
+    background: #EEE;
+    color: $spotify-green;
+    font-size: 40px;
   }
 }
+

@@ -1,61 +1,86 @@
-.latency-indicator {
+
+@import '../variables';
+
+.styles {
   position: absolute;
   bottom: 5px;
   left: 10px;
   font-size: 10px;
   z-index: 1000;
-  .click-to-show-latency {
-    min-height: 30px;
-    width: 90px;
-    position: relative;
-    span {
-      position: absolute;
-      bottom: 0;
-    }
+}
+
+.click-to-show {
+  min-height: 30px;
+  width: 90px;
+  position: relative;
+  span {
+    position: absolute;
+    bottom: 0;
   }
-  .latency-numbers {
-  }
-  .latency-figures {
-    figure {
-      width: 3px;
-      background: black;
-      display: inline-block;
-      margin: 0 2px;
-      border: 1px solid darkgray;
-      &:nth-child(1) {
-        height: 3px;
-        background: white;
-      }
-      &:nth-child(2) {
-        height: 6px;
-      }
-      &:nth-child(3) {
-        height: 9px;
-      }
-      &:nth-child(4) {
-        height: 12px;
-      }
+}
+
+%latency-figures {
+  figure {
+    width: 3px;
+    background: $spotify-black;
+    display: inline-block;
+    margin: 0 2px;
+    border: 1px solid $spotify-gray;
+    &:nth-child(1) {
+      height: 3px;
+      background: $spotify-white;
     }
-    &.level-2 {
-      figure {
-        &:nth-child(2) {
-          background: white;
-        }
-      }
+    &:nth-child(2) {
+      height: 6px;
     }
-    &.level-3 {
-      figure {
-        &:nth-child(3) {
-          background: white;
-        }
-      }
+    &:nth-child(3) {
+      height: 9px;
     }
-    &.level-4 {
-      figure {
-        &:nth-child(4) {
-          background: white;
-        }
-      }
+    &:nth-child(4) {
+      height: 12px;
     }
   }
 }
+
+.level-1,
+%level-1 {
+  @extend %latency-figures;
+}
+
+.level-2,
+%level-2 {
+  @extend %level-1;
+  @extend %latency-figures;
+  figure {
+    &:nth-child(2) {
+      background: $spotify-white;
+    }
+  }
+}
+
+.level-3,
+%level-3 {
+  @extend %level-1;
+  @extend %level-2;
+  @extend %latency-figures;
+  figure {
+    &:nth-child(3) {
+      background: $spotify-white;
+    }
+  }
+}
+
+.level-4,
+%level-4 {
+  @extend %level-1;
+  @extend %level-2;
+  @extend %level-3;
+  @extend %latency-figures;
+  figure {
+    &:nth-child(4) {
+      background: $spotify-white;
+    }
+  }
+}
+
+

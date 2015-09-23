@@ -2,9 +2,19 @@
 import React from 'react/addons';
 React.initializeTouchEvents(true);
 
-import 'styles/components/Latency.scss';
+import styles from 'styles/components/Latency.scss';
+import CSSModules from 'react-css-modules';
 
+@CSSModules(styles)
 export default class Latency extends React.Component {
+  static propTypes = {
+    latency: React.PropTypes.number.isRequired,
+  }
+
+  static defaultProps = {
+    latency: 0,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,13 +31,13 @@ export default class Latency extends React.Component {
   _createLatencyElements(latency, latencyClass) {
     return (
       <div>
-        <div className={`${latencyClass} latency-figures`}>
+        <div styleName={latencyClass}>
           <figure/>
           <figure/>
           <figure/>
           <figure/>
         </div>
-        <div className="latency-numbers">
+        <div className="numbers">
           { latency } ms
         </div>
       </div>
@@ -36,18 +46,18 @@ export default class Latency extends React.Component {
 
   render() {
     let {latency} = this.props;
-    let latencyClass = '';
-    if (latency <= 450) { latencyClass += 'level-2';}
-    if (latency <= 300) { latencyClass += ' level-3';}
-    if (latency <= 150) { latencyClass += ' level-4';}
+    let latencyClass = 'level-1';
+    if (latency <= 450) { latencyClass = 'level-2';}
+    if (latency <= 300) { latencyClass = 'level-3';}
+    if (latency <= 150) { latencyClass = 'level-4';}
     return (
         <div
           onTouchStart={this._toggleLatencyElements.bind(this)}
-          className="latency-indicator"
+          styleName="styles"
         >
           { this.state.showing ?
             this._createLatencyElements(latency, latencyClass) :
-            <div className="click-to-show-latency">
+            <div styleName="click-to-show">
               <span>Click for latency</span>
             </div>
           }
@@ -55,11 +65,3 @@ export default class Latency extends React.Component {
       );
   }
 }
-
-Latency.propTypes = {
-  latency: React.PropTypes.number.isRequired,
-};
-
-Latency.defaultProps = {
-  latency: 0,
-};

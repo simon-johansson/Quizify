@@ -1,5 +1,7 @@
 
-.feedback-button {
+@import '../variables';
+
+:global .feedback-button {
   position: fixed;
   visibility: visible;
   cursor: pointer;
@@ -8,8 +10,8 @@
   width: auto;
   border: 0;
   font-size: 14px;
-  background: #2C2C2C;
-  color: #FFFFFF;
+  background: $spotify-gray;
+  color: $spotify-white;
   padding: 10px 20px;
   margin: 0;
   z-index: 0;
