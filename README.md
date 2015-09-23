@@ -3,6 +3,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Dependencies][david-deps-image]][david-deps-url]
 [![Development Dependencies][david-devdeps-image]][david-devdeps-url]
+<!-- ![Status](https://img.shields.io/badge/usability_tested-yes!-FF41A2.svg) -->
 
 > Web based realtime multiplayer quiz. Use your mobile as a controller, up to 8 players.
 
