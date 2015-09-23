@@ -1,9 +1,23 @@
-'use strict';
 
 import React from 'react/addons';
 import nop from 'nop';
 
 export default class Question extends React.Component {
+  static propTypes = {
+    track: React.PropTypes.object.isRequired,
+    showTrackDetails: React.PropTypes.bool.isRequired,
+    onTrackEnded: React.PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    track: {
+      title: '',
+      images: []
+    },
+    showTrackDetails: false,
+    onTrackEnded: nop,
+  }
+
   constructor(props) {
     super(props);
   }
@@ -49,18 +63,3 @@ export default class Question extends React.Component {
     );
   }
 }
-
-Question.propTypes = {
-  track: React.PropTypes.object.isRequired,
-  showTrackDetails: React.PropTypes.bool.isRequired,
-  onTrackEnded: React.PropTypes.func.isRequired,
-};
-
-Question.defaultProps = {
-  track: {
-    title: '',
-    images: []
-  },
-  showTrackDetails: false,
-  onTrackEnded: nop,
-};

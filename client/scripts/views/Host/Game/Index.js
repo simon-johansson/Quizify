@@ -57,7 +57,8 @@ export default class Game extends React.Component {
           <button onClick={window.endRound}>End round</button>
           <button onClick={window.endGame}>End game</button>
           {/* <label for="countdown">Set countdown</label> */}
-          {/* <input type="text" name="countdown" id="countdown" value={this.state.countdown}/> */}
+          {/* <input type="text" name="countdown"
+          id="countdown" value={this.state.countdown}/> */}
         </div>
       );
     }

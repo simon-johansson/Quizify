@@ -1,4 +1,3 @@
-'use strict';
 
 import {pluck} from 'lodash';
 import Sound from './Sound';

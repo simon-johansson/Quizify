@@ -1,11 +1,10 @@
-'use strict';
 
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
-var PlayerActionCreators  =  Reflux.createActions({
+const PlayerActionCreators  =  Reflux.createActions({
   // called by button in PlayerLobby compenent
-  "joinGame": {
-    children: ["completed", "failed"]
+  'joinGame': {
+    children: ['completed', 'failed']
   },
 });
 
@@ -17,4 +16,4 @@ PlayerActionCreators.answerReceived = Reflux.createAction();
 PlayerActionCreators.endRound = Reflux.createAction();
 PlayerActionCreators.endGame = Reflux.createAction();
 
-module.exports = PlayerActionCreators;
+export default PlayerActionCreators;

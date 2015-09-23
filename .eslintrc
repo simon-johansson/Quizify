@@ -34,7 +34,8 @@
       "anonymous": "always",
       "named": "never"
     }],
-    "strict": [2, "global"]
+    "strict": [2, "global"],
+    "semi": [2, "always"]
   },
   "plugins": [
     "react"

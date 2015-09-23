@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 import Store from 'stores/PlayerStore';
@@ -6,6 +5,20 @@ import JoinGameForm from './components/JoinGameForm';
 import JoinedGameInstructions from './components/JoinedGameInstructions';
 
 export default class PlayerLobby extends React.Component {
+  static propTypes = {
+    joinedGame: React.PropTypes.bool.isRequired,
+    gameId: React.PropTypes.string.isRequired,
+    players: React.PropTypes.array.isRequired,
+    playerName: React.PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    joinedGame: false,
+    gameId: '',
+    players: [],
+    playerName: ''
+  }
+
   constructor(props) {
     super(props);
   }
@@ -29,24 +42,16 @@ export default class PlayerLobby extends React.Component {
         <div className="PlayerLobby-view">
           { this._developmentHelpers() }
           { joinedGame ?
-            <JoinedGameInstructions playerName={playerName} players={players} /> :
-            <JoinGameForm playerName={playerName} gameId={gameId} />
+            <JoinedGameInstructions
+              playerName={playerName}
+              players={players}
+            /> :
+            <JoinGameForm
+              playerName={playerName}
+              gameId={gameId}
+            />
           }
         </div>
       );
   }
 }
-
-PlayerLobby.propTypes = {
-  joinedGame: React.PropTypes.bool.isRequired,
-  gameId: React.PropTypes.string.isRequired,
-  players: React.PropTypes.array.isRequired,
-  playerName: React.PropTypes.string.isRequired,
-};
-
-PlayerLobby.defaultProps = {
-  joinedGame: false,
-  gameId: '',
-  players: [],
-  playerName: ''
-};

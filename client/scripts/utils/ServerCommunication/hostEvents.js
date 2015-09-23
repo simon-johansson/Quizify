@@ -1,46 +1,32 @@
 
 import {merge} from 'lodash';
-import nop from 'nop';
 import events from 'shared/socketEvents';
-import HostActions from 'actions/HostActionCreators';
-import {wrapper} from './utils';
+import actions from 'actions/HostActionCreators';
+import {
+  bindBouncingListeners,
+  bindOutgoingListeners,
+  bindIncomingListeners,
+  unbindRefluxActions,
+  unbindSocketEvents
+} from './utils';
 
 const bouncingListeners = ['createGame', 'startGame', 'endRound'];
 const outgoingListeners = ['listPlayers', 'newRound', 'answerReceived'];
 const incomingListeners = ['answer', 'playerJoined'];
 
 const bouncing = (socket) => {
-  let ev = events.toServer.fromHost;
-
-  bouncingListeners.forEach(listener => {
-    HostActions[listener].listen((dataToServer = {}) => {
-      // console.log('emitting ', listener);
-      socket.emit(
-        ev[listener],
-        dataToServer,
-        dataFromServer => wrapper(HostActions[listener], dataFromServer)
-      );
-    });
-  });
+  const ev = events.toServer.fromHost;
+  bindBouncingListeners(socket, bouncingListeners, actions, ev);
 };
 
 const outgoing = (socket) => {
-  let ev = events.toServer.fromHost;
-
-  outgoingListeners.forEach(listener => {
-    HostActions[listener].listen(data => {
-      // console.log('emitting ', listener, data);
-      socket.emit(ev[listener], data);
-    });
-  });
+  const ev = events.toServer.fromHost;
+  bindOutgoingListeners(socket, outgoingListeners, actions, ev);
 };
 
 const incoming = (socket) => {
-  let ev = events.fromServer.toHost;
-
-  incomingListeners.forEach(listener => {
-    socket.on(ev[listener], HostActions[listener]);
-  });
+  const ev = events.fromServer.toHost;
+  bindIncomingListeners(socket, incomingListeners, actions, ev);
 };
 
 export default {
@@ -49,12 +35,10 @@ export default {
   },
 
   unbind(socket) {
-    merge(bouncingListeners, outgoingListeners).forEach(listener => {
-        HostActions[listener].listen = nop;
-      });
+    const actionListeners = merge(bouncingListeners, outgoingListeners);
+    unbindRefluxActions(actionListeners, actions);
 
-    incomingListeners.forEach(listener => {
-      socket.off(events.fromServer.toHost[listener]);
-    });
+    const ev = events.fromServer.toHost;
+    unbindSocketEvents(socket, incomingListeners, ev);
   }
 };

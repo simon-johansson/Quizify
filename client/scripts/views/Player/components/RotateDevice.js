@@ -1,9 +1,16 @@
-'use strict';
 
 import React from 'react/addons';
 import 'styles/views/RotateDevice.scss';
 
 export default class RotateDevice extends React.Component {
+  static propTypes = {
+    mobile: React.PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    mobile: false,
+  }
+
   constructor(props) {
     super(props);
   }
@@ -23,7 +30,7 @@ export default class RotateDevice extends React.Component {
     );
   }
 
-  render () {
+  render() {
     let {mobile} = this.props;
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -37,12 +44,4 @@ export default class RotateDevice extends React.Component {
     );
   }
 }
-
-RotateDevice.propTypes = {
-  mobile: React.PropTypes.bool.isRequired,
-};
-
-RotateDevice.defaultProps = {
-  mobile: false,
-};
 

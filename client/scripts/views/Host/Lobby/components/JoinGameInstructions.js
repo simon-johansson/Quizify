@@ -1,10 +1,21 @@
-'use strict';
 
 import React from 'react/addons';
 import QRCode from 'react-qr';
 import PlayerHelpers from 'views/shared/helpers/Player';
 
 export default class JoinGameInstructions extends React.Component {
+  static propTypes = {
+    url: React.PropTypes.string.isRequired,
+    gameId: React.PropTypes.string.isRequired,
+    deepLink: React.PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    url: '...',
+    gameId: '...',
+    deepLink: null,
+  }
+
   constructor(props) {
     super(props);
   }
@@ -25,15 +36,3 @@ export default class JoinGameInstructions extends React.Component {
       );
   }
 }
-
-JoinGameInstructions.propTypes = {
-  url: React.PropTypes.string.isRequired,
-  gameId: React.PropTypes.string.isRequired,
-  deepLink: React.PropTypes.string.isRequired,
-};
-
-JoinGameInstructions.defaultProps = {
-  url: '...',
-  gameId: '...',
-  deepLink: null,
-};

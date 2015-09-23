@@ -1,17 +1,12 @@
-'use strict';
 
-var Router = require('react-router');
-var { RouteHandler, Link } = Router;
+import React from 'react/addons';
+import { RouteHandler, Link } from 'react-router';
+import HostStore from 'stores/HostStore';
+import ServerCommunication from 'utils/ServerCommunication';
 
-var React = require('react/addons');
+import 'styles/views/Host/Host.scss';
 
-var HostStore = require('stores/HostStore');
-var ServerCommunication = require('utils/ServerCommunication');
-
-require('styles/views/Host/Host.scss');
-
-class Host extends React.Component {
-
+export default class Host extends React.Component {
   constructor(props, context) {
     super(props, context);
   }
@@ -33,5 +28,3 @@ class Host extends React.Component {
     );
   }
 }
-
-module.exports = Host;

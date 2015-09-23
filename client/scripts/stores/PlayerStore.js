@@ -1,14 +1,13 @@
-'use strict';
 
-var Reflux = require('reflux');
-var MobileDetect = require('mobile-detect');
-var md = new MobileDetect(window.navigator.userAgent);
+import Reflux from 'reflux';
+import MobileDetect from 'mobile-detect';
+const md = new MobileDetect(window.navigator.userAgent);
 
-var ClientActions = require('../actions/ClientActionCreators');
-var PlayerActions = require('../actions/PlayerActionCreators');
-var browserStorage = require('../utils/BrowserStorage');
+import ClientActions from '../actions/ClientActionCreators';
+import PlayerActions from '../actions/PlayerActionCreators';
+import browserStorage from '../utils/BrowserStorage';
 
-var PlayerStore = Reflux.createStore({
+const PlayerStore = Reflux.createStore({
   listenables: PlayerActions,
 
   setInitialState() {
@@ -28,7 +27,7 @@ var PlayerStore = Reflux.createStore({
       },
       game: {
         points: 0,
-        hasEnded: null  
+        hasEnded: null
       }
     };
   },
@@ -43,13 +42,13 @@ var PlayerStore = Reflux.createStore({
   isUsingMobile() { return this.state.isUsingMobile; },
 
   _onLatency(data) {
-    var {state} = this;
+    const {state} = this;
     state.latency = data;
     this.trigger(state, 'latency');
   },
 
-  _onJoinedGame(data) {
-    var {state} = this;
+  onJoinGameCompleted(data) {
+    const {state} = this;
     state.gameId = data.gameId;
     state.playerId = data.playerId;
     state.joindGame = true;
@@ -60,8 +59,8 @@ var PlayerStore = Reflux.createStore({
     this.trigger(state);
   },
 
-  _listPlayers(data) {
-    var {state} = this;
+  onListPlayers(data) {
+    const {state} = this;
     state.players = data.players;
     this.trigger(state);
   },
@@ -71,10 +70,10 @@ var PlayerStore = Reflux.createStore({
     this.state.game.points = 0;
     this.state.game.hasEnded = false;
   },
-  
+
   onNewRound(data) {
-    var { state } = this;
-    state.round.alternatives = data.alternatives.sort(function() {
+    const { state } = this;
+    state.round.alternatives = data.alternatives.sort(() => {
       return 0.5 - Math.random();
     });
     state.round.points = null;
@@ -83,13 +82,13 @@ var PlayerStore = Reflux.createStore({
   },
 
   onAnswerReceived(data) {
-    var { state } = this;
+    const { state } = this;
     state.round.points = data.points;
     this.trigger(this.state, 'answerReceived');
   },
 
   onEndRound(data) {
-    var { state } = this;
+    const { state } = this;
     state.round.correct = data.correct;
 
     if (state.round.correct) {
@@ -114,12 +113,9 @@ var PlayerStore = Reflux.createStore({
     this.setInitialState();
 
     this.listenTo(ClientActions.latency, this._onLatency);
-
     this.listenTo(PlayerActions.joinGame.failed, this._onError);
-    this.listenTo(PlayerActions.joinGame.completed, this._onJoinedGame);
-    this.listenTo(PlayerActions.listPlayers, this._listPlayers);
   },
 
 });
 
-module.exports = PlayerStore;
+export default PlayerStore;

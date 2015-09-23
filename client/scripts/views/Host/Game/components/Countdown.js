@@ -1,9 +1,20 @@
-'use strict';
 
 import React from 'react/addons';
 import nop from 'nop';
 
 export default class Countdown extends React.Component {
+  static propTypes = {
+    counter: React.PropTypes.number.isRequired,
+    onFinished: React.PropTypes.func.isRequired,
+    onTick: React.PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    counter: 0,
+    onFinished: nop,
+    onTick: nop,
+  }
+
   constructor(props) {
     super(props);
     const {counter} = this.props;
@@ -67,15 +78,3 @@ export default class Countdown extends React.Component {
       );
   }
 }
-
-Countdown.propTypes = {
-  counter: React.PropTypes.number.isRequired,
-  onFinished: React.PropTypes.func.isRequired,
-  onTick: React.PropTypes.func.isRequired,
-};
-
-Countdown.defaultProps = {
-  counter: 0,
-  onFinished: nop,
-  onTick: nop,
-};

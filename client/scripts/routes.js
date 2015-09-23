@@ -1,7 +1,11 @@
-'use strict';
 
 import React from 'react';
-import Router, { Route, NotFoundRoute, HashLocation, DefaultRoute } from 'react-router';
+import Router, {
+  Route,
+  NotFoundRoute,
+  HashLocation,
+  DefaultRoute
+} from 'react-router';
 import ga from 'react-ga';
 
 import SpotifyQuizApp from 'views/SpotifyQuizApp';
@@ -12,7 +16,7 @@ import HostRoutes from 'views/Host/routes';
 import PlayerRoutes from 'views/Player/routes';
 
 class NotFound extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <h2>Error!</h2>

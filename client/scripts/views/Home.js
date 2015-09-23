@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 import {Link} from 'react-router';

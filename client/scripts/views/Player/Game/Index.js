@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 
@@ -51,11 +50,11 @@ export default class Game extends React.Component {
 
   render() {
     let { hasEnded, points } = this.state.game;
-    
+
     return (
        <div className="Game-view">
         { this._developmentHelpers() }
-        { 
+        {
           hasEnded ?
           <GameEnd points={points} /> :
           <Round />

@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 import {Link} from 'react-router';
@@ -6,7 +5,7 @@ import {Link} from 'react-router';
 import HostActions from 'actions/HostActionCreators';
 import HostStore from 'stores/HostStore';
 
-import PlayerHelpers from 'views/shared/helpers/Player';
+import {getPlayerElements} from 'views/shared/helpers/Player';
 import JoinGameInstructions from './components/JoinGameInstructions';
 import StartGameButton from './components/StartGameButton';
 
@@ -56,7 +55,7 @@ export default class HostLobby extends React.Component {
   }
 
   _getPlayerElements(players) {
-    return PlayerHelpers.getPlayerElements(players);
+    return getPlayerElements(players);
   }
 
   render() {

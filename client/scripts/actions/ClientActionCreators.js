@@ -1,13 +1,12 @@
-'use strict';
 
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
-var ClientActionCreators  =  Reflux.createActions({
-  "leaveGame": {
-    children: ["completed", "failed"]
+const ClientActionCreators = Reflux.createActions({
+  'leaveGame': {
+    children: ['completed', 'failed']
   }
 });
 
 ClientActionCreators.latency = Reflux.createAction();
 
-module.exports = ClientActionCreators;
+export default ClientActionCreators;

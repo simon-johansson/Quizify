@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 
@@ -6,9 +5,9 @@ import React from 'react/addons';
 import styles from 'styles/views/About.scss';
 import CSSModules from 'react-css-modules';
 
-
-class About extends React.Component {
-  render () {
+@CSSModules(styles)
+export default class About extends React.Component {
+  render() {
     return (
       <div className="About-view">
         <h2 styleName='black'>About</h2>
@@ -19,4 +18,4 @@ class About extends React.Component {
   }
 }
 
-export default CSSModules(About, styles);
+

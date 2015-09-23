@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 import { RouteHandler, Link } from 'react-router';
@@ -25,7 +24,7 @@ export default class SpotifyQuizApp extends React.Component {
     ServerCommunication.bindClientEvents();
 
     if(PlayerStore.isUsingMobile()) {
-      this.context.router.transitionTo('player-lobby');
+      this.context.router.transitionTo('PlayerLobby');
     }
   }
 

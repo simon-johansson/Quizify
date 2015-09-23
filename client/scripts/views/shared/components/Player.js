@@ -1,16 +1,25 @@
-'use strict';
 
-var React = require('react/addons');
-var Reflux = require('reflux');
+import React from 'react/addons';
+import Reflux from 'reflux';
 
-require('styles/components/Player.scss');
+import 'styles/components/Player.scss';
 
-class Player extends React.Component {
+export default class Player extends React.Component {
+  static propTypes = {
+    playerName: React.PropTypes.string.isRequired,
+    index: React.PropTypes.number.isRequired,
+  }
+
+  static defaultProps = {
+    playerName: '',
+    index: '',
+  }
+
   constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     let {playerName, index} = this.props;
     return (
       <div>
@@ -19,15 +28,3 @@ class Player extends React.Component {
     );
   }
 }
-
-Player.propTypes = {
-  playerName: React.PropTypes.string.isRequired,
-  index: React.PropTypes.number.isRequired,
-};
-
-Player.defaultProps = {
-  playerName: '',
-  index: '',
-};
-
-module.exports = Player;

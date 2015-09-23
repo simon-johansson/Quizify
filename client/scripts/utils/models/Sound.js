@@ -1,4 +1,3 @@
-'use strict';
 
 import {merge} from 'lodash';
 import {soundManager} from 'soundmanager2';

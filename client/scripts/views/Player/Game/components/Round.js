@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react/addons';
 
@@ -37,25 +36,29 @@ export default class Round extends React.Component {
 
   render() {
     const { round } = this.state;
-    const waitMessage = <div style={{color:"white"}}>Wait</div>;
+    const waitMessage = <div style={{color:'white'}}>Wait</div>;
     let alternatives = [];
 
     if (round.alternatives) {
-      alternatives = round.alternatives.map(function(alternative) {
-        return <button onClick={this.answer}>{alternative}</button>;
+      alternatives = round.alternatives.map(alternative => {
+        return (
+          <button onClick={this.answer}>{alternative}</button>
+        );
       }.bind(this));
     }
 
     return (
        <div className="Round-view">
-        { 
+        {
           round.alternatives ?
-          <div style={{color:"white"}}>{alternatives}</div> : 
+          <div style={{color:'white'}}>{alternatives}</div> :
           (
-            round.correct === null ? waitMessage : 
-            (round.correct ? 
-            <div style={{color:"white"}}>Your answer is correct and you got {round.points} points!</div> :
-            <div style={{color:"white"}}> :( </div>)
+            round.correct === null ? waitMessage :
+            (round.correct ?
+            <div style={{color:'white'}}>
+              Your answer is correct and you got {round.points} points!
+            </div> :
+            <div style={{color:'white'}}> :( </div>)
           )
         }
         { round.correct === null ? round.points : '' }

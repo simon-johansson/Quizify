@@ -1,21 +1,20 @@
-'use strict';
 
-let store = require('store');
-const storageKey = 'spotifyquiz';
+import store from 'store';
+const storageKey = 'a-unique-identifier';
 
-var generateStorageKey = (key) => {
+const generateStorageKey = (key) => {
   return `${storageKey}-${key}`;
 };
 
-var get = (key) => {
+const get = (key) => {
   return store.get(generateStorageKey(key)) || '';
 };
 
-var set = (key, value) => {
+const set = (key, value) => {
   return store.set(generateStorageKey(key), value);
 };
 
-module.exports = {
+export default {
   getPlayerName() {
     return get('playerName');
   },

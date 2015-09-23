@@ -1,51 +1,44 @@
 
 import {merge} from 'lodash';
-import nop from 'nop';
 import events from 'shared/socketEvents';
-import PlayerActions from 'actions/PlayerActionCreators';
-import {wrapper} from './utils';
+import actions from 'actions/PlayerActionCreators';
+import {
+  bindBouncingListeners,
+  bindOutgoingListeners,
+  bindIncomingListeners,
+  unbindRefluxActions,
+  unbindSocketEvents
+} from './utils';
 
 const bouncingListeners = ['joinGame'];
 const outgoingListeners = [];
 const incomingListeners = ['listPlayers', 'listPlayers'];
 
 const bouncing = (socket) => {
-  let ev = events.toServer.fromPlayer;
-
-  bouncingListeners.forEach(listener => {
-    PlayerActions[listener].listen(dataToServer => {
-      // console.log('emitting ', listener);
-      socket.emit(
-        ev[listener],
-        dataToServer,
-        dataFromServer => wrapper(PlayerActions[listener], dataFromServer)
-      );
-    });
-  });
+  const ev = events.toServer.fromPlayer;
+  bindBouncingListeners(socket, bouncingListeners, actions, ev);
 };
 
 const outgoing = (socket) => {
+  const ev = events.toServer.fromPlayer;
+  bindOutgoingListeners(socket, outgoingListeners, actions, ev);
 };
 
 const incoming = (socket) => {
-  let ev = events.fromServer.toPlayer;
-
-  incomingListeners.forEach(listener => {
-    socket.on(ev[listener], PlayerActions[listener]);
-  });
+  const ev = events.fromServer.toPlayer;
+  bindIncomingListeners(socket, incomingListeners, actions, ev);
 };
 
-module.exports = {
+export default {
   bind(socket) {
     [bouncing, outgoing, incoming].forEach(fn => fn(socket));
   },
-  unbind() {
-    merge(bouncingListeners, outgoingListeners).forEach(listener => {
-        PlayerActions[listener].listen = nop;
-      });
 
-    incomingListeners.forEach(listener => {
-      socket.off(events.fromServer.toPlayer[listener]);
-    });
+  unbind(socket) {
+    const actionListeners = merge(bouncingListeners, outgoingListeners);
+    unbindRefluxActions(actionListeners, actions);
+
+    const ev = events.fromServer.toPlayer;
+    unbindSocketEvents(socket, incomingListeners, ev);
   }
 };

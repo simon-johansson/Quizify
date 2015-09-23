@@ -24,11 +24,11 @@ module.exports = merge(webpackConfig, {
   ],
 
   module: {
-    // preLoaders: [{
-    //   test: /\.js$/,
-    //   exclude: /node_modules/,
-    //   loader: 'eslint-loader'
-    // }],
+    preLoaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'eslint-loader'
+    }],
     loaders: [{
       test: /\.scss/,
       // loader: 'style-loader!css-loader!sass-loader?modules',
@@ -56,3 +56,4 @@ module.exports = merge(webpackConfig, {
   ]
 
 });
+
