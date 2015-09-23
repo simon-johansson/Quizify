@@ -1,6 +1,7 @@
-'use strict';
 
 import React from 'react/addons';
+React.initializeTouchEvents(true);
+
 import 'styles/components/Latency.scss';
 
 export default class Latency extends React.Component {
@@ -40,10 +41,15 @@ export default class Latency extends React.Component {
     if (latency <= 300) { latencyClass += ' level-3';}
     if (latency <= 150) { latencyClass += ' level-4';}
     return (
-        <div onClick={this._toggleLatencyElements.bind(this)} className="latency-indicator">
+        <div
+          onTouchStart={this._toggleLatencyElements.bind(this)}
+          className="latency-indicator"
+        >
           { this.state.showing ?
             this._createLatencyElements(latency, latencyClass) :
-            <span>Click for latency</span>
+            <div className="click-to-show-latency">
+              <span>Click for latency</span>
+            </div>
           }
         </div>
       );
