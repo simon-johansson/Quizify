@@ -1,14 +1,11 @@
-// 'use strict';
 
-var express = require('express');
+import express from 'express';
+const app = express();
 
-var app = express();
-var server = require('http').createServer(app);
+import http from 'http';
+const server = http.createServer(app);
 
-require('./config/express')(app);
+import expressConfig from './config/express';
+expressConfig(app);
 
-// app.route('/*').get(function(req, res) {
-//   res.redirect('/');
-// });
-
-module.exports = server;
+export default server;

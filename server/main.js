@@ -1,6 +1,6 @@
 'use strict';
 
-require("babel/register");
+require('babel/register');
 
 var server = require('./server');
 var config = require('./config/environment/');
