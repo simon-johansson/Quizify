@@ -1,12 +1,10 @@
-'use strict';
 
-require('babel/register');
+import server from './server';
+import config from './config/environment/';
 
-var server = require('./server');
-var config = require('./config/environment/');
+import {init as webSocketConfig} from './components/socket';
+webSocketConfig(server);
 
-require('./components/socket').init(server);
-
-server.listen(config.port, function () {
-  console.log('Server running on port ' + config.port);
+server.listen(config.port, () => {
+  console.log(`Server running on port ${config.port}`);
 });

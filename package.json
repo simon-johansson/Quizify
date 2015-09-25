@@ -97,7 +97,7 @@
     "url": "https://github.com/simon-johansson/Quizify.git"
   },
   "scripts": {
-    "start": "node server/main.js",
+    "start": "node server",
     "test-frontend": "node node_modules/karma/bin/karma start test/client/karma.conf.js",
     "test-backend": "mocha --opts test/server/mocha.opts test/server",
     "test": "npm run-script test-frontend && npm run-script test-backend",

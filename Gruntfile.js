@@ -30,8 +30,8 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: './server/main.js',
-          debug: true
+          script: './server',
+          debug: true,
         },
       },
     },
