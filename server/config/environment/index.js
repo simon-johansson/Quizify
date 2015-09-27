@@ -1,19 +1,20 @@
-'use strict';
 
-var path = require('path');
-var _    = require('lodash');
+import {normalize} from 'path';
+import {merge} from 'lodash';
+const {NODE_ENV, PORT} = process.env;
+let env;
 
-var all = {
-  env: process.env.NODE_ENV || 'development',
-  root: path.normalize(__dirname + '/../../..'),
-  port: process.env.PORT || 9000,
+const all = {
+  env: NODE_ENV || 'development',
+  root: normalize(__dirname + '/../../..'),
+  port: PORT || 9000,
   spotifyTokenRefreshRate: 3600000 // one hour
 };
 
 try {
-  var env = require(`./${all.env}.js`);
-} catch (err){
-  var env = {};
+  env = require(`./${all.env}.js`);
+} catch (err) {
+  env = {};
 }
 
-module.exports = _.merge(all, env);
+export default merge(all, env);

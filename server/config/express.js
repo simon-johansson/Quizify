@@ -1,50 +1,51 @@
 
-const path = require('path');
-const express = require('express');
-const favicon = require('serve-favicon');
-const morgan = require('morgan');
-const compression = require('compression');
-const bodyParser     = require('body-parser');
-const methodOverride = require('method-override');
-const config = require('./environment');
-const webpack = require('webpack');
-const webpackconfig = require('../../webpack.dev.config');
+import {join} from 'path';
+import express from 'express';
+import favicon from 'serve-favicon';
+import morgan from 'morgan';
+import compression from 'compression';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import {root as rootDir, clientDir} from './environment';
+import webpackconfig from '../../webpack.dev.config';
 const compiler = webpack(webpackconfig);
 
-module.exports = app => {
-  const env = app.get('env');
+const environments = {
 
-  if(env === 'production') {
+  production(app) {
     app.use(compression());
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
     app.use(methodOverride());
-    app.use(express.static(path.join(config.root, 'dist')));
-    app.use(favicon(path.join(config.root, 'dist', 'favicons', 'favicon.ico')));
+    app.use(express.static(join(rootDir, clientDir)));
+    app.use(favicon(join(rootDir, clientDir, 'favicons', 'favicon.ico')));
     // app.use(morgan('dev'));
-  }
+  },
 
-  if(env === 'test') {
-    // app.use(morgan('dev'));
-  }
-
-  if(env === 'development') {
-
-    app.use(express.static(path.join(config.root, 'client')));
-
-    app.use(require('webpack-dev-middleware')(compiler, {
+  development(app) {
+    app.use(express.static(join(rootDir, clientDir)));
+    app.use(webpackDevMiddleware(compiler, {
       noInfo: true,
       publicPath: webpackconfig.output.publicPath,
       stats: {colors: true}
     }));
-
-    app.use(require('webpack-hot-middleware')(compiler, {
+    app.use(webpackHotMiddleware(compiler, {
       log: console.log
     }));
+  }
+};
 
-    app.get('/', function (req, res) {
-      res.sendFile(path.join(config.root, 'client', 'index.html'));
-    });
+
+export default app => {
+  const env = app.get('env');
+  try {
+    environments[env](app);
+  }
+  catch(err) {
+    console.log(err);
   }
 };
 

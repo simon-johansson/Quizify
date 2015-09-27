@@ -1,5 +1,4 @@
-'use strict';
 
-module.exports = {
+export default {
   port: process.env.PORT || 8765,
 };

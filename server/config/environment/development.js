@@ -1,7 +1,7 @@
-'use strict';
 
-let ip = require('my-local-ip');
+import ip from 'my-local-ip';
 
-module.exports = {
-  url: `http://${ip()}:${process.env.PORT || 9000}`
+export default {
+  url: `http://${ip()}:${process.env.PORT || 9000}`,
+  clientDir: 'client'
 };

@@ -1,9 +1,13 @@
-'use strict'
 
-module.exports = {
+const {
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET,
+  GA_TRACKING_ID} = process.env;
+
+export default {
   spotifyKeys: {
-    clientId: process.env.SPOTIFY_CLIENT_ID || '',
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET || '',
+    clientId: SPOTIFY_CLIENT_ID || '',
+    clientSecret: SPOTIFY_CLIENT_SECRET || '',
   },
-  googleAnalytics: process.env.GA_TRACKING_ID || '',
+  googleAnalytics: GA_TRACKING_ID || '',
 };
