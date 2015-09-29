@@ -1,133 +1,47 @@
-'use strict';
 
-var socketIO = require('socket.io');
-var nop = require('nop');
-var ev = require('../../../shared/socketEvents');
-var config = require('../../config/environment');
-var spotify = require('../spotify');
-var io;
+import nop from 'nop';
+import {forOwn} from 'lodash';
+import ev from '../../../shared/socketEvents';
+import {setServer, io} from './instance';
+import hostHandlers from './handlers/host';
+import playerHandlers from './handlers/player';
+import clientHandlers from './handlers/client';
 
-function onHostCreateGame(data, callback = nop) {
-  let gameId = `${Math.floor(Math.random() * 100000)}`;
-  if(io.nsps['/'].adapter.rooms[gameId]) {
-    return onHostCreateGame();
-  }
-  this.join(gameId);
-  this.gameId = gameId;
-  // console.log(`new game created with ID: ${gameId}`);
-  callback({gameId, url: config.url});
-}
-
-function onPlayerJoinGame(data, callback = nop) {
-  let {gameId, playerName} = data;
-  let playerId = this.id;
-  if(io.nsps['/'].adapter.rooms[gameId]) {
-    this.join(gameId);
-    this.gameId = gameId;
-    // console.log(`New player (${playerName}) joined game: ${gameId}`);
-    var obj = { gameId, playerName, playerId }
-    io.to(gameId).emit(ev.fromServer.toHost.playerJoined, obj);
+const handlerExists = (handler) => {
+  if(typeof handler !== 'function') {
+    throw Error(`${key} does not exist`);
+    return false;
   } else {
-    let errorMessage = `Game ${gameId} does not exist`;
-    var obj = { errorMessage };
-    // console.log(`Error: Player attempted to join room (${errorMessage}) that could not be found`);
+    return true;
   }
-  callback(obj);
-}
+};
 
-function onClientLeave(callback = nop) {
-  let clientId = this.id;
-  let gameId = this.gameId;
-  if(io.nsps['/'].adapter.rooms[gameId]) {
-    if(!this.disconnected) {
-      this.leave(gameId);
-      this.gameId = null;
+const connectToHandler = (socket, events, handlers) => {
+  forOwn(events, (value, key) => {
+    const handler = handlers[key];
+    if(handlerExists(handler)) {
+      socket.on(value, handler);
     }
-    // console.log(`Client (${id}) disconnected from game: ${gameId}`);
-    io.to(gameId).emit(ev.fromServer.toClient.leaveGame, { clientId });
-  }
-}
-
-function onListPlayers(data) {
-  let gameId = this.gameId;
-  if(io.nsps['/'].adapter.rooms[gameId]) {
-    io.to(gameId).emit(ev.fromServer.toPlayer.listPlayers, data);
-  }
-}
-
-const getTrack = (gameId, event, callback) => {
-  spotify.getTrack((err, track) => {
-    if(err) {
-      var obj = { errorMessage: err.message };
-    } else {
-      var obj = { track };
-      io.to(gameId).emit(event);
-    }
-    callback(obj);
   });
 };
 
-function onEndRound(data, callback = nop) {
-  let gameId = this.gameId;
-  let event = ev.fromServer.toPlayer.endRound;
-  getTrack(gameId, event, callback);
-}
-
-function onStartGame(data, callback = nop) {
-  let gameId = this.gameId;
-  let event = ev.fromServer.toPlayer.startGame;
-  getTrack(gameId, event, callback);
-}
-
-function onNewRound(data) {
-  let gameId = this.gameId;
-  if(io.nsps['/'].adapter.rooms[gameId]) {
-    io.to(gameId).emit(ev.fromServer.toPlayer.newRound, data);
-  }
-}
-
-function onAnswerReceived(data) {
-  // let gameId = this.gameId;
-  let playerId = data.playerId;
-  if(io.nsps['/'].adapter.rooms[playerId]) {
-    io.to(playerId).emit(ev.fromServer.toPlayer.answerReceived, {points: 300});
-  }
-}
-
 function bindEvents(socket) {
-  let {fromHost, fromPlayer, fromClient} = ev.toServer;
-  socket.on(fromHost.createGame, onHostCreateGame);
-  socket.on(fromHost.listPlayers, onListPlayers);
-  socket.on(fromHost.startGame, onStartGame);
-  socket.on(fromHost.endRound, onEndRound);
-  socket.on(fromHost.newRound, onNewRound);
-  socket.on(fromHost.answerReceived, onAnswerReceived);
+  let {
+    fromHost: hostEvents,
+    fromPlayer: playerEvents,
+    fromClient: clientEvents
+  } = ev.toServer;
 
-  socket.on(fromPlayer.joinGame, onPlayerJoinGame);
-
-  socket.on(fromClient.leaveGame, onClientLeave);
-  socket.on(fromClient.ping, function(callback = nop) {
-    setTimeout(() => {
-      callback();
-    }, 0);
-  });
-  socket.on('disconnect', onClientLeave);
+  connectToHandler(socket, hostEvents, hostHandlers);
+  connectToHandler(socket, playerEvents, playerHandlers);
+  connectToHandler(socket, clientEvents, clientHandlers);
 }
 
-module.exports = {
+export default {
   init(server) {
-    io = socketIO(server);
+    setServer(server);
     io.on('connection', (socket) => {
       bindEvents(socket);
     });
   },
-  getClientsInRoom(gameId) {
-    const {rooms} = io.nsps['/'].adapter;
-
-    if(rooms[gameId]) {
-      return Object.keys(rooms[gameId]).length;
-    } else {
-      return 0;
-    }
-  }
 };

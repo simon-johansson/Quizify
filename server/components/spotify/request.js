@@ -42,9 +42,9 @@ module.exports = {
     return getPlaylistTracks(playlist)
       .then(getRandomTrack)
       .then(getRelatedArtists)
-      .then(data => { return clb(null, data); })
-      .catch((err) => {
-        return clb(err);
-      });
+      // .then(data => { return clb(null, data); })
+      // .catch((err) => {
+      //   return clb(err);
+      // });
   }
 }

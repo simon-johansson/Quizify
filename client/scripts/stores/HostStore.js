@@ -63,7 +63,7 @@ const HostStore = Reflux.createStore({
 
   onStartGameCompleted(data) {
     let {state} = this;
-    let round = new Round(data.track);
+    let round = new Round(data);
     state.rounds.push(round);
   },
 
@@ -76,7 +76,7 @@ const HostStore = Reflux.createStore({
 
   onEndRoundCompleted(data) {
     let {state} = this;
-    let round = new Round(data.track);
+    let round = new Round(data);
     state.rounds.push(round);
   },
 
