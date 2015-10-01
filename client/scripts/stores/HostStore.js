@@ -87,6 +87,10 @@ const HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  onAnswer(data) {
+    console.log(data);
+  },
+
   // Maybe a good idea to move all the errors out to
   // a seperate store?
   onError(err) {

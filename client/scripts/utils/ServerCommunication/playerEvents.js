@@ -11,8 +11,8 @@ import {
 } from './utils';
 
 const bouncingListeners = ['joinGame'];
-const outgoingListeners = [];
-const incomingListeners = ['listPlayers', 'listPlayers'];
+const outgoingListeners = ['answer'];
+const incomingListeners = ['startGame', 'listPlayers', 'listPlayers'];
 
 const bouncing = (socket) => {
   const ev = events.toServer.fromPlayer;

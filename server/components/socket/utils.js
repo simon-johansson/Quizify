@@ -15,7 +15,10 @@ export const createErrorObject = (msg) => {
 };
 
 export const emit = (id, ev, playload = {}) => {
-  const fn = () => io.to(id).emit(ev, playload);
+  const fn = () => {
+    console.log(ev, playload);
+    io.to(id).emit(ev, playload);
+  };
 
   if(CHECK_FOR_CLIENTS_IN_ROOM) {
     if(io.nsps['/'].adapter.rooms[id]) { fn(); }

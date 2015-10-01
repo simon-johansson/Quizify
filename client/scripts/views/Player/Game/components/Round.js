@@ -31,7 +31,10 @@ export default class Round extends React.Component {
   }
 
   answer(data) {
-    Actions.answer(data.target.textContent);
+    Actions.answer({
+      answer: data.target.textContent,
+      timestamp: new Date()
+    });
   }
 
   render() {

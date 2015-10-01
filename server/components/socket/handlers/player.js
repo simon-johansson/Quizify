@@ -27,5 +27,10 @@ export default {
     callback(payload);
   },
 
-  answer() {}
+  answer(data) {
+    const {gameId} = this;
+    const ev = events.fromServer.toHost.answer;
+    emit(gameId, ev, data);
+    console.log(data);
+  }
 };
