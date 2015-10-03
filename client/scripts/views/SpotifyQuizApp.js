@@ -5,6 +5,7 @@ import { RouteHandler, Link } from 'react-router';
 import PlayerStore from 'stores/PlayerStore';
 import ServerCommunication from 'utils/ServerCommunication';
 import FeedbackButton from './shared/components/FeedbackButton';
+import AlbumCoverBackground from './shared/components/AlbumCoverBackground';
 
 // CSS
 import 'normalize.css';
@@ -35,22 +36,14 @@ export default class SpotifyQuizApp extends React.Component {
   render() {
     return (
       <div styleName='app'>
-        <h1>SpotifyQuiz</h1>
-        <ul>
-          <li>
-            <Link to="Home">
-              <span>Home</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="About">
-              <span>About</span>
-            </Link>
-          </li>
-        </ul>
+        <div styleName='title'>
+          <h1>Title</h1>
+        </div>
+
 
         <RouteHandler/>
         <FeedbackButton/>
+        <AlbumCoverBackground />
       </div>
     );
   }
