@@ -1,14 +1,10 @@
 
 .styles {
-  border: 0px dashed #f00;
-}
-
-.players {
   display: block;
   background: white;
   position: absolute;
   top: 190px;
-  left: 790px;
+  left: 190px;
   width: 420px;
   height: 420px;
   margin: 0;
@@ -18,4 +14,22 @@
     color: #222222;
     font-size: 20px;
   }
+}
+
+.url {
+  color: green;
+}
+
+.id {
+  color: green;
+}
+
+:global .react-qr {
+  width: 180px;
+  height: 180px;
+  display: block;
+  position: absolute;
+  top: 210px;
+  left: 210px;
+  margin: 0;
 }

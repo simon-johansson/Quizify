@@ -37,6 +37,15 @@ let getRelatedArtists = (track) => {
     });
 }
 
+let extractCovers = data => {
+  return data.body.tracks.items.map(e => {
+    return {
+      id: e.track.id,
+      url: e.track.album.images[1].url
+    };
+  });
+};
+
 module.exports = {
   getTrack(clb) {
     return getPlaylistTracks(playlist)
@@ -46,5 +55,9 @@ module.exports = {
       // .catch((err) => {
       //   return clb(err);
       // });
+  },
+  getCovers(clb) {
+    return getPlaylistTracks(playlist)
+      .then(extractCovers)
   }
-}
+};

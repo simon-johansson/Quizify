@@ -6,7 +6,7 @@ import TimeoutTransitionGroup from 'timeout-transition-group';
 import styles from 'styles/components/AlbumCoverBackground.scss';
 import CSSModules from 'react-css-modules';
 
-const covers = [
+const covers = _.shuffle([
   {
     id: '1ds2QsfhAAfRiaFMGDzrdb',
     url: 'https://i.scdn.co/image/6f77e481eb4314bfe0195e0ffbf067cb9bcd24f0'
@@ -308,7 +308,7 @@ const covers = [
     id: '4jTiyLlOJVJj3mCr7yfPQD',
     url: 'https://i.scdn.co/image/c2cc1553f8f800267e265e75a633d1996acec087'
   }
-];
+]);
 
 class AlbumCover extends React.Component {
   static propTypes = {

@@ -10,6 +10,8 @@ export default class Home extends React.Component {
   render() {
     return (
       <div styleName="styles">
+        <h1>Realtime Multiplayer Music Quiz</h1>
+        <p>Use your mobile as a controller, up to 8 players!</p>
         <Link to="HostLobby">
           <button>Create</button>
         </Link>

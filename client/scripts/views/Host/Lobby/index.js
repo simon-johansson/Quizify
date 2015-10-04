@@ -7,9 +7,9 @@ import HostStore from 'stores/HostStore';
 
 import {getPlayerElements} from 'views/shared/helpers/Player';
 import JoinGameInstructions from './components/JoinGameInstructions';
-import StartGameButton from './components/StartGameButton';
+import Leaderboard from '../shared/components/Leaderboard';
 
-import styles from 'styles/views/Host/Lobby.css';
+import styles from 'styles/views/Host/Lobby.scss';
 import CSSModules from 'react-css-modules';
 
 @CSSModules(styles)
@@ -59,16 +59,13 @@ export default class HostLobby extends React.Component {
   }
 
   render() {
-    const {url, gameId, deepLink} = this.state;
-    const players = this._getPlayerElements(this.state.players);
+    const {url, gameId, deepLink, players} = this.state;
+    // const players = this._getPlayerElements(this.state.players);
     return (
       <div styleName="styles">
         { this._developmentHelpers() }
         <JoinGameInstructions url={url} deepLink={deepLink} gameId={gameId} />
-        <div styleName="players">
-          { players }
-        </div>
-        <StartGameButton canStartGame={!!players.length} link={'HostGame'} />
+        <Leaderboard players={players} />
       </div>
     );
   }

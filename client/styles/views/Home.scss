@@ -1,4 +1,20 @@
 
 .styles {
-  border: 1px dashed #f00;
+  display: block;
+  background: white;
+  position: absolute;
+  top: 195px;
+  left: 395px;
+  width: 610px;
+  height: 410px;
+  margin: 0;
+  text-align: center;
+  box-shadow: 0px 0px 50px 20px rgba(0,0,0,0.9);
+  h1 {
+    color: #222222;
+  }
+  p {
+    color: #222222;
+    font-size: 20px;
+  }
 }
