@@ -65,7 +65,7 @@ export default class HostLobby extends React.Component {
       <div styleName="styles">
         { this._developmentHelpers() }
         <JoinGameInstructions url={url} deepLink={deepLink} gameId={gameId} />
-        <Leaderboard players={players} />
+        <Leaderboard heading="Lobby" players={players} />
       </div>
     );
   }

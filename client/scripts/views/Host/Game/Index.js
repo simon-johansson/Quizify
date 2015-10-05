@@ -5,6 +5,7 @@ import HostActions from 'actions/HostActionCreators';
 import HostStore from 'stores/HostStore';
 import Question from './components/Question';
 import Countdown from './components/Countdown';
+import Leaderboard from '../shared/components/Leaderboard';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Game extends React.Component {
       currentRound: {},
       roundsPlayed: 0,
       totalNumberOfRounds: 3,
+      players: HostStore.getPlayers()
     };
   }
 
@@ -65,7 +67,7 @@ export default class Game extends React.Component {
   }
 
   render() {
-    const {currentRound, countdown} = this.state;
+    const {currentRound, countdown, players} = this.state;
 
     return (
       <div className="Game-view">
@@ -83,6 +85,7 @@ export default class Game extends React.Component {
           counter={countdown}
           onFinished={this._startNewRound.bind(this)}
         />
+        <Leaderboard heading="Leaderboard" players={players} />
       </div>
     );
   }

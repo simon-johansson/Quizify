@@ -12,10 +12,12 @@ export default class Leaderboard extends React.Component {
 
   static propTypes = {
     players: React.PropTypes.array.isRequired,
+    heading: React.PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     players: [],
+    heading: '',
   }
 
   constructor(props) {
@@ -33,7 +35,7 @@ export default class Leaderboard extends React.Component {
     });
     return (
       <div styleName="Leaderboard">
-        <header>Lobby</header>
+        <header>{this.props.heading}</header>
         <table>
           <col width="140" />
           <col width="60" />
@@ -47,7 +49,7 @@ export default class Leaderboard extends React.Component {
             {players}
           </tbody>
         </table>
-        <StartGameButton canStartGame={!!players.length} />
+        <StartGameButton enabled={!!players.length} />
       </div>
     );
   }
