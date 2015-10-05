@@ -112,201 +112,6 @@ const covers = _.shuffle([
   },{
     id: '5kZRoc6Gz7u5eu4a0YM2LS',
     url: 'https://i.scdn.co/image/0336e59b85f37ed971875cb734379be34a9d30ab'
-  },{
-    id: '7a6GeFdPlbQtd7BwVlZ52k',
-    url: 'https://i.scdn.co/image/11ad2ee982b2683c4c49b34fb2ee50c835dde424'
-  },{
-    id: '477daPpd3DnneaHhvjM35l',
-    url: 'https://i.scdn.co/image/a927181bf5006569052b54b646be0f01b1f6bea3'
-  },{
-    id: '27GmP9AWRs744SzKcpJsTZ',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '2u5B53qh8UGDnPcdJATcDl',
-    url: 'https://i.scdn.co/image/da8f15c14a4868be853babeb97fc764be8867bb5'
-  },{
-    id: '41Fflg7qHiVOD6dEPvsCzO',
-    url: 'https://i.scdn.co/image/2910f0b081430686f99287edc1a089fd0e1f93ba'
-  },{
-    id: '32OlwWuMpZ6b0aN2RZOeMS',
-    url: 'https://i.scdn.co/image/620e780abe344fe99eae8472e66b2a09c5bed465'
-  },{
-    id: '3ESSGgWzRf1xvP7G5hHMhB',
-    url: 'https://i.scdn.co/image/5aa0bd2874ec6ae0885adc84bb02d5ffce6f8cc2'
-  },{
-    id: '44aN5xKL3kGHvQ5bXVk6B8',
-    url: 'https://i.scdn.co/image/aa82e12fe28ea0602243644271309503d396ae7d'
-  },{
-    id: '2sNvitW3TxiTeC9xT9f2ZZ',
-    url: 'https://i.scdn.co/image/33a1770f26490cfd6768fa9e62a6875fa209a1d8'
-  },{
-    id: '3jEPu6FD1icy9cLllhB2XK',
-    url: 'https://i.scdn.co/image/0f5b23524e18e174580bbbe177390227d089f55f'
-  },{
-    id: '5eWgDlp3k6Tb5RD8690s6I',
-    url: 'https://i.scdn.co/image/462342903cda2a69377d73f1c837a9ffa73de031'
-  },{
-    id: '285HeuLxsngjFn4GGegGNm',
-    url: 'https://i.scdn.co/image/9b092f765831793404d46b816d688135ff32735f'
-  },{
-    id: '0CQTJlVR2tPLsZ8mtpY8Cr',
-    url: 'https://i.scdn.co/image/e57ffe8598b4255e9700484cbefdd10133eeb7e7'
-  },{
-    id: '7vqUr6K2Js9Paq4kdNSOm6',
-    url: 'https://i.scdn.co/image/42f6403f96373d8b4dbd514445f9aea2196c61a4'
-  },{
-    id: '5UPwc30oJ4KhQYctNfv34x',
-    url: 'https://i.scdn.co/image/fef8458af72a9816f520a5c73e311db94b2498d9'
-  },{
-    id: '7y2YUIyCuVhBidENVT0068',
-    url: 'https://i.scdn.co/image/e861a8496004ec7ad816fff5288e86a94d82356b'
-  },{
-    id: '7jv4Mb21bdd9SDVOm9Fm9l',
-    url: 'https://i.scdn.co/image/0018882db812638c47a507fcf7ffa677f7599944'
-  },{
-    id: '6bRbeEgg8v8BQ0HuVuPE7v',
-    url: 'https://i.scdn.co/image/6fa19f4aa3a85366771aeb203a1bc8641db6584c'
-  },{
-    id: '0fYVliAYKHuPmECRs1pbRf',
-    url: 'https://i.scdn.co/image/0d22274c284ec02c4bb3a5aef193cd879810e279'
-  },{
-    id: '3icbmPGKTsKAa0IinkizCM',
-    url: 'https://i.scdn.co/image/96eaa0e70cfb594a10b7695cf505e0e6ccaf02cb'
-  },{
-    id: '1PTqbs9FV8hSJCS7OOF5OC',
-    url: 'https://i.scdn.co/image/f1c9f7d10e98537d230902b0ee6971f18165fd55'
-  },{
-    id: '33NHr7lu7tCMjK05jUj1v0',
-    url: 'https://i.scdn.co/image/267afbe410515b8077eba14e760a279eaecf0a01'
-  },{
-    id: '7dS5EaCoMnN7DzlpT6aRn2',
-    url: 'https://i.scdn.co/image/04819888ff45e441e96b03e620ce323de86d7c10'
-  },{
-    id: '2AGottAzfC8bHzF7kEJ3Wa',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '5lFDtgWsjRJu8fPOAyJIAK',
-    url: 'https://i.scdn.co/image/9c6eb30ff5270c115b1ecd2b74430e505c281f25'
-  },{
-    id: '1WoOzgvz6CgH4pX6a1RKGp',
-    url: 'https://i.scdn.co/image/5aa0bd2874ec6ae0885adc84bb02d5ffce6f8cc2'
-  },{
-    id: '7jslhIiELQkgW9IHeYNOWE',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '0hy1SOTEn9ifXTzOwnCwEr',
-    url: 'https://i.scdn.co/image/cb53ed2859a3966d597094cd82735aaed675061e'
-  },{
-    id: '0r4SsYcwvd8URat6AS2m6f',
-    url: 'https://i.scdn.co/image/8bda10ee261982586794a31228fd5e203686a08b'
-  },{
-    id: '2jplimH0b7Abf5LQSPx27A',
-    url: 'https://i.scdn.co/image/ea6428bfe0266bacbd4149e1f28414284c46bbd3'
-  },{
-    id: '6Xs7OKt6i0Ddq8B4M5Dgvr',
-    url: 'https://i.scdn.co/image/b8d7a38c2125e932f9d16e46ae738e2f54e0cb32'
-  },{
-    id: '6YwLgicpvVuMt1eE2OldwQ',
-    url: 'https://i.scdn.co/image/e493fa011b2a406be780c8c86c16def8611ee3a1'
-  },{
-    id: '3lSR267IJfT54p0Gfuw7mi',
-    url: 'https://i.scdn.co/image/94a277d6ca8fed7988acc521b61620cf23943299'
-  },{
-    id: '1sNSG13fsK6KPKKNIQXXrh',
-    url: 'https://i.scdn.co/image/c57b056a0fcafc7801cdc8fb2e49f8781ee9cbe7'
-  },{
-    id: '7IHOIqZUUInxjVkko181PB',
-    url: 'https://i.scdn.co/image/8880999bbe1ce30df6c52bc928d516287d26d39b'
-  },{
-    id: '46lFttIf5hnUZMGvjK0Wxo',
-    url: 'https://i.scdn.co/image/d87d7b97348c80ef8dbd46d36c12f4836381dd61'
-  },{
-    id: '05cXQMJcrM9msUYu11mOrs',
-    url: 'https://i.scdn.co/image/a56c49f3819c2c7312ced8e31236cccc3d588dab'
-  },{
-    id: '5SqSckut3FcoQKmGkMWgp1',
-    url: 'https://i.scdn.co/image/fef8458af72a9816f520a5c73e311db94b2498d9'
-  },{
-    id: '4oWmroatZtMmlgc3havMrv',
-    url: 'https://i.scdn.co/image/cb102704e11b18308c590831873a509ed9b73789'
-  },{
-    id: '0GR7iJLhj80KD5LkA14ZRn',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '5lnsCyEKWofnC00U4Ax0ti',
-    url: 'https://i.scdn.co/image/a39617793ffedfeb6c105567af2e5253c3808ac6'
-  },{
-    id: '1iuljeYz6ZG3GTJOZZkoer',
-    url: 'https://i.scdn.co/image/5aa0bd2874ec6ae0885adc84bb02d5ffce6f8cc2'
-  },{
-    id: '0Gi17qCJh9e9RJxLaYkm9l',
-    url: 'https://i.scdn.co/image/fef8458af72a9816f520a5c73e311db94b2498d9'
-  },{
-    id: '2uTG00P1DkhB97pdITkl2O',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '3aIhJDHxr1kgTSnutJxPTH',
-    url: 'https://i.scdn.co/image/d87d7b97348c80ef8dbd46d36c12f4836381dd61'
-  },{
-    id: '3853uIOwh2L9F8TkDd1F49',
-    url: 'https://i.scdn.co/image/c3b9fd80a5f3cb4da0c7de4c3ce7f57b266dfa2d'
-  },{
-    id: '0B5OTb36fzLayn6XQHg5A1',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '63CSozvYUEudPp12679UVF',
-    url: 'https://i.scdn.co/image/02b6322bf1ddeabd574d05610ba4aa234bfaf6b9'
-  },{
-    id: '6UIt4r9bLP7dN7YZmsAa5h',
-    url: 'https://i.scdn.co/image/e0f898464733b25341882e2e84832daaf62ed642'
-  },{
-    id: '7rVrQF43tH4mI0542hijUC',
-    url: 'https://i.scdn.co/image/905cf38d253ac81e4ed128625d876498091d6f97'
-  },{
-    id: '5XzmZjXhMjDHr7ZfJ6DELQ',
-    url: 'https://i.scdn.co/image/1dd75fe38b211d56a31e14cbf73824e5e9100435'
-  },{
-    id: '40EB7ABUO6MoWMUwPKptJ7',
-    url: 'https://i.scdn.co/image/6c221281d6d3d6d241ad746bfd4a1d0b00658424'
-  },{
-    id: '0tDC3KJPPu5eonGTtCURpq',
-    url: 'https://i.scdn.co/image/53fea48ae7ad87d8dea8fbf28ba2573b8a332a11'
-  },{
-    id: '76kyKtPLsFbQkdQ86QrkF4',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '49aLCvvEKM5EA8IYwDmtaE',
-    url: 'https://i.scdn.co/image/ef32f2500aef548ee2b0589773c84c400472d59a'
-  },{
-    id: '6bqtKURdSWkInAJHDkuaL0',
-    url: 'https://i.scdn.co/image/f2405b82d0578dd815a3082ca0f7ec4e18e937a1'
-  },{
-    id: '1Gzv0cMy3xm7sgN5gd7WkU',
-    url: 'https://i.scdn.co/image/ecc0c638a470afa93fa5bb291cf84741957d85f8'
-  },{
-    id: '62vpWI1CHwFy7tMIcSStl8',
-    url: 'https://i.scdn.co/image/4fb9d637d51744a883ec30c0bce5fea337b6a8bc'
-  },{
-    id: '2LLFl56eIFGFlnrplUC26f',
-    url: 'https://i.scdn.co/image/98b3e013d54ba44d5e27b5e442d1108f277baab5'
-  },{
-    id: '4SNtBMJa7Wpk1tJzMSUv9B',
-    url: 'https://i.scdn.co/image/e22bd9ab01e2d8c381e198f7e6344ea79ba4745b'
-  },{
-    id: '1HbcclMpw0q2WDWpdGCKdS',
-    url: 'https://i.scdn.co/image/c6574e297a501e44d051f9130c883e1fdfcb3099'
-  },{
-    id: '1KtVVUM6OkpyOsbVfbMybX',
-    url: 'https://i.scdn.co/image/bae3fdea03d703ec0e06b5a584d17a6af8f3ed1a'
-  },{
-    id: '6kwAbEjseqBob48jCus7Sz',
-    url: 'https://i.scdn.co/image/fc213d7efcde95a9da0e9ed97cffd2fa7af90dec'
-  },{
-    id: '4VrWlk8IQxevMvERoX08iC',
-    url: 'https://i.scdn.co/image/fc213d7efcde95a9da0e9ed97cffd2fa7af90dec'
-  },{
-    id: '4jTiyLlOJVJj3mCr7yfPQD',
-    url: 'https://i.scdn.co/image/c2cc1553f8f800267e265e75a633d1996acec087'
   }
 ]);
 
@@ -398,23 +203,25 @@ export default class Background extends React.Component {
     super(props);
     this.state = {
       data: covers,
+      spinner: []
     };
   }
 
-  // animateTile() {
-  //   unless @state.spinner.length
-  //     @setState {spinner: _.cloneDeep @state.data}
-  //   spinnerCopy = _.cloneDeep @state.spinner
-  //   dataCopy    = _.cloneDeep @state.data
-  //   dataCopy[_.random(dataCopy.length - 1)] = spinnerCopy.pop()
-  //   @setState {spinner: spinnerCopy, data: dataCopy}
-  // }
+  animateTile() {
+    if(!this.state.spinner.length) {
+      this.setState({spinner: _.cloneDeep(this.state.data)});
+    }
+    const spinnerCopy = _.cloneDeep(this.state.spinner);
+    let dataCopy = _.cloneDeep(this.state.data);
+    dataCopy[_.random(dataCopy.length - 1)] = spinnerCopy.pop();
+    this.setState({spinner: spinnerCopy, data: dataCopy});
+  }
 
   componentDidMount() {
     // this.loadAlbumCoversFromServer();
-    // setInterval(() => {
-      // this.animateTile();
-    // }, _.random(1500, 1700));
+    setInterval(() => {
+      this.animateTile();
+    }, _.random(1500, 1700));
   }
 
   render() {
