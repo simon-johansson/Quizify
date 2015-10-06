@@ -4,6 +4,10 @@ import React from 'react/addons';
 import Actions from 'actions/PlayerActionCreators';
 import Store from 'stores/PlayerStore';
 
+import styles from 'styles/views/Player/Round.scss';
+import CSSModules from 'react-css-modules';
+
+@CSSModules(styles)
 export default class Round extends React.Component {
   constructor(props) {
     super(props);
@@ -45,13 +49,15 @@ export default class Round extends React.Component {
     if (round.alternatives) {
       alternatives = round.alternatives.map(alternative => {
         return (
-          <button onClick={this.answer}>{alternative}</button>
+          <button styleName="alternative" onClick={this.answer}>
+            {alternative}
+          </button>
         );
       }.bind(this));
     }
 
     return (
-       <div className="Round-view">
+       <div styleName="round-view">
         {
           round.alternatives ?
           <div style={{color:'white'}}>{alternatives}</div> :
