@@ -28,7 +28,7 @@ export default class Game extends React.Component {
     this.unsubscribe();
   }
 
-  _onStoreChange() {
+  _onStoreChange(state, message) {
     this.setState({
       currentRound: HostStore.getCurrentRound(),
       roundsPlayed: HostStore.getRoundsPlayed(),
@@ -37,15 +37,19 @@ export default class Game extends React.Component {
     if(this.state.currentRound.hasEnded) {
       this.setState({countdown: 5});
     }
+
+    if(message === 'changeTrack') {
+      HostActions.newRound({
+        alternatives: this.state.currentRound.track.artist.related
+      });
+    }
   }
 
   _startNewRound() {
     const {roundsPlayed, totalNumberOfRounds} = this.state;
     if(roundsPlayed < totalNumberOfRounds) {
       this.setState({countdown: 0});
-      HostActions.newRound({
-        alternatives: [ 'Adam Lambert', 'Rabbii', 'The Knife', 'Gorillaz' ]
-      });
+      HostActions.changeTrack();
     } else {
       console.log('End game!');
     }

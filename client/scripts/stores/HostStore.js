@@ -80,15 +80,17 @@ const HostStore = Reflux.createStore({
     state.rounds.push(round);
   },
 
-  onNewRound() {
+  onChangeTrack() {
     let {state} = this;
     state.currentRound = state.rounds[state.rounds.length - 1];
     state.currentRound.isShowing = true;
-    this.trigger(state);
+    this.trigger(state, 'changeTrack');
   },
 
   onAnswer(data) {
+
     console.log(data);
+    this.trigger(state);
   },
 
   // Maybe a good idea to move all the errors out to
