@@ -7,6 +7,8 @@ import Question from './components/Question';
 import Countdown from './components/Countdown';
 import Leaderboard from '../shared/components/Leaderboard';
 
+let _ = require('lodash');
+
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -39,8 +41,15 @@ export default class Game extends React.Component {
     }
 
     if(message === 'changeTrack') {
+      let artist = this.state.currentRound.track.artist;
+      let alternatives = _.map(
+        _.slice(_.shuffle(artist.related), 0, 3), 
+        (related) =>   {
+          return related;
+        });
+      alternatives.push(artist.name);
       HostActions.newRound({
-        alternatives: this.state.currentRound.track.artist.related
+        alternatives: alternatives
       });
     }
   }
