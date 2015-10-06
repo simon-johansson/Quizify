@@ -28,7 +28,6 @@ export default class Game extends React.Component {
 
   _onStoreChange(state, change) {
     if (change !== 'latency') { // REMOVE !!!
-      console.log(state);
       this.setState(state);
     }
   }

@@ -12,6 +12,7 @@ export default class Round extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      playerId: Store.getPlayerId(),
       round:  {
         alternatives: null,
         points: null,
@@ -35,9 +36,11 @@ export default class Round extends React.Component {
   }
 
   answer(data) {
+    let id = this.state.playerId;
     Actions.answer({
       answer: data.target.textContent,
-      timestamp: new Date()
+      timestamp: new Date(),
+      playerId: id
     });
   }
 
@@ -49,7 +52,7 @@ export default class Round extends React.Component {
     if (round.alternatives) {
       alternatives = round.alternatives.map(alternative => {
         return (
-          <button styleName="alternative" onClick={this.answer}>
+          <button styleName="alternative" onClick={this.answer.bind(this)}>
             {alternative}
           </button>
         );

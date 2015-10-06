@@ -22,7 +22,8 @@ const HostStore = Reflux.createStore({
       currentRound: {
         hasEnded: false,
         isShowing: false,
-        track: {}
+        track: {},
+        answers: []
       },
       roundsPlayed: 0,
     };
@@ -88,8 +89,8 @@ const HostStore = Reflux.createStore({
   },
 
   onAnswer(data) {
-
-    console.log(data);
+    let {state} = this;
+    state.currentRound.answers.push(data);
     this.trigger(state);
   },
 
