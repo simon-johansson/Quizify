@@ -43,6 +43,7 @@
     "soundmanager2": "^2.97.20150601-a",
     "spotify-web-api-node": "^2.1.0",
     "store": "^1.3.17",
+    "timeout-transition-group": "^1.0.3",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.0.0",
     "webpack-merge": "^0.2.0"
