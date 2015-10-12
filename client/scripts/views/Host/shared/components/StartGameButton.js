@@ -1,6 +1,5 @@
 
 import React from 'react/addons';
-import { Link } from 'react-router';
 
 import styles from 'styles/components/StartGameButton.scss';
 import CSSModules from 'react-css-modules';
@@ -12,13 +11,11 @@ export default class StartGameButton extends React.Component {
   }
 
   static propTypes = {
-    canStartGame: React.PropTypes.bool.isRequired,
-    link: React.PropTypes.string.isRequired,
+    enabled: React.PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
-    canStartGame: false,
-    link: '',
+    enabled: false,
   }
 
   constructor(props) {
@@ -30,12 +27,12 @@ export default class StartGameButton extends React.Component {
   }
 
   render() {
-    const {canStartGame} = this.props;
-    let buttonStyle = canStartGame ? 'enabled' : 'disabled';
+    const {enabled} = this.props;
+    let buttonStyle = enabled ? 'enabled' : 'disabled';
     return (
       <div styleName="StartGameButton">
         <button
-          onClick={canStartGame ? ::this.onClick : null}
+          onClick={enabled ? ::this.onClick : null}
           styleName={buttonStyle}
         >
           Start game (up to 8 players)

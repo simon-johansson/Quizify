@@ -25,6 +25,7 @@ export default class Leaderboard extends React.Component {
   }
 
   render() {
+    const gameHasStarted = false;
     const players = this.props.players.map((player, i) => {
       return (
         <tr key={i}>
@@ -49,7 +50,9 @@ export default class Leaderboard extends React.Component {
             {players}
           </tbody>
         </table>
-        <StartGameButton enabled={!!players.length} />
+        { !gameHasStarted &&
+          <StartGameButton enabled={!!players.length} />
+        }
       </div>
     );
   }
