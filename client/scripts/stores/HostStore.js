@@ -94,6 +94,15 @@ const HostStore = Reflux.createStore({
     this.trigger(state);
   },
 
+  onDecrementPoints(data) {
+    let {state} = this;
+    const points = 30 - Math.floor(data / 1000);
+    if (state.currentRound.points !== points) {
+      state.currentRound.points = points;
+      this.trigger(state);
+    }
+  },
+
   // Maybe a good idea to move all the errors out to
   // a seperate store?
   onError(err) {

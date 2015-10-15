@@ -33,8 +33,12 @@ window.removePlayer = () => {
   ClientActions.leaveGame.completed({clientId: player.playerId});
 };
 
-window.giveAnswer = () => {
-  console.log('not yet implemented');
+window.giveRightAnswer = (id) => {
+  console.log('Right answer:', id);
+};
+
+window.giveWrongAnswer = (id) => {
+  console.log('Wrong answer:', id);
 };
 
 window.endRound = () => {

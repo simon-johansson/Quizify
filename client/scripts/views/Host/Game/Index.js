@@ -43,7 +43,7 @@ export default class Game extends React.Component {
     if(message === 'changeTrack') {
       let artist = this.state.currentRound.track.artist;
       let alternatives = _.map(
-        _.slice(_.shuffle(artist.related), 0, 3), 
+        _.slice(_.shuffle(artist.related), 0, 3),
         (related) =>   {
           return related;
         });
@@ -71,9 +71,6 @@ export default class Game extends React.Component {
           <p>Host game dev helpers</p>
           <button onClick={window.endRound}>End round</button>
           <button onClick={window.endGame}>End game</button>
-          {/* <label for="countdown">Set countdown</label> */}
-          {/* <input type="text" name="countdown"
-          id="countdown" value={this.state.countdown}/> */}
         </div>
       );
     }
@@ -89,8 +86,10 @@ export default class Game extends React.Component {
         { currentRound.isShowing &&
           <Question
             track={currentRound.track}
+            points={currentRound.points}
             showTrackDetails={currentRound.hasEnded}
             onTrackEnded={HostActions.endRound}
+            onTrackPlaying={HostActions.decrementPoints}
           />
         }
 

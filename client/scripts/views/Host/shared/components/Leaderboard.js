@@ -24,12 +24,34 @@ export default class Leaderboard extends React.Component {
     super(props);
   }
 
+  _developmentHelpers(id) {
+    if(process.env.NODE_ENV === 'development' &&
+       window.location.hash === '#/host/game') {
+      return (
+        <div className="development-helpers-inline">
+          <button
+            onClick={window.giveRightAnswer.bind(this, id)}>
+            right
+          </button>
+          <button
+            onClick={window.giveWrongAnswer.bind(this, id)}>
+            wrong
+          </button>
+        </div>
+      );
+    }
+  }
+
   render() {
     const gameHasStarted = false;
     const players = this.props.players.map((player, i) => {
+      const {playerId, playerName} = player;
       return (
         <tr key={i}>
-          <td>{player.playerName}</td>
+          <td>
+            {player.playerName}
+            { this._developmentHelpers(playerId) }
+          </td>
           <td>-</td>
         </tr>
       );

@@ -31,11 +31,15 @@ export default class Sound {
     delete this.sound;
   }
 
-  play(onfinish = nop) {
+  play(options = {}) {
+    const self = this;
     if (!this.sound) { return; }
     this.sound.play({
       volume: 100,
-      onfinish
+      onfinish: options.onEnd,
+      whileplaying: function () {
+        options.onTick(this.position);
+      }
     });
   }
 

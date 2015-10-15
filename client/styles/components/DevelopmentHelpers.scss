@@ -37,3 +37,20 @@ $padding-margin: 5px;
     margin-bottom: $padding-margin;
   }
 }
+
+:global .development-helpers-inline {
+  display: inline-block;
+  margin-left: 5px;
+  button {
+    margin-left: 5px;
+    display: inline-block;
+    @include font;
+    color: black;
+    // width: 200px;
+    background: tomato;
+    border: 0;
+    &:first-child {
+      background: lime;
+    }
+  }
+}

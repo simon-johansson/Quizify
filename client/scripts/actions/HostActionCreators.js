@@ -20,5 +20,6 @@ HostActionCreators.changeTrack = Reflux.createAction();
 HostActionCreators.newRound = Reflux.createAction();
 HostActionCreators.answer = Reflux.createAction();
 HostActionCreators.answerReceived = Reflux.createAction();
+HostActionCreators.decrementPoints = Reflux.createAction();
 
 export default HostActionCreators;
