@@ -12,7 +12,7 @@ class Player {
   constructor(playerName) {
     this.playerName = playerName ||
                       names.splice(_.random(0, (names.length - 1)), 1)[0];
-    this.playerId = `${Math.floor(Math.random() * 100000)}`;
+    this.clientId = `${Math.floor(Math.random() * 100000)}`;
     this.gameId = '1234';
   }
 }
@@ -30,7 +30,7 @@ window.addPlayers = (num) => {
 window.removePlayer = () => {
   let player = _.sample(HostStore.getPlayers());
   names.push(player.playerName);
-  ClientActions.leaveGame.completed({clientId: player.playerId});
+  ClientActions.leaveGame.completed({clientId: player.clientId});
 };
 
 window.giveRightAnswer = (id) => {

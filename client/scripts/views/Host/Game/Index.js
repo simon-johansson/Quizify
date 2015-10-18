@@ -68,12 +68,15 @@ export default class Game extends React.Component {
     }
 
     if(message === 'answer') {
-      let correctAnswer = this.state.currentRound.track.artist;
-      console.log(state);
+      const {currentRound, players} = this.state;
+      let correctAnswer = currentRound.track.artist;
       HostActions.answerReceived({
         points: state.points,
         playerId: state.clientId
       });
+      if (currentRound.answers.length === players.length) {
+        HostActions.endRound();
+      };
     }
   }
 
@@ -101,33 +104,36 @@ export default class Game extends React.Component {
 
   render() {
     const {currentRound, countdown, players} = this.state;
+    const gameHasStarted = true;
 
     return (
       <div styleName="Game">
         { this._developmentHelpers() }
 
+        <section>
+          { currentRound.isShowing &&
+            <Question
+              track={currentRound.track}
+              points={currentRound.points}
+              showTrackDetails={currentRound.hasEnded}
+              onTrackEnded={HostActions.endRound}
+              onTrackPlaying={HostActions.decrementPoints}
+            />
+          }
 
-        { currentRound.isShowing &&
-          <Question
-            track={currentRound.track}
-            points={currentRound.points}
-            showTrackDetails={currentRound.hasEnded}
-            onTrackEnded={HostActions.endRound}
-            onTrackPlaying={HostActions.decrementPoints}
-          />
-        }
-
-        { !!countdown &&
-          <Countdown
-            counter={countdown}
-            onFinished={this._prepareNewRound.bind(this)}
-          />
-        }
+          { !!countdown &&
+            <Countdown
+              counter={countdown}
+              onFinished={this._prepareNewRound.bind(this)}
+            />
+          }
+        </section>
 
         <Leaderboard
           heading="Leaderboard"
           players={players}
-          cachedPoints={currentRound.answers}
+          currentRound={currentRound}
+          gameHasStarted={gameHasStarted}
         />
 
       </div>

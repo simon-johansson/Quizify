@@ -1,5 +1,5 @@
 
-import {result, find} from 'lodash';
+import {result, find, sortByOrder} from 'lodash';
 import React from 'react/addons';
 import { Link } from 'react-router';
 
@@ -13,14 +13,16 @@ export default class Leaderboard extends React.Component {
 
   static propTypes = {
     players: React.PropTypes.array.isRequired,
-    cachedPoints: React.PropTypes.array.isRequired,
+    currentRound: React.PropTypes.object.isRequired,
     heading: React.PropTypes.string.isRequired,
+    gameHasStarted: React.PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
     players: [],
-    cachedPoints: [],
+    currentRound: {},
     heading: '',
+    gameHasStarted: false
   }
 
   constructor(props) {
@@ -46,21 +48,27 @@ export default class Leaderboard extends React.Component {
   }
 
   render() {
-    const gameHasStarted = false;
-    const players = this.props.players.map((player, i) => {
-      const {playerId, playerName, points} = player;
+    const {players, currentRound, gameHasStarted} = this.props;
+    const playersSorted = sortByOrder(players, ['points'], ['desc']);
+    const playerElements = playersSorted.map((player, i) => {
+      const {clientId, playerName, points} = player;
       // console.log(this.props.cachedPoints);
-      const cachedPoints = result(find(this.props.cachedPoints, {
-        clientId: playerId,
-      }), 'points');
-      // console.log(cachedPoints);
+      const roundPoints = result(find(
+        currentRound.answers, {clientId}
+      ), 'points');
       return (
         <tr key={i}>
           <td>
             {player.playerName}
-            { this._developmentHelpers(playerId) }
+            { this._developmentHelpers(clientId) }
           </td>
-          <td>{cachedPoints ? `${cachedPoints} + ` : null}  {`${points}`}</td>
+          <td>
+            { roundPoints && !currentRound.hasEnded ?
+              `${roundPoints} + ` :
+               null
+            }
+            {`${points}`}
+          </td>
         </tr>
       );
     });
@@ -77,11 +85,11 @@ export default class Leaderboard extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {players}
+            {playerElements}
           </tbody>
         </table>
         { !gameHasStarted &&
-          <StartGameButton enabled={!!players.length} />
+          <StartGameButton enabled={!!playerElements.length} />
         }
       </div>
     );

@@ -1,4 +1,5 @@
 
+import {find} from 'lodash';
 import Reflux from 'reflux';
 
 import ClientActions from 'actions/ClientActionCreators';
@@ -41,9 +42,9 @@ const HostStore = Reflux.createStore({
 
   onPlayerJoined(data) {
     const {state} = this;
-    const {playerId, playerName} = data;
+    const {clientId, playerName} = data;
     const points = 0;
-    state.players.push({playerId, playerName, points});
+    state.players.push({clientId, playerName, points});
     this.trigger(state, 'playerJoinedGame');
   },
 
@@ -63,7 +64,16 @@ const HostStore = Reflux.createStore({
   onEndRound() {
     let {state} = this;
     state.currentRound.hasEnded = true;
-    state.roundsPlayed += 1; 
+    state.roundsPlayed += 1;
+    state.currentRound.answers.forEach(answer => {
+      let {clientId} = answer;
+      let player = find(state.players, {clientId});
+      // console.log(answer);
+      if (answer.answer === state.currentRound.track.artist.name ||
+          answer.answer === 'right') {
+        player.points += answer.points;
+      }
+    });
     this.trigger(state);
   },
 

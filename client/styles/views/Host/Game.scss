@@ -3,5 +3,9 @@
 @import 'neat';
 
 .Game {
-  @include outer-container;
+  // @include outer-container;
+
+  section {
+    @include span-columns(6);
+  }
 }

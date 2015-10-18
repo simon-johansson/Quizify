@@ -12,13 +12,12 @@ import {
 export default {
   joinGame(data, callback = nop) {
     const {gameId, playerName} = data;
-    const playerId = this.id;
     const ev = events.fromServer.toHost.playerJoined;
     let payload;
     if(roomExists(gameId)) {
       joinRoom.call(this, gameId);
       // console.log(`New player (${playerName}) joined game: ${gameId}`);
-      payload = {playerName, playerId};
+      payload = {playerName};
       emit.call(this, gameId, ev, payload);
     } else {
       payload = createErrorObject(`Game ${gameId} does not exist`);
