@@ -24,7 +24,8 @@ const PlayerStore = Reflux.createStore({
         alternatives: null,
         points: null,
         correct: null,
-        hasEnded: null
+        hasEnded: null,
+        answer: null
       },
       game: {
         points: 0,
@@ -74,6 +75,12 @@ const PlayerStore = Reflux.createStore({
     state.round.points = null;
     state.round.correct = null;
     this.trigger(this.state, 'newRound');
+  },
+
+  onAnswer(data) {
+    const { state } = this;
+    state.round.answer = data.answer;
+    this.trigger(this.state);
   },
 
   onAnswerReceived(data) {

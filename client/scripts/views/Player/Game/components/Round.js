@@ -53,8 +53,17 @@ export default class Round extends React.Component {
 
     if (round.alternatives) {
       alternatives = round.alternatives.map(alternative => {
+        let style = 'alternative';
+        let isDisabled = round.answer ? true : false;
+        if (round.answer === alternative) {
+          style += '-selected';
+        } else if (isDisabled) {
+          style += '-disabled';
+        }
         return (
-          <button styleName="alternative" onClick={this.answer.bind(this)}>
+          <button styleName={style} 
+            disabled={isDisabled}
+            onClick={this.answer.bind(this)}>
             {alternative}
           </button>
         );
