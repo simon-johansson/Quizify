@@ -1,18 +1,18 @@
 .round-view {
 	padding-left: 32px;
 	padding-right: 32px;
-
 }
+
 .alternative {
 	display: block;
 	width: 100%;
 	margin-bottom: 40px;
-	height: 100px;
+	height: 60px;
 }
 
 .alternative-selected {
 	@extend .alternative;
-	background-color: #008000;
+	background-color: #666;
 }
 
 .alternative-disabled {
