@@ -28,7 +28,7 @@ export default class SpotifyQuizApp extends React.Component {
     ServerCommunication.connect();
     ServerCommunication.bindClientEvents();
 
-    if(PlayerStore.isUsingMobile()) {
+    if(PlayerStore.getIsUsingMobile()) {
       this.context.router.transitionTo('PlayerLobby');
     }
   }

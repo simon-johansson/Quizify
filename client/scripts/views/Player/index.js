@@ -46,7 +46,7 @@ export default class Player extends React.Component {
 
   _onStoreChange(state, change) {
     this.setState({
-      joinedGame: PlayerStore.hasJoinedGame(),
+      joinedGame: PlayerStore.getJoinedGame(),
       players: PlayerStore.getPlayers(),
       playerName: PlayerStore.getPlayerName(),
       latency: PlayerStore.getLatency()

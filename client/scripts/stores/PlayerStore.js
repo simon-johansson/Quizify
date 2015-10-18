@@ -16,7 +16,7 @@ const PlayerStore = Reflux.createStore({
       playerId: null,
       playerName: browserStorage.getPlayerName() || '',
       gameId: null,
-      joindGame: false,
+      joinedGame: false,
       players: [],
       latency: 0,
       isUsingMobile: md.mobile(),
@@ -46,7 +46,7 @@ const PlayerStore = Reflux.createStore({
     const {state} = this;
     state.gameId = data.gameId;
     state.playerId = data.playerId;
-    state.joindGame = true;
+    state.joinedGame = true;
     if(state.playerName !== data.playerName) {
       state.playerName = data.playerName;
       browserStorage.setPlayerName(data.playerName);
