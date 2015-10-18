@@ -26,7 +26,17 @@ export default class HostLobby extends React.Component {
 
   componentDidMount() {
     this.unsubscribe = HostStore.listen(this._onStoreChange.bind(this));
-    HostActions.createGame();
+    if(HostStore.getGameId()) {
+      let {state} = this;
+      state.gameId = HostStore.getGameId();
+      state.players = HostStore.getPlayers();
+      state.url = HostStore.getUrl();
+      state.deepLink = HostStore.getDeepLink();
+      console.log(this.state);
+      this.forceUpdate();
+    } else {
+      HostActions.createGame();
+    }
   }
 
   componentWillUnmount() {

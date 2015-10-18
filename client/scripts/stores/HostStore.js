@@ -59,6 +59,7 @@ const HostStore = Reflux.createStore({
     let {state} = this;
     let round = new Round(data);
     state.rounds.push(round);
+    state.gameOver = false;
   },
 
   onEndRound() {
@@ -107,7 +108,7 @@ const HostStore = Reflux.createStore({
     }
   },
 
-  endGame() {
+  onEndGame() {
     let {state} = this;
     state.rounds = [];
     state.currentRound = new Round();
