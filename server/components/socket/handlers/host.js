@@ -26,30 +26,30 @@ export default {
   listPlayers(data) {
     const {gameId} = this;
     const ev = events.fromServer.toPlayer.listPlayers;
-    emit(gameId, ev, data);
+    emit.call(this, gameId, ev, data);
   },
 
   startGame(data, callback = nop) {
     const {gameId} = this;
     const ev = events.fromServer.toPlayer.startGame;
-    fetchTrack(gameId, ev, callback);
+    fetchTrack.call(this, gameId, ev, callback);
   },
 
   newRound(data) {
     const {gameId} = this;
     const ev = events.fromServer.toPlayer.newRound;
-    emit(gameId, ev, data);
+    emit.call(this, gameId, ev, data);
   },
 
   answerReceived(data) {
-    const {playerId} = data;
+    const {playerId, points} = data;
     const ev = events.fromServer.toPlayer.answerReceived;
-    emit(playerId, ev, {points: 300});
+    emit.call(this, playerId, ev, {points: points});
   },
 
   endRound(data, callback = nop) {
     const {gameId} = this;
     const ev = events.fromServer.toPlayer.endRound;
-    fetchTrack(gameId, ev, callback);
+    fetchTrack.call(this, gameId, ev, callback);
   }
 };

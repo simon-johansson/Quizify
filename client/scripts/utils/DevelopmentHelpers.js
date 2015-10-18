@@ -34,11 +34,19 @@ window.removePlayer = () => {
 };
 
 window.giveRightAnswer = (id) => {
-  console.log('Right answer:', id);
+  HostActions.answer({
+    clientId: id,
+    answer: 'right',
+    timestamp: new Date()
+  });
 };
 
 window.giveWrongAnswer = (id) => {
-  console.log('Wrong answer:', id);
+  HostActions.answer({
+    clientId: id,
+    answer: 'wrong',
+    timestamp: new Date()
+  });
 };
 
 window.endRound = () => {

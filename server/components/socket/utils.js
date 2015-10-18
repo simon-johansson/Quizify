@@ -14,9 +14,10 @@ export const createErrorObject = (msg) => {
   return error;
 };
 
-export const emit = (id, ev, playload = {}) => {
+export const emit = function (id, ev, playload = {}) {
+  playload.clientId = this.id;
+  console.log(playload);
   const fn = () => {
-    console.log(ev, playload);
     io.to(id).emit(ev, playload);
   };
 
@@ -35,9 +36,9 @@ export const leaveRoom = function (id) {
   this.leave(id);
 };
 
-export const fetchTrack = (id, ev, callback) => {
+export const fetchTrack = function (id, ev, callback) {
   spotify.getTrack().then(track => {
-    emit(id, ev);
+    emit.call(this, id, ev);
     return track;
   }, err => {
     return createErrorObject(err.message);

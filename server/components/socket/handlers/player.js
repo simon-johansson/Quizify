@@ -19,7 +19,7 @@ export default {
       joinRoom.call(this, gameId);
       // console.log(`New player (${playerName}) joined game: ${gameId}`);
       payload = {playerName, playerId};
-      emit(gameId, ev, payload);
+      emit.call(this, gameId, ev, payload);
     } else {
       payload = createErrorObject(`Game ${gameId} does not exist`);
       // console.log(`Error: Player attempted to join room (${errorMessage}) that could not be found`);
@@ -30,7 +30,6 @@ export default {
   answer(data) {
     const {gameId} = this;
     const ev = events.fromServer.toHost.answer;
-    emit(gameId, ev, data);
-    console.log(data);
+    emit.call(this, gameId, ev, data);
   }
 };

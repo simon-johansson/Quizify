@@ -152,7 +152,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'express',
-      'open',
+      // 'open',
       // 'express-keepalive',
       // 'wait',
       'watch'

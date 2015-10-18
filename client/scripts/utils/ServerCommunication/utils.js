@@ -25,7 +25,7 @@ export const bindBouncingListeners = (socket, listeners, actions, ev) => {
 export const bindOutgoingListeners = (socket, listeners, actions, ev) => {
   listeners.forEach(listener => {
     actions[listener].listen(dataToServer => {
-      // console.log('emitting ', listener, data);
+      console.log('emitting: ', listener, dataToServer);
       socket.emit(ev[listener], dataToServer);
     });
   });

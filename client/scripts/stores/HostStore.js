@@ -44,9 +44,10 @@ const HostStore = Reflux.createStore({
   },
 
   onPlayerJoined(data) {
-    let {state} = this;
-    let {playerId, playerName} = data;
-    state.players.push({playerId, playerName});
+    const {state} = this;
+    const {playerId, playerName} = data;
+    const points = 0;
+    state.players.push({playerId, playerName, points});
     this.trigger(state, 'playerJoinedGame');
   },
 
@@ -85,8 +86,9 @@ const HostStore = Reflux.createStore({
 
   onAnswer(data) {
     let {state} = this;
+    data.points = state.currentRound.points;
     state.currentRound.answers.push(data);
-    this.trigger(state);
+    this.trigger(data, 'answer');
   },
 
   onDecrementPoints(data) {

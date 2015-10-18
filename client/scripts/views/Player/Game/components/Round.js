@@ -33,14 +33,16 @@ export default class Round extends React.Component {
     if (change !== 'latency') { // REMOVE !!!
       this.setState(state);
     }
+    if (change === 'answerReceived') {
+      console.log(state);
+    }
   }
 
   answer(data) {
     let id = this.state.playerId;
     Actions.answer({
       answer: data.target.textContent,
-      timestamp: new Date(),
-      playerId: id
+      timestamp: new Date()
     });
   }
 

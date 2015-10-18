@@ -56,6 +56,15 @@ export default class Game extends React.Component {
         alternatives: alternatives
       });
     }
+
+    if(message === 'answer') {
+      let correctAnswer = this.state.currentRound.track.artist;
+      console.log(state);
+      HostActions.answerReceived({
+        points: state.points,
+        playerId: state.clientId
+      });
+    }
   }
 
   _prepareNewRound() {
@@ -84,8 +93,9 @@ export default class Game extends React.Component {
     const {currentRound, countdown, players} = this.state;
 
     return (
-      <div className="Game-view">
+      <div styleName="Game">
         { this._developmentHelpers() }
+
 
         { currentRound.isShowing &&
           <Question
@@ -104,7 +114,11 @@ export default class Game extends React.Component {
           />
         }
 
-        <Leaderboard heading="Leaderboard" players={players} />
+        <Leaderboard
+          heading="Leaderboard"
+          players={players}
+          cachedPoints={currentRound.answers}
+        />
 
       </div>
     );

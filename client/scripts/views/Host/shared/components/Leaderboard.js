@@ -1,4 +1,5 @@
 
+import {result, find} from 'lodash';
 import React from 'react/addons';
 import { Link } from 'react-router';
 
@@ -12,11 +13,13 @@ export default class Leaderboard extends React.Component {
 
   static propTypes = {
     players: React.PropTypes.array.isRequired,
+    cachedPoints: React.PropTypes.array.isRequired,
     heading: React.PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     players: [],
+    cachedPoints: [],
     heading: '',
   }
 
@@ -45,14 +48,19 @@ export default class Leaderboard extends React.Component {
   render() {
     const gameHasStarted = false;
     const players = this.props.players.map((player, i) => {
-      const {playerId, playerName} = player;
+      const {playerId, playerName, points} = player;
+      // console.log(this.props.cachedPoints);
+      const cachedPoints = result(find(this.props.cachedPoints, {
+        clientId: playerId,
+      }), 'points');
+      // console.log(cachedPoints);
       return (
         <tr key={i}>
           <td>
             {player.playerName}
             { this._developmentHelpers(playerId) }
           </td>
-          <td>-</td>
+          <td>{cachedPoints ? `${cachedPoints} + ` : null}  {`${points}`}</td>
         </tr>
       );
     });
