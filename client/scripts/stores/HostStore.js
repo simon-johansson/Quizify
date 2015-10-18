@@ -9,7 +9,7 @@ import Round from 'utils/models/Round';
 const createDeepLink = (url, id) => `${url}/#/player/${id}`;
 
 const HostStore = Reflux.createStore({
-  listenables: [HostActions, PlayerActions, ClientActions],
+  listenables: [HostActions, ClientActions],
 
   setInitialState() {
     this.state = {
