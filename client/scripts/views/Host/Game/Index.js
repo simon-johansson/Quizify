@@ -7,8 +7,12 @@ import Question from './components/Question';
 import Countdown from './components/Countdown';
 import Leaderboard from '../shared/components/Leaderboard';
 
-let _ = require('lodash');
+let _ = require('lodash'); // Remove
 
+import styles from 'styles/views/Host/Game.scss';
+import CSSModules from 'react-css-modules';
+
+@CSSModules(styles)
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -93,11 +97,15 @@ export default class Game extends React.Component {
           />
         }
 
-        <Countdown
-          counter={countdown}
-          onFinished={this._startNewRound.bind(this)}
-        />
+        { !!countdown &&
+          <Countdown
+            counter={countdown}
+            onFinished={this._startNewRound.bind(this)}
+          />
+        }
+
         <Leaderboard heading="Leaderboard" players={players} />
+
       </div>
     );
   }

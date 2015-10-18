@@ -64,10 +64,10 @@ export default class Question extends React.Component {
   render() {
     let {track, points, showTrackDetails} = this.props;
     return (
-      <div>
+      <div styleName="Question">
 
         {  track && !showTrackDetails &&
-          <div styleName="question">
+          <div>
             <h2>Name the artist</h2>
             <h3>{points}</h3>
           </div>

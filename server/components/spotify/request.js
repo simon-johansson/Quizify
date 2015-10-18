@@ -23,7 +23,6 @@ let getPlaylistTracks = (playlist) => {
 
 let extractTracks = (data) => {
   return data.body.tracks.items.map( data => {
-    console.log(data);
     return new Track(data.track);
   });
 }
@@ -61,7 +60,7 @@ module.exports = {
       .then(connected => {
         isConnected = connected;
         if (config.env === 'production' || isConnected) {
-          getPlaylistTracks(playlist);
+          return getPlaylistTracks(playlist);
         } else {
           return require('../../../test/server/fixtures/getPlaylist_fixture');
         }

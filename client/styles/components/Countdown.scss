@@ -1,7 +1,7 @@
 @import 'bourbon';
 @import 'neat';
 
-.Question {
+.Countdown {
   @include span-columns(6);
-  background: black;
+  color: black;
 }

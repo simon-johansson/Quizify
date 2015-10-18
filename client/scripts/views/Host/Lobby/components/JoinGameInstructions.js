@@ -26,7 +26,7 @@ export default class JoinGameInstructions extends React.Component {
 
   render() {
     return (
-        <div styleName="styles">
+        <div styleName="JoinGameInstructions">
           <p>1. Use your mobile to join at:</p>
           <h2 styleName="url">{ this.props.url }</h2>
           <p>2. Enter the following Game ID:</p>

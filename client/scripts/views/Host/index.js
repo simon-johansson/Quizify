@@ -4,8 +4,10 @@ import { RouteHandler, Link } from 'react-router';
 import HostStore from 'stores/HostStore';
 import ServerCommunication from 'utils/ServerCommunication';
 
-import 'styles/views/Host/Host.scss';
+import styles from 'styles/views/Host/Host.scss';
+import CSSModules from 'react-css-modules';
 
+@CSSModules(styles)
 export default class Host extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -22,7 +24,7 @@ export default class Host extends React.Component {
 
   render() {
     return (
-      <div className='Host-view'>
+      <div styleName='Host'>
         <RouteHandler/>
       </div>
     );

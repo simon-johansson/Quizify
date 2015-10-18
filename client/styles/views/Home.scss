@@ -1,15 +1,14 @@
+@import 'bourbon';
+@import 'neat';
+@import '../variables';
 
 .styles {
+  @include span-columns(6);
+  @include shift(3);
   display: block;
-  background: white;
-  position: absolute;
-  top: 195px;
-  left: 395px;
-  width: 610px;
-  height: 410px;
-  margin: 0;
+  background: $sand;
+  padding-bottom: 20px;
   text-align: center;
-  box-shadow: 0px 0px 50px 20px rgba(0,0,0,0.9);
   h1 {
     color: #222222;
   }

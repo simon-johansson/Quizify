@@ -2,6 +2,10 @@
 import React from 'react/addons';
 import nop from 'nop';
 
+import styles from 'styles/components/Countdown.scss';
+import CSSModules from 'react-css-modules';
+
+@CSSModules(styles)
 export default class Countdown extends React.Component {
   static propTypes = {
     counter: React.PropTypes.number.isRequired,
@@ -70,7 +74,7 @@ export default class Countdown extends React.Component {
   render() {
     let {counter} = this.state;
     return (
-        <div className="Countdown">
+        <div styleName="Countdown">
           { !!counter &&
             <h1>{counter}</h1>
           }

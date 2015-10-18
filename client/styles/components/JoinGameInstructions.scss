@@ -1,15 +1,14 @@
 
-.styles {
+@import 'bourbon';
+@import 'neat';
+@import '../variables';
+
+.JoinGameInstructions {
+  @include span-columns(6);
   display: block;
   background: white;
-  position: absolute;
-  top: 190px;
-  left: 190px;
-  width: 420px;
-  height: 420px;
+  background: $sand;
   margin: 0;
-  text-align: center;
-  box-shadow: 0px 0px 50px 20px rgba(0,0,0,0.9);
   p {
     color: #222222;
     font-size: 20px;
@@ -28,8 +27,8 @@
   width: 180px;
   height: 180px;
   display: block;
-  position: absolute;
-  top: 210px;
-  left: 210px;
+  // position: absolute;
+  // top: 210px;
+  // left: 210px;
   margin: 0;
 }

@@ -6,6 +6,12 @@ var webpackConfig = require('./webpack.config.js');
 var secrets = require('./server/config/secrets');
 var buildPath = path.resolve(__dirname, 'client', 'build');
 
+var sassNeatPaths = require('node-neat').with([
+    path.resolve(__dirname, './client/styles')
+  ]).map( neatPath => {
+    return 'includePaths[]=' + neatPath;
+}).join('&');
+
 module.exports = merge(webpackConfig, {
 
   output: {
@@ -34,7 +40,7 @@ module.exports = merge(webpackConfig, {
       // loader: 'style-loader!css-loader!sass-loader?modules',
       // loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded',
       // loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader')
-      loader: 'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader?sourceMap',
+      loader: 'style-loader!css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader?sourceMap&' + sassNeatPaths,
     }, {
       test: /\.css$/,
       // loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
