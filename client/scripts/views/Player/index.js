@@ -29,7 +29,7 @@ export default class Player extends React.Component {
       gameId: props.params.gameId,
       players: [],
       playerName: PlayerStore.getPlayerName(),
-      isUsingMobile: PlayerStore.isUsingMobile(),
+      isUsingMobile: PlayerStore.getIsUsingMobile(),
     };
   }
 
