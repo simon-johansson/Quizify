@@ -74,6 +74,8 @@ const PlayerStore = Reflux.createStore({
     });
     state.round.points = null;
     state.round.correct = null;
+    state.round.hasEnded = false;
+    state.round.answer = false;
     this.trigger(this.state, 'newRound');
   },
 
