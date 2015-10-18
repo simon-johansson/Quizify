@@ -23,7 +23,7 @@ const HostStore = Reflux.createStore({
       rounds: [],
       currentRound: new Round(),
       roundsPlayed: 0,
-      totalNumberOfRounds: 3,
+      totalNumberOfRounds: 8,
       gameOver: false,
     };
 

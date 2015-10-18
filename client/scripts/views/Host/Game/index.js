@@ -7,7 +7,7 @@ import Question from './components/Question';
 import Countdown from './components/Countdown';
 import Leaderboard from '../shared/components/Leaderboard';
 
-let _ = require('lodash'); // Remove
+let _ = require('lodash'); // Remove !!
 
 import styles from 'styles/views/Host/Game.scss';
 import CSSModules from 'react-css-modules';
