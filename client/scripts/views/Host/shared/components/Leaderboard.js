@@ -1,5 +1,5 @@
 
-import {result, find, sortByOrder} from 'lodash';
+import {find, sortByOrder} from 'lodash';
 import React from 'react/addons';
 import { Link } from 'react-router';
 
@@ -53,19 +53,24 @@ export default class Leaderboard extends React.Component {
     const playerElements = playersSorted.map((player, i) => {
       const {clientId, playerName, points} = player;
       // console.log(this.props.cachedPoints);
-      const roundPoints = result(find(
-        currentRound.answers, {clientId}
-      ), 'points');
+      const roundAnswer = find(currentRound.answers, {clientId}) || {};
+      let style = 'neutral';
+      if (currentRound.hasEnded) {
+        if (roundAnswer.correct) {
+          style = 'correct';
+        } else {
+          style = 'hidden';
+        }
+      };
       return (
         <tr key={i}>
           <td>
             {player.playerName}
             { this._developmentHelpers(clientId) }
           </td>
-          <td>
-            { roundPoints && !currentRound.hasEnded ?
-              `${roundPoints} + ` :
-               null
+          <td styleName="points">
+            { roundAnswer.points &&
+              <span styleName={style}>{roundAnswer.points} + </span>
             }
             {`${points}`}
           </td>

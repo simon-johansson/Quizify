@@ -35,3 +35,17 @@
   }
 }
 
+.neutral {
+  color: $gray;
+}
+
+.hidden {
+  display: none;
+}
+.correct {
+  color: lime;
+}
+
+.points {
+  text-align: right;
+}

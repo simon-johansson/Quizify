@@ -69,8 +69,7 @@ const HostStore = Reflux.createStore({
       let {clientId} = answer;
       let player = find(state.players, {clientId});
       // console.log(answer);
-      if (answer.answer === state.currentRound.track.artist.name ||
-          answer.answer === 'right') {
+      if (answer.correct) {
         player.points += answer.points;
       }
     });
@@ -93,6 +92,8 @@ const HostStore = Reflux.createStore({
   onAnswer(data) {
     let {state} = this;
     data.points = state.currentRound.points;
+    data.correct = data.answer === state.currentRound.track.artist.name ||
+                   data.answer === 'right';
     state.currentRound.answers.push(data);
     this.trigger(data, 'answer');
   },
