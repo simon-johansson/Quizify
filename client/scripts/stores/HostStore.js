@@ -19,13 +19,8 @@ const HostStore = Reflux.createStore({
       players: [],
       countdown: 10,
       rounds: [],
-      currentRound: {
-        hasEnded: false,
-        isShowing: false,
-        track: {},
-        answers: []
-      },
-      roundsPlayed: 0,
+      currentRound: new Round(),
+      roundsPlayed: 0
     };
   },
 
@@ -81,11 +76,11 @@ const HostStore = Reflux.createStore({
     state.rounds.push(round);
   },
 
-  onChangeTrack() {
+  onPrepareNewRound() {
     let {state} = this;
     state.currentRound = state.rounds[state.rounds.length - 1];
     state.currentRound.isShowing = true;
-    this.trigger(state, 'changeTrack');
+    this.trigger(state, 'newRound');
   },
 
   onAnswer(data) {

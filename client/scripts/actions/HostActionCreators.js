@@ -16,7 +16,7 @@ const HostActionCreators = Reflux.createActions({
 
 HostActionCreators.listPlayers = Reflux.createAction();
 HostActionCreators.playerJoined = Reflux.createAction();
-HostActionCreators.changeTrack = Reflux.createAction();
+HostActionCreators.prepareNewRound = Reflux.createAction();
 HostActionCreators.newRound = Reflux.createAction();
 HostActionCreators.answer = Reflux.createAction();
 HostActionCreators.answerReceived = Reflux.createAction();

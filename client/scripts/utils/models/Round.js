@@ -5,6 +5,7 @@ export default class Round {
   constructor(track) {
     this.hasEnded = false;
     this.isShowing = false;
-    this.track = new Track(track);
+    this.track = track ? new Track(track) : {};
+    this.answers = [];
   }
 }

@@ -44,7 +44,7 @@ export default class Game extends React.Component {
       this.setState({countdown: 5});
     }
 
-    if(message === 'changeTrack') {
+    if(message === 'newRound') {
       let artist = this.state.currentRound.track.artist;
       let alternatives = _.map(
         _.slice(_.shuffle(artist.related), 0, 3),
@@ -58,11 +58,11 @@ export default class Game extends React.Component {
     }
   }
 
-  _startNewRound() {
+  _prepareNewRound() {
     const {roundsPlayed, totalNumberOfRounds} = this.state;
     if(roundsPlayed < totalNumberOfRounds) {
       this.setState({countdown: 0});
-      HostActions.changeTrack();
+      HostActions.prepareNewRound();
     } else {
       console.log('End game!');
     }
@@ -100,7 +100,7 @@ export default class Game extends React.Component {
         { !!countdown &&
           <Countdown
             counter={countdown}
-            onFinished={this._startNewRound.bind(this)}
+            onFinished={this._prepareNewRound.bind(this)}
           />
         }
 
