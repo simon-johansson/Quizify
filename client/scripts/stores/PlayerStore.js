@@ -6,6 +6,7 @@ const md = new MobileDetect(window.navigator.userAgent);
 import ClientActions from '../actions/ClientActionCreators';
 import PlayerActions from '../actions/PlayerActionCreators';
 import browserStorage from '../utils/BrowserStorage';
+import {augmentWithStateGetters} from './utils';
 
 const PlayerStore = Reflux.createStore({
   listenables: PlayerActions,
@@ -30,16 +31,10 @@ const PlayerStore = Reflux.createStore({
         hasEnded: null
       }
     };
+    augmentWithStateGetters(this);
   },
 
   getState(){ return this.state; },
-  getPlayerId(){ return this.state.playerId; },
-  getPlayerName() { return this.state.playerName; },
-  getGameId() { return this.state.gameId; },
-  getPlayers() { return this.state.players; },
-  hasJoinedGame() { return this.state.joindGame; },
-  getLatency() { return this.state.latency; },
-  isUsingMobile() { return this.state.isUsingMobile; },
 
   _onLatency(data) {
     const {state} = this;

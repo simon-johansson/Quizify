@@ -5,6 +5,7 @@ import ClientActions from 'actions/ClientActionCreators';
 import HostActions from 'actions/HostActionCreators';
 import PlayerActions from 'actions/PlayerActionCreators';
 import Round from 'utils/models/Round';
+import {augmentWithStateGetters} from './utils';
 
 const createDeepLink = (url, id) => `${url}/#/player/${id}`;
 
@@ -24,18 +25,11 @@ const HostStore = Reflux.createStore({
       totalNumberOfRounds: 3,
       gameOver: false,
     };
+
+    augmentWithStateGetters(this);
   },
 
   getState() { return this.state; },
-  getPlayers() { return this.state.players; },
-  getGameId() { return this.state.gameId; },
-  getSiteUrl() { return this.state.url; },
-  getGameDeepLink() { return this.state.deepLink; },
-  getTrack() { return this.state.track; },
-  getCountdown() { return this.state.countdown; },
-  getRounds() { return this.state.rounds; },
-  getCurrentRound() { return this.state.currentRound; },
-  getRoundsPlayed() { return this.state.roundsPlayed; },
 
   onCreateGameCompleted(data) {
     let {state} = this;
