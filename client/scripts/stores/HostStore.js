@@ -20,7 +20,9 @@ const HostStore = Reflux.createStore({
       countdown: 10,
       rounds: [],
       currentRound: new Round(),
-      roundsPlayed: 0
+      roundsPlayed: 0,
+      totalNumberOfRounds: 3,
+      gameOver: false,
     };
   },
 
@@ -67,7 +69,7 @@ const HostStore = Reflux.createStore({
   onEndRound() {
     let {state} = this;
     state.currentRound.hasEnded = true;
-    state.roundsPlayed += 1;
+    state.roundsPlayed += 1; 
     this.trigger(state);
   },
 
@@ -98,6 +100,15 @@ const HostStore = Reflux.createStore({
       state.currentRound.points = points;
       this.trigger(state);
     }
+  },
+
+  endGame() {
+    let {state} = this;
+    state.rounds = [];
+    state.currentRound = new Round();
+    state.roundsPlayed = 0;
+    state.gameOver = true;
+    this.trigger(state);
   },
 
   // Maybe a good idea to move all the errors out to

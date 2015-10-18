@@ -14,14 +14,19 @@ import CSSModules from 'react-css-modules';
 
 @CSSModules(styles)
 export default class Game extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       countdown: 5,
       currentRound: {},
       roundsPlayed: 0,
-      totalNumberOfRounds: 3,
-      players: HostStore.getPlayers()
+      totalNumberOfRounds: HostStore.getTotalNumberOfRounds(),
+      players: HostStore.getPlayers(),
+      gameOver: false
     };
   }
 
@@ -38,10 +43,15 @@ export default class Game extends React.Component {
     this.setState({
       currentRound: HostStore.getCurrentRound(),
       roundsPlayed: HostStore.getRoundsPlayed(),
+      gameOver: HostStore.getGameOver()
     });
 
     if(this.state.currentRound.hasEnded) {
       this.setState({countdown: 5});
+    }
+
+    if(this.state.gameOver) {
+      this.context.router.transitionTo('HostLobby');
     }
 
     if(message === 'newRound') {
@@ -73,7 +83,7 @@ export default class Game extends React.Component {
       this.setState({countdown: 0});
       HostActions.prepareNewRound();
     } else {
-      console.log('End game!');
+      HostActions.endGame();
     }
   }
 
