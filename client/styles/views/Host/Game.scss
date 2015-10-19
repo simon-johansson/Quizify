@@ -1,11 +1,14 @@
 
 @import 'bourbon';
 @import 'neat';
+@import '../../variables';
 
 .Game {
-  // @include outer-container;
+  @include outer-container;
 
   section {
-    @include span-columns(6);
+    @include span-columns(7);
+    background: $orange;
+    min-height: 400px;
   }
 }

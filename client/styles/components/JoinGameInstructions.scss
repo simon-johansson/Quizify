@@ -4,31 +4,42 @@
 @import '../variables';
 
 .JoinGameInstructions {
-  @include span-columns(6);
+  @include span-columns(4);
+  position: relative;
   display: block;
-  background: white;
   background: $sand;
-  margin: 0;
+  padding: 0;
+  color: $black;
+  // text-align: center;
+
+  header {
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
+    background: lightgray;
+  }
+
   p {
-    color: #222222;
     font-size: 20px;
+    margin-right: 10px;
   }
 }
 
-.url {
-  color: green;
-}
-
-.id {
-  color: green;
+.bold {
+  // text-align: center;
+  color: green !important;
+  font-weight: bold;
+  margin-left: 25px;
+  margin-top: 0;
+  font-size: 30px !important;
 }
 
 :global .react-qr {
-  width: 180px;
-  height: 180px;
+  width: 230px;
+  // height: 180px;
   display: block;
   // position: absolute;
-  // top: 210px;
-  // left: 210px;
-  margin: 0;
+  // bottom: 10px;
+  // right: 10px;
+  // margin: auto;
 }

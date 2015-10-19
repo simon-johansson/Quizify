@@ -5,10 +5,9 @@
 
 .Leaderboard {
   @include span-columns(4);
-  @include shift(2);
+  // @include shift(1);
   position: relative;
   display: block;
-  background: white;
   background: $sand;
   text-align: center;
   color: #222222;
@@ -28,6 +27,9 @@
     text-align: left;
     th {
       padding: 10px;
+      &:last-child {
+        text-align: right;
+      }
     }
     td {
       padding: 8px 10px;
@@ -42,10 +44,15 @@
 .hidden {
   display: none;
 }
+
 .correct {
   color: lime;
 }
 
 .points {
   text-align: right;
+}
+
+.position {
+  margin-right: 10px;
 }
