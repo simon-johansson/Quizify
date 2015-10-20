@@ -1,10 +1,45 @@
 @import 'bourbon';
 @import 'neat';
+@import '../../variables';
+@import '../../mixins';
 
 .Lobby {
   @include outer-container;
   display: block;
   position: relative;
+}
+
+.wrapper {
+  @include span-columns(3);
+  color: $black;
+
+  header {
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
+    background: lightgray;
+  }
+}
+
+.settings,
+.rules {
+  background: $sand;
+  min-height: 270px;
+}
+
+.settings {
+}
+
+.rules {
+  margin-top: 25px;
+  ul {
+    padding: 0 10px 10px;
+    font-size: 13px;
+    list-style: none;
+  }
+  li {
+    margin-bottom: 10px;
+  }
 }
 
 // .players {

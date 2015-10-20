@@ -1,0 +1,19 @@
+
+@import 'variables';
+
+@mixin module {
+  position: relative;
+  display: block;
+  background: $sand;
+  padding: 0;
+  color: $black;
+}
+
+@mixin module-header {
+  header {
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
+    background: lightgray;
+  }
+}

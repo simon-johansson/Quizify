@@ -75,9 +75,45 @@ export default class HostLobby extends React.Component {
     return (
       <div styleName="Lobby">
         { this._developmentHelpers() }
-        <JoinGameInstructions url={url} deepLink={deepLink} gameId={gameId} />
+        <JoinGameInstructions
+          url={url}
+          deepLink={deepLink}
+          gameId={gameId}
+        />
+
+        <div styleName="wrapper">
+          <section styleName="settings">
+            <header>
+              Settings
+            </header>
+          </section>
+
+          <section styleName="rules">
+            <header>
+              Rules
+            </header>
+            <ul>
+              <li>
+                The goal is to name the artist behind the song,
+                you will get 4 alternatives.
+              </li>
+              <li>
+                The faster you answer the more points you get.
+              </li>
+              <li>
+                Round ends when everyone has answered or
+                the song has ended.
+              </li>
+              <li>
+                The player with most points after 8 rounds is
+                the winner.
+              </li>
+            </ul>
+          </section>
+        </div>
+
         <Leaderboard
-          heading="Lobby"
+          heading="Players"
           players={players}
           gameHasStarted={gameHasStarted}
         />

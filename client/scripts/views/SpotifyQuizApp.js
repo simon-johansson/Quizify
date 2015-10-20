@@ -35,7 +35,7 @@ export default class SpotifyQuizApp extends React.Component {
 
   render() {
     return (
-      <div styleName='app'>
+      <div styleName='SpotifyQuizApp'>
         <RouteHandler/>
         <FeedbackButton/>
         {/* <AlbumCoverBackground /> */}

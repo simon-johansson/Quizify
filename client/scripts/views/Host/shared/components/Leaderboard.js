@@ -65,6 +65,7 @@ export default class Leaderboard extends React.Component {
       return (
         <tr key={i}>
           <td>
+            <span styleName="position">{i + 1}.</span>
             {player.playerName}
             { this._developmentHelpers(clientId) }
           </td>
@@ -79,7 +80,10 @@ export default class Leaderboard extends React.Component {
     });
     return (
       <div styleName="Leaderboard">
-        <header>{this.props.heading}</header>
+        <header>
+          {this.props.heading}
+          {}
+        </header>
         <table>
           <col width="140" />
           <col width="60" />

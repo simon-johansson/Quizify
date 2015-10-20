@@ -2,21 +2,15 @@
 @import 'bourbon';
 @import 'neat';
 @import '../variables';
+@import '../mixins';
 
 .JoinGameInstructions {
   @include span-columns(4);
-  position: relative;
-  display: block;
-  background: $sand;
-  padding: 0;
-  color: $black;
-  // text-align: center;
+  @include module;
+  @include module-header;
 
-  header {
-    text-align: left;
-    padding: 10px;
-    font-size: 15px;
-    background: lightgray;
+  section {
+    padding: 0 10px 10px;
   }
 
   p {
