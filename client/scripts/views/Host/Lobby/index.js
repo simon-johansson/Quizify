@@ -94,11 +94,12 @@ export default class HostLobby extends React.Component {
             </header>
             <ul>
               <li>
-                The goal is to name the artist behind the song,
+                The goal is to guess the artist behind the song,
                 you will get 4 alternatives.
               </li>
               <li>
-                The faster you answer the more points you get.
+                The faster you answer the more points you'll get but
+                you can't change your mind once you have answered.
               </li>
               <li>
                 Round ends when everyone has answered or
