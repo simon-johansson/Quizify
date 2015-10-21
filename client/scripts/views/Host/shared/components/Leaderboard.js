@@ -73,7 +73,7 @@ export default class Leaderboard extends React.Component {
             { roundAnswer.points &&
               <span styleName={style}>{roundAnswer.points} + </span>
             }
-            {`${points}`}
+            {`${points ? points : '-'}`}
           </td>
         </tr>
       );
