@@ -5,14 +5,14 @@
 @import '../mixins';
 
 .Leaderboard {
-  @include span-columns(5);
+  @include span-columns(4);
   // @include shift(1);
   position: relative;
   display: block;
   background: $sand;
   text-align: center;
   color: #222222;
-  min-height: 400px;
+  height: 100%;
   p {
     color: #222222;
     font-size: 20px;

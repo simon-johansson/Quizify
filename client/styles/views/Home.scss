@@ -1,19 +1,18 @@
 @import 'bourbon';
 @import 'neat';
 @import '../variables';
+@import '../mixins';
 
-.styles {
+.Home {
   @include span-columns(6);
   @include shift(3);
-  display: block;
-  background: $sand;
+  @include mq-module;
+
+  height: 600px;
   padding-bottom: 20px;
   text-align: center;
-  h1 {
-    color: #222222;
-  }
+
   p {
-    color: #222222;
     font-size: 20px;
   }
 }

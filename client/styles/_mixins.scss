@@ -1,7 +1,16 @@
 
+@import 'bourbon';
+@import 'neat';
 @import 'variables';
 
-@mixin module {
+@mixin mq-container {
+  @include outer-container;
+  display: block;
+  position: relative;
+  height: 600px;
+}
+
+@mixin mq-module {
   position: relative;
   display: block;
   background: $sand;
@@ -9,7 +18,7 @@
   color: $black;
 }
 
-@mixin module-header {
+@mixin mq-module-header {
   header {
     text-align: left;
     padding: 10px;

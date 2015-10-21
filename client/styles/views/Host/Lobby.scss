@@ -1,44 +1,46 @@
+
 @import 'bourbon';
 @import 'neat';
 @import '../../variables';
 @import '../../mixins';
 
 .Lobby {
-  @include outer-container;
-  display: block;
-  position: relative;
+  @include mq-container;
 }
 
 .wrapper {
-  @include span-columns(3);
-  color: $black;
+  @include span-columns(4);
+  @include display(flex);
+  @include flex-direction(column);
+  @include mq-module-header;
 
-  header {
-    text-align: left;
-    padding: 10px;
-    font-size: 15px;
-    background: lightgray;
-  }
+  height: 100%;
+  position: relative;
 }
 
 .settings,
 .rules {
-  background: $sand;
-  min-height: 270px;
+  @include mq-module;
 }
 
 .settings {
+  @include flex(1);
 }
 
 .rules {
+  @include flex(1);
   margin-top: 25px;
+
   ul {
+    @include display(flex);
+    @include flex-direction(column);
+    @include justify-content(space-between);
+
+    height: 230px;
+    position: relative;
     padding: 0 10px 10px;
-    font-size: 13px;
+    font-size: 15px;
     list-style: none;
-  }
-  li {
-    margin-bottom: 10px;
   }
 }
 

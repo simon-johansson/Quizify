@@ -2,13 +2,14 @@
 @import 'bourbon';
 @import 'neat';
 @import '../../variables';
+@import '../../mixins';
 
 .Game {
-  @include outer-container;
+  @include mq-container;
 
   section {
-    @include span-columns(7);
-    background: $orange;
-    min-height: 400px;
+    @include span-columns(8);
+    @include mq-module;
+    height: 100%;
   }
 }
