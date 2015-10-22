@@ -7,6 +7,7 @@ export default class Round {
     this.isShowing = false;
     this.track = track ? new Track(track) : {};
     this.answers = [];
-    this.points = 10;
+    this.points = 20;
+    this.isPlaying = false;
   }
 }
