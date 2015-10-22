@@ -99,6 +99,15 @@ const HostStore = Reflux.createStore({
     this.trigger(data, 'answer');
   },
 
+  onTrackStarted(data) {
+    let {state} = this;
+    setInterval(() => {
+      let points = state.currentRound.points - 0.1;
+      state.currentRound.points = points.toFixed(1);
+      this.trigger(state);
+    }, 100);
+  },
+
   onDecrementPoints(data) {
     let {state} = this;
     const points = 30 - Math.floor(data / 1000);

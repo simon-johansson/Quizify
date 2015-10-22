@@ -11,6 +11,7 @@ export default class Question extends React.Component {
     track: React.PropTypes.object.isRequired,
     points: React.PropTypes.number.isRequired,
     showTrackDetails: React.PropTypes.bool.isRequired,
+    onTrackStarted: React.PropTypes.func.isRequired,
     onTrackEnded: React.PropTypes.func.isRequired,
     onTrackPlaying: React.PropTypes.func.isRequired,
   }
@@ -20,8 +21,9 @@ export default class Question extends React.Component {
       title: '',
       images: []
     },
-    points: 3000,
+    points: 30,
     showTrackDetails: false,
+    onTrackStarted: nop,
     onTrackEnded: nop,
     onTrackPlaying: nop,
   }
@@ -47,6 +49,7 @@ export default class Question extends React.Component {
 
   _playTrack(track) {
     track.play( {
+      onStart: this.props.onTrackStarted,
       onEnd: this.props.onTrackEnded,
       onTick: this.props.onTrackPlaying
     });

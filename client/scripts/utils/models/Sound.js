@@ -37,9 +37,10 @@ export default class Sound {
     this.sound.play({
       volume: 100,
       onfinish: options.onEnd,
-      whileplaying: function () {
-        options.onTick(this.position);
-      }
+      onplay: options.onStart
+      // whileplaying: function () {
+      //   options.onTick(this.position);
+      // }
     });
   }
 

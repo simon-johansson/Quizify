@@ -20,6 +20,7 @@ HostActionCreators.prepareNewRound = Reflux.createAction();
 HostActionCreators.newRound = Reflux.createAction();
 HostActionCreators.answer = Reflux.createAction();
 HostActionCreators.answerReceived = Reflux.createAction();
+HostActionCreators.trackStarted = Reflux.createAction();
 HostActionCreators.decrementPoints = Reflux.createAction();
 HostActionCreators.endGame = Reflux.createAction();
 

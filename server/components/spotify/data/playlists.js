@@ -43,5 +43,8 @@ let playlists = [
 module.exports = {
   top100Tracks() {
     return playlists[2];
+  },
+  top100RockTracks() {
+    return playlists[4];
   }
 };

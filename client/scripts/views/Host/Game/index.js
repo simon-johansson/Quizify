@@ -116,6 +116,7 @@ export default class Game extends React.Component {
               track={currentRound.track}
               points={currentRound.points}
               showTrackDetails={currentRound.hasEnded}
+              onTrackStarted={HostActions.trackStarted}
               onTrackEnded={HostActions.endRound}
               onTrackPlaying={HostActions.decrementPoints}
             />
