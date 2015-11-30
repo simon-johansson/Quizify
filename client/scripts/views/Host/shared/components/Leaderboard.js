@@ -49,7 +49,7 @@ export default class Leaderboard extends React.Component {
 
   render() {
     const {players, currentRound, gameHasStarted} = this.props;
-    const playersSorted = sortByOrder(players, ['points'], ['desc']);
+    const playersSorted = players.sort((a, b) => b.points - a.points);
     const playerElements = playersSorted.map((player, i) => {
       const {clientId, playerName, points} = player;
       // console.log(this.props.cachedPoints);

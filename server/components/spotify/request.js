@@ -9,7 +9,7 @@ import playlists from './data/playlists';
 import Track from './Track';
 import checkConnectivity from '../checkConnectivity';
 
-const playlist = playlists.top100RockTracks();
+const playlist = playlists.top100Tracks();
 const options = {
   country: 'SE',
   limit: 100,

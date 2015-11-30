@@ -4,7 +4,6 @@ import Reflux from 'reflux';
 
 import ClientActions from 'actions/ClientActionCreators';
 import HostActions from 'actions/HostActionCreators';
-import PlayerActions from 'actions/PlayerActionCreators';
 import Round from 'utils/models/Round';
 import {augmentWithStateGetters} from './utils';
 
@@ -64,17 +63,21 @@ const HostStore = Reflux.createStore({
 
   onEndRound() {
     let {state} = this;
-    state.currentRound.hasEnded = true;
-    state.roundsPlayed += 1;
-    state.currentRound.answers.forEach(answer => {
-      let {clientId} = answer;
-      let player = find(state.players, {clientId});
-      // console.log(answer);
-      if (answer.correct) {
-        player.points += answer.points;
-      }
-    });
-    this.trigger(state);
+    if (!state.currentRound.hasEnded) {
+      state.currentRound.hasEnded = true;
+      state.currentRound.isPlaying = false;
+      state.roundsPlayed += 1;
+      state.currentRound.answers.forEach(answer => {
+        let {clientId} = answer;
+        let player = find(state.players, {clientId});
+        // console.log(answer);
+        if (answer.correct) {
+          let points = parseFloat(player.points) + parseFloat(answer.points);
+          player.points = points.toFixed(1);
+        }
+      });
+      this.trigger(state);
+    }
   },
 
   onEndRoundCompleted(data) {
@@ -99,22 +102,45 @@ const HostStore = Reflux.createStore({
     this.trigger(data, 'answer');
   },
 
-  onTrackStarted(data) {
+  // onTrackStarted(data) {
+  //   let {state} = this;
+  //   clearInterval(state.currentRound.interval);
+  //   state.currentRound.interval = setInterval(() => {
+  //     if (state.currentRound.points > 0) {
+  //       let points = state.currentRound.points - 0.1;
+  //       state.currentRound.points = points.toFixed(1);
+  //       this.trigger(state);
+  //     } else {
+  //       clearInterval(state.currentRound.interval);
+  //     }
+  //   }, 100);
+  // },
+
+  // onDecrementPoints(data) {
+  //   let {state} = this;
+  //   const points = 30 - Math.floor(data / 1000);
+  //   if (state.currentRound.points !== points) {
+  //     state.currentRound.points = points;
+  //     this.trigger(state);
+  //   }
+  // },
+
+  onTrackStarted() {
     let {state} = this;
-    setInterval(() => {
-      let points = state.currentRound.points - 0.1;
-      state.currentRound.points = points.toFixed(1);
-      this.trigger(state);
-    }, 100);
+    state.currentRound.isPlaying = true;
+    this.trigger(state);
   },
 
-  onDecrementPoints(data) {
+  onDecrementPoints() {
     let {state} = this;
-    const points = 30 - Math.floor(data / 1000);
-    if (state.currentRound.points !== points) {
-      state.currentRound.points = points;
-      this.trigger(state);
+    if (state.currentRound.points > 0) {
+      state.currentRound.points -= 0.1;
+      state.currentRound.points = state.currentRound.points.toFixed(1);
     }
+    else {
+      state.currentRound.points = 0;
+    }
+    this.trigger(state);
   },
 
   onEndGame() {

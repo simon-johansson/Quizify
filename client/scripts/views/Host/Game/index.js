@@ -4,6 +4,7 @@ import React from 'react/addons';
 import HostActions from 'actions/HostActionCreators';
 import HostStore from 'stores/HostStore';
 import Question from './components/Question';
+import Points from './components/Points';
 import Countdown from './components/Countdown';
 import Leaderboard from '../shared/components/Leaderboard';
 
@@ -106,6 +107,10 @@ export default class Game extends React.Component {
     const {currentRound, countdown, players} = this.state;
     const gameHasStarted = true;
 
+    if (currentRound.points <= 0) {
+      HostActions.endRound();
+    }
+
     return (
       <div styleName="Game">
         { this._developmentHelpers() }
@@ -114,13 +119,17 @@ export default class Game extends React.Component {
           { currentRound.isShowing &&
             <Question
               track={currentRound.track}
-              points={currentRound.points}
               showTrackDetails={currentRound.hasEnded}
               onTrackStarted={HostActions.trackStarted}
               onTrackEnded={HostActions.endRound}
               onTrackPlaying={HostActions.decrementPoints}
             />
           }
+
+          <Points
+            current={currentRound.points}
+            shouldDecrement={currentRound.isPlaying}
+          />
 
           { !!countdown &&
             <Countdown

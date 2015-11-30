@@ -39,12 +39,15 @@ export default class Question extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {track} = this.props;
+
     if(nextProps.track.meta.id !== track.meta.id) {
       this._playTrack(nextProps.track);
     }
+
     if(nextProps.showTrackDetails) {
       track.fadeOut();
     }
+
   }
 
   _playTrack(track) {
@@ -65,14 +68,14 @@ export default class Question extends React.Component {
   }
 
   render() {
-    let {track, points, showTrackDetails} = this.props;
+    let {track, showTrackDetails} = this.props;
+
     return (
       <div styleName="Question">
 
         {  track && !showTrackDetails &&
           <div>
             <h2>Name the artist</h2>
-            <h3>{points}</h3>
           </div>
         }
 
