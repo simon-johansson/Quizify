@@ -1,0 +1,444 @@
+{
+    "body": {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify/playlist/4hOKQuZbraPDIfaGbM3lKI"
+        },
+        "followers": {
+            "href": null,
+            "total": 3939828
+        },
+        "href": "https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI",
+        "id": "4hOKQuZbraPDIfaGbM3lKI",
+        "images": [
+            {
+                "height": 300,
+                "url": "https://i.scdn.co/image/d5905c3899a14a48bd67d4ccfdea5ec14de74947",
+                "width": 300
+            }
+        ],
+        "name": "Top 100 tracks currently on Spotify",
+        "owner": {
+            "external_urls": {
+                "spotify": "http://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+        },
+        "public": true,
+        "snapshot_id": "/6Uhc7B92gt6M8yYrylz0c2l1VN7C78h5Ri2r7g4zDiFQfSa7LJiHEC7VLz8N+Qr",
+        "tracks": {
+            "href": "https://api.spotify.com/v1/users/spotify/playlists/4hOKQuZbraPDIfaGbM3lKI/tracks?offset=0&limit=100",
+            "items": [
+                {
+                    "added_at": "2015-10-15T06:13:02Z",
+                    "added_by": {
+                        "external_urls": {
+                            "spotify": "http://open.spotify.com/user/spotify"
+                        },
+                        "href": "https://api.spotify.com/v1/users/spotify",
+                        "id": "spotify",
+                        "type": "user",
+                        "uri": "spotify:user:spotify"
+                    },
+                    "is_local": false,
+                    "track": {
+                        "album": {
+                            "album_type": "single",
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/album/2hL8vuRtlo75Wr9PyZI5Jb"
+                            },
+                            "href": "https://api.spotify.com/v1/albums/2hL8vuRtlo75Wr9PyZI5Jb",
+                            "id": "2hL8vuRtlo75Wr9PyZI5Jb",
+                            "images": [
+                                {
+                                    "height": 640,
+                                    "url": "images/d19999236e1e8d7eb95bf60f13c3c62cd8cba2dc.jpeg",
+                                    "width": 640
+                                },
+                                {
+                                    "height": 300,
+                                    "url": "images/6f77e481eb4314bfe0195e0ffbf067cb9bcd24f0.jpeg",
+                                    "width": 300
+                                },
+                                {
+                                    "height": 64,
+                                    "url": "images/f823305d411084e58f989b2e52cc1a987f0a24f6.jpeg",
+                                    "width": 64
+                                }
+                            ],
+                            "name": "What Do You Mean?",
+                            "type": "album",
+                            "uri": "spotify:album:2hL8vuRtlo75Wr9PyZI5Jb"
+                        },
+                        "artists": [
+                            {
+                                "external_urls": {
+                                    "spotify": "https://open.spotify.com/artist/1uNFoZAHBGtllmzznpCI3s"
+                                },
+                                "href": "https://api.spotify.com/v1/artists/1uNFoZAHBGtllmzznpCI3s",
+                                "id": "1uNFoZAHBGtllmzznpCI3s",
+                                "name": "Justin Bieber",
+                                "type": "artist",
+                                "uri": "spotify:artist:1uNFoZAHBGtllmzznpCI3s"
+                            }
+                        ],
+                        "disc_number": 1,
+                        "duration_ms": 207546,
+                        "explicit": false,
+                        "external_ids": {
+                            "isrc": "USUM71511919"
+                        },
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/track/1ds2QsfhAAfRiaFMGDzrdb"
+                        },
+                        "href": "https://api.spotify.com/v1/tracks/1ds2QsfhAAfRiaFMGDzrdb",
+                        "id": "1ds2QsfhAAfRiaFMGDzrdb",
+                        "name": "What Do You Mean?",
+                        "popularity": 100,
+                        "preview_url": "audio/445532a845d7ab03452276ad76c32b80d2addea6.mp3",
+                        "track_number": 1,
+                        "type": "track",
+                        "uri": "spotify:track:1ds2QsfhAAfRiaFMGDzrdb"
+                    }
+                },
+                {
+                    "added_at": "2015-10-15T06:13:02Z",
+                    "added_by": {
+                        "external_urls": {
+                            "spotify": "http://open.spotify.com/user/spotify"
+                        },
+                        "href": "https://api.spotify.com/v1/users/spotify",
+                        "id": "spotify",
+                        "type": "user",
+                        "uri": "spotify:user:spotify"
+                    },
+                    "is_local": false,
+                    "track": {
+                        "album": {
+                            "album_type": "album",
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/album/28ZKQMoNBB0etKXZ97G2SN"
+                            },
+                            "href": "https://api.spotify.com/v1/albums/28ZKQMoNBB0etKXZ97G2SN",
+                            "id": "28ZKQMoNBB0etKXZ97G2SN",
+                            "images": [
+                                {
+                                    "height": 640,
+                                    "url": "images/51a60fbb7daba6e6fbc0d3b47e34017dce6f3921.jpeg",
+                                    "width": 640
+                                },
+                                {
+                                    "height": 300,
+                                    "url": "images/fef8458af72a9816f520a5c73e311db94b2498d9.jpeg",
+                                    "width": 300
+                                },
+                                {
+                                    "height": 64,
+                                    "url": "images/3557e0d4bdd8a01de2ab6da45dd6e470878e840d.jpeg",
+                                    "width": 64
+                                }
+                            ],
+                            "name": "Beauty Behind The Madness",
+                            "type": "album",
+                            "uri": "spotify:album:28ZKQMoNBB0etKXZ97G2SN"
+                        },
+                        "artists": [
+                            {
+                                "external_urls": {
+                                    "spotify": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"
+                                },
+                                "href": "https://api.spotify.com/v1/artists/1Xyo4u8uXC1ZmMpatF05PJ",
+                                "id": "1Xyo4u8uXC1ZmMpatF05PJ",
+                                "name": "The Weeknd",
+                                "type": "artist",
+                                "uri": "spotify:artist:1Xyo4u8uXC1ZmMpatF05PJ"
+                            }
+                        ],
+                        "disc_number": 1,
+                        "duration_ms": 213520,
+                        "explicit": false,
+                        "external_ids": {
+                            "isrc": "USUG11500741"
+                        },
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/track/6RsWqX8zABZLhZydXxEFOm"
+                        },
+                        "href": "https://api.spotify.com/v1/tracks/6RsWqX8zABZLhZydXxEFOm",
+                        "id": "6RsWqX8zABZLhZydXxEFOm",
+                        "name": "Can't Feel My Face",
+                        "popularity": 99,
+                        "preview_url": "audio/fcadb74cbaf121aedf10c4bb5780bf601154b400.mp3",
+                        "track_number": 7,
+                        "type": "track",
+                        "uri": "spotify:track:6RsWqX8zABZLhZydXxEFOm"
+                    }
+                },
+                {
+                    "added_at": "2015-10-15T06:13:02Z",
+                    "added_by": {
+                        "external_urls": {
+                            "spotify": "http://open.spotify.com/user/spotify"
+                        },
+                        "href": "https://api.spotify.com/v1/users/spotify",
+                        "id": "spotify",
+                        "type": "user",
+                        "uri": "spotify:user:spotify"
+                    },
+                    "is_local": false,
+                    "track": {
+                        "album": {
+                            "album_type": "single",
+                            "available_markets": [
+                                "CA",
+                                "MX",
+                                "US"
+                            ],
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/album/19YQ10twgD5djBaBDUpH7o"
+                            },
+                            "href": "https://api.spotify.com/v1/albums/19YQ10twgD5djBaBDUpH7o",
+                            "id": "19YQ10twgD5djBaBDUpH7o",
+                            "images": [
+                                {
+                                    "height": 640,
+                                    "url": "images/0cf194beeb8118bcb0d492e1fdd010798dbc3a20.jpeg",
+                                    "width": 640
+                                },
+                                {
+                                    "height": 300,
+                                    "url": "images/aa533378f184bcb1e60d5f52aa88e44ba67be0e1.jpeg",
+                                    "width": 300
+                                },
+                                {
+                                    "height": 64,
+                                    "url": "images/27c80c44fade7e8b0dc2ed1fba5d8bccba01acdb.jpeg",
+                                    "width": 64
+                                }
+                            ],
+                            "name": "Hotline Bling",
+                            "type": "album",
+                            "uri": "spotify:album:19YQ10twgD5djBaBDUpH7o"
+                        },
+                        "artists": [
+                            {
+                                "external_urls": {
+                                    "spotify": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4"
+                                },
+                                "href": "https://api.spotify.com/v1/artists/3TVXtAsR1Inumwj472S9r4",
+                                "id": "3TVXtAsR1Inumwj472S9r4",
+                                "name": "Drake",
+                                "type": "artist",
+                                "uri": "spotify:artist:3TVXtAsR1Inumwj472S9r4"
+                            }
+                        ],
+                        "available_markets": [
+                            "CA",
+                            "MX",
+                            "US"
+                        ],
+                        "disc_number": 1,
+                        "duration_ms": 267023,
+                        "explicit": false,
+                        "external_ids": {
+                            "isrc": "USCM51500238"
+                        },
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/track/6nmz4imkDcmtwMjocAzFSx"
+                        },
+                        "href": "https://api.spotify.com/v1/tracks/6nmz4imkDcmtwMjocAzFSx",
+                        "id": "6nmz4imkDcmtwMjocAzFSx",
+                        "name": "Hotline Bling",
+                        "popularity": 94,
+                        "preview_url": "audio/cdaf6b912eff64eef60bd69723e4f5182547cd6a.mp3",
+                        "track_number": 1,
+                        "type": "track",
+                        "uri": "spotify:track:6nmz4imkDcmtwMjocAzFSx"
+                    }
+                },
+                {
+                    "added_at": "2015-10-15T06:13:02Z",
+                    "added_by": {
+                        "external_urls": {
+                            "spotify": "http://open.spotify.com/user/spotify"
+                        },
+                        "href": "https://api.spotify.com/v1/users/spotify",
+                        "id": "spotify",
+                        "type": "user",
+                        "uri": "spotify:user:spotify"
+                    },
+                    "is_local": false,
+                    "track": {
+                        "album": {
+                            "album_type": "album",
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/album/28ZKQMoNBB0etKXZ97G2SN"
+                            },
+                            "href": "https://api.spotify.com/v1/albums/28ZKQMoNBB0etKXZ97G2SN",
+                            "id": "28ZKQMoNBB0etKXZ97G2SN",
+                            "images": [
+                                {
+                                    "height": 640,
+                                    "url": "images/51a60fbb7daba6e6fbc0d3b47e34017dce6f3921.jpeg",
+                                    "width": 640
+                                },
+                                {
+                                    "height": 300,
+                                    "url": "images/fef8458af72a9816f520a5c73e311db94b2498d9.jpeg",
+                                    "width": 300
+                                },
+                                {
+                                    "height": 64,
+                                    "url": "images/3557e0d4bdd8a01de2ab6da45dd6e470878e840d.jpeg",
+                                    "width": 64
+                                }
+                            ],
+                            "name": "Beauty Behind The Madness",
+                            "type": "album",
+                            "uri": "spotify:album:28ZKQMoNBB0etKXZ97G2SN"
+                        },
+                        "artists": [
+                            {
+                                "external_urls": {
+                                    "spotify": "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"
+                                },
+                                "href": "https://api.spotify.com/v1/artists/1Xyo4u8uXC1ZmMpatF05PJ",
+                                "id": "1Xyo4u8uXC1ZmMpatF05PJ",
+                                "name": "The Weeknd",
+                                "type": "artist",
+                                "uri": "spotify:artist:1Xyo4u8uXC1ZmMpatF05PJ"
+                            }
+                        ],
+                        "disc_number": 1,
+                        "duration_ms": 242253,
+                        "explicit": true,
+                        "external_ids": {
+                            "isrc": "USUG11500737"
+                        },
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/track/25khomWgBVamSdKw7hzm3l"
+                        },
+                        "href": "https://api.spotify.com/v1/tracks/25khomWgBVamSdKw7hzm3l",
+                        "id": "25khomWgBVamSdKw7hzm3l",
+                        "name": "The Hills",
+                        "popularity": 98,
+                        "preview_url": "audio/e980728b67c386b945147cad74151c72080814a3.mp3",
+                        "track_number": 5,
+                        "type": "track",
+                        "uri": "spotify:track:25khomWgBVamSdKw7hzm3l"
+                    }
+                },
+                {
+                    "added_at": "2015-10-15T06:13:02Z",
+                    "added_by": {
+                        "external_urls": {
+                            "spotify": "http://open.spotify.com/user/spotify"
+                        },
+                        "href": "https://api.spotify.com/v1/users/spotify",
+                        "id": "spotify",
+                        "type": "user",
+                        "uri": "spotify:user:spotify"
+                    },
+                    "is_local": false,
+                    "track": {
+                        "album": {
+                            "album_type": "album",
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/album/4AUTMNSP56xicSznzKgzjB"
+                            },
+                            "href": "https://api.spotify.com/v1/albums/4AUTMNSP56xicSznzKgzjB",
+                            "id": "4AUTMNSP56xicSznzKgzjB",
+                            "images": [
+                                {
+                                    "height": 640,
+                                    "url": "images/e27d27f5157b340743ae849abd33dc75f1b107f6.jpeg",
+                                    "width": 640
+                                },
+                                {
+                                    "height": 300,
+                                    "url": "images/22ed044ae4f2ce8687b37755efb05f7f701e0168.jpeg",
+                                    "width": 300
+                                },
+                                {
+                                    "height": 64,
+                                    "url": "images/0a2d63ec2de301dfa812d3fa93da1fcc88fbb666.jpeg",
+                                    "width": 64
+                                }
+                            ],
+                            "name": "What Dreams Are Made Of",
+                            "type": "album",
+                            "uri": "spotify:album:4AUTMNSP56xicSznzKgzjB"
+                        },
+                        "artists": [
+                            {
+                                "external_urls": {
+                                    "spotify": "https://open.spotify.com/artist/4TH4BHy0LdBi3dpBW4P2UX"
+                                },
+                                "href": "https://api.spotify.com/v1/artists/4TH4BHy0LdBi3dpBW4P2UX",
+                                "id": "4TH4BHy0LdBi3dpBW4P2UX",
+                                "name": "R. City",
+                                "type": "artist",
+                                "uri": "spotify:artist:4TH4BHy0LdBi3dpBW4P2UX"
+                            },
+                            {
+                                "external_urls": {
+                                    "spotify": "https://open.spotify.com/artist/4bYPcJP5jwMhSivRcqie2n"
+                                },
+                                "href": "https://api.spotify.com/v1/artists/4bYPcJP5jwMhSivRcqie2n",
+                                "id": "4bYPcJP5jwMhSivRcqie2n",
+                                "name": "Adam Levine",
+                                "type": "artist",
+                                "uri": "spotify:artist:4bYPcJP5jwMhSivRcqie2n"
+                            }
+                        ],
+                        "disc_number": 1,
+                        "duration_ms": 227480,
+                        "explicit": false,
+                        "external_ids": {
+                            "isrc": "USRC11501369"
+                        },
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/track/7x5xYW5W42OGPAdHUyyguy"
+                        },
+                        "href": "https://api.spotify.com/v1/tracks/7x5xYW5W42OGPAdHUyyguy",
+                        "id": "7x5xYW5W42OGPAdHUyyguy",
+                        "name": "Locked Away",
+                        "popularity": 57,
+                        "preview_url": "audio/da44c955fe59ba5983be2d92071a22c9efdde1b5.mp3",
+                        "track_number": 2,
+                        "type": "track",
+                        "uri": "spotify:track:7x5xYW5W42OGPAdHUyyguy"
+                    }
+                }
+            ],
+            "limit": 100,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 100
+        },
+        "type": "playlist",
+        "uri": "spotify:user:spotify:playlist:4hOKQuZbraPDIfaGbM3lKI"
+    },
+    "headers": {
+        "server": "nginx",
+        "date": "Thu, 15 Oct 2015 16:14:36 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "close",
+        "cache-control": "public, max-age=0",
+        "etag": "\"AAAHHALzZMT9Lrcru4OsK7sjGjd0F6S3\"",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, OPTIONS, PUT, DELETE",
+        "access-control-allow-credentials": "true",
+        "access-control-max-age": "604800",
+        "access-control-allow-headers": "Accept, Authorization, Origin, Content-Type",
+        "content-encoding": "gzip",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31536000;"
+    },
+    "statusCode": 200
+}

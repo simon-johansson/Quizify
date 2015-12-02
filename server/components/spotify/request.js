@@ -19,18 +19,18 @@ let isConnected = true;
 
 let getPlaylistTracks = (playlist) => {
   return client.getPlaylist(playlist.owner, playlist.id, options);
-}
+};
 
 let extractTracks = (data) => {
   return data.body.tracks.items.map( data => {
     return new Track(data.track);
   });
-}
+};
 
 let getRandomTrack = (data) => {
   let tracks = extractTracks(data);
   return _.sample(tracks);
-}
+};
 
 let getRelatedArtists = (track) => {
   if (isConnected) {
@@ -45,14 +45,14 @@ let getRelatedArtists = (track) => {
   }
 };
 
-let extractCovers = data => {
-  return data.body.tracks.items.map(e => {
-    return {
-      id: e.track.id,
-      url: e.track.album.images[1].url
-    };
-  });
-};
+// let extractCovers = data => {
+//   return data.body.tracks.items.map(e => {
+//     return {
+//       id: e.track.id,
+//       url: e.track.album.images[1].url
+//     };
+//   });
+// };
 
 module.exports = {
   getTrack(clb) {
@@ -62,7 +62,7 @@ module.exports = {
         if (config.env === 'production' || isConnected) {
           return getPlaylistTracks(playlist);
         } else {
-          return require('../../../test/server/fixtures/getPlaylist_fixture');
+          return require('./data/offline_fixture');
         }
       })
       // .then(function (data) {
@@ -78,6 +78,6 @@ module.exports = {
   },
   getCovers(clb) {
     return getPlaylistTracks(playlist)
-      .then(extractCovers)
+      .then(extractCovers);
   }
 };

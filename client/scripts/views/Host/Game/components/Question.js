@@ -19,7 +19,7 @@ export default class Question extends React.Component {
   static defaultProps = {
     track: {
       title: '',
-      images: []
+      image: {}
     },
     points: 30,
     showTrackDetails: false,
@@ -58,11 +58,11 @@ export default class Question extends React.Component {
     });
   }
 
-  _trackDetails(title, images) {
+  _trackDetails(title, image) {
     return (
       <div>
         <h1>{title}</h1>
-        <img src={images[1].url} />
+        <img src={image.url} />
       </div>
     );
   }
@@ -80,7 +80,7 @@ export default class Question extends React.Component {
         }
 
         { track && showTrackDetails &&
-          this._trackDetails(track.title, track.images)
+          this._trackDetails(track.title, track.image)
         }
 
       </div>

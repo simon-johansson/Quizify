@@ -7,7 +7,7 @@ class Track {
     this.audio = track.preview_url;
     this.title = track.name;
 
-    this.images = track.album.images;
+    this.image = track.album.images[1];
 
     this.artist = {};
     this.artist.name = track.artists[0].name;
