@@ -7,6 +7,8 @@ import HostActions from 'actions/HostActionCreators';
 import Round from 'utils/models/Round';
 import {augmentWithStateGetters} from './utils';
 
+import _ from 'lodash';
+
 const createDeepLink = (url, id) => `${url}/#/player/${id}`;
 
 const HostStore = Reflux.createStore({
@@ -59,6 +61,9 @@ const HostStore = Reflux.createStore({
     let round = new Round(data);
     state.rounds.push(round);
     state.gameOver = false;
+    _.each(state.players, (player) => {
+      player.points = 0;
+    });
   },
 
   onEndRound() {
