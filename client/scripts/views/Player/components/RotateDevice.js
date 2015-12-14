@@ -18,18 +18,10 @@ export default class RotateDevice extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    if(this.props.mobile) {
-      window.onresize = () => this.forceUpdate();
-    }
-  }
-
   render() {
     const {mobile} = this.props;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
     let instructions = null;
-    if(width > height && mobile) {
+    if(mobile) {
       instructions = (
         <div>
           <h2>Please rotate your device!</h2>
