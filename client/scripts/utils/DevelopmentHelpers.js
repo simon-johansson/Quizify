@@ -53,6 +53,10 @@ window.endRound = () => {
   HostActions.endRound();
 };
 
+window.endGame = () => {
+  HostActions.endGame();
+};
+
 // ----------------
 // Player helpers
 // ----------------
