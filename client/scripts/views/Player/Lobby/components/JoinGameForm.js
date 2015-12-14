@@ -53,7 +53,7 @@ export default class JoinGameForm extends React.Component {
         <span>Game ID</span>
         <input
           className="game-id-input"
-          type="text"
+          type="tel"
           value={gameId}
           onChange={this._onGameIdChange.bind(this)}
         />
