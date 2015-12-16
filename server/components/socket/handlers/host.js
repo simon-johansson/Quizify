@@ -51,5 +51,11 @@ export default {
     const {gameId} = this;
     const ev = events.fromServer.toPlayer.endRound;
     fetchTrack.call(this, gameId, ev, callback);
+  },
+
+  endGame(data, callback = nop) {
+    const {gameId} = this;
+    const ev = events.fromServer.toPlayer.endGame;
+    emit.call(this, gameId, ev);
   }
 };

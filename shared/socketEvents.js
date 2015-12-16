@@ -12,6 +12,7 @@ export default {
       newRound: 'host:newRound',
       answerReceived: 'host:answerReceived',
       endRound: 'host:endRound',
+      endGame: 'host:endGame'
     },
     fromPlayer: {
       joinGame: 'player:joinGame',
@@ -32,6 +33,7 @@ export default {
       startGame: 'server:startGame',
       answerReceived: 'server:answerReceived',
       endRound: 'server:roundEnded',
+      endGame: 'server:endGame'
     }
   }
 };
