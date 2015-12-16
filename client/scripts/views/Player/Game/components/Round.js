@@ -61,7 +61,7 @@ export default class Round extends React.Component {
           style += '-disabled';
         }
         return (
-          <button styleName={style} 
+          <button styleName={style}
             disabled={isDisabled}
             onClick={this.answer.bind(this)}>
             {alternative}
@@ -79,9 +79,9 @@ export default class Round extends React.Component {
             round.correct === null ? waitMessage :
             (round.correct ?
             <div style={{color:'white'}}>
-              Your answer is correct and you got {round.points} points!
+              Well Done! 🙌
             </div> :
-            <div style={{color:'white'}}> :( </div>)
+            <div style={{color:'white'}}> Well Done! 🙌 </div>)
           )
         }
         { round.correct === null ? round.points : '' }
@@ -89,5 +89,3 @@ export default class Round extends React.Component {
     );
   }
 }
-
-

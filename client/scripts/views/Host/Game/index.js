@@ -76,18 +76,19 @@ export default class Game extends React.Component {
         playerId: state.clientId
       });
       if (currentRound.answers.length === players.length) {
+        // Send data for player to know if answer is correct
         HostActions.endRound();
       };
     }
   }
 
   _prepareNewRound() {
-    const {roundsPlayed, totalNumberOfRounds} = this.state;
+    const {roundsPlayed, totalNumberOfRounds, players} = this.state;
     if(roundsPlayed < totalNumberOfRounds) {
       this.setState({countdown: 0});
       HostActions.prepareNewRound();
     } else {
-      HostActions.endGame();
+      HostActions.endGame(players);
     }
   }
 
@@ -150,5 +151,3 @@ export default class Game extends React.Component {
     );
   }
 }
-
-
