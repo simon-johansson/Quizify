@@ -46,17 +46,18 @@ export default class Sound {
 
   fadeOut(dur = 3000, toVol = 0, callback = nop) {
     if (!this.sound) { return; }
-    let s = this.sound;
-    let vol = s.volume;
-    let tick = dur / Math.abs(vol - toVol);
-    let i = setInterval(() => {
-      vol = vol > toVol ? vol - 1 : vol + 1;
-      s.setVolume(vol);
-      if(vol === toVol){
-        callback.call(this);
-        this._removeSound();
-        clearInterval(i);
-      }
-    }, tick);
+    this._removeSound();
+    // let s = this.sound;
+    // let vol = s.volume;
+    // let tick = dur / Math.abs(vol - toVol);
+    // let i = setInterval(() => {
+    //   vol = vol > toVol ? vol - 1 : vol + 1;
+    //   s.setVolume(vol);
+    //   if(vol === toVol){
+    //     callback.call(this);
+    //     this._removeSound();
+    //     clearInterval(i);
+    //   }
+    // }, tick);
   }
 }
