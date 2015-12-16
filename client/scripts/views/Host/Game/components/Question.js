@@ -58,10 +58,10 @@ export default class Question extends React.Component {
     });
   }
 
-  _trackDetails(title, image) {
+  _trackDetails(artist, title, image) {
     return (
       <div>
-        <h1>{title}</h1>
+        <h1>{artist} - {title}</h1>
         <img src={image.url} />
       </div>
     );
@@ -80,7 +80,7 @@ export default class Question extends React.Component {
         }
 
         { track && showTrackDetails &&
-          this._trackDetails(track.title, track.image)
+          this._trackDetails(track.artist.name, track.title, track.image)
         }
 
       </div>
