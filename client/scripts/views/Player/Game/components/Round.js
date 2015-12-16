@@ -79,9 +79,9 @@ export default class Round extends React.Component {
             round.correct === null ? waitMessage :
             (round.correct ?
             <div style={{color:'white'}}>
-              Well Done! 🙌
+              Wait for next round
             </div> :
-            <div style={{color:'white'}}> Well Done! 🙌 </div>)
+            <div style={{color:'white'}}> Wait for next round </div>)
           )
         }
         { round.correct === null ? round.points : '' }
