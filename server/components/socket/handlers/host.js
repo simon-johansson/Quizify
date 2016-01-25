@@ -56,6 +56,6 @@ export default {
   endGame(data, callback = nop) {
     const {gameId} = this;
     const ev = events.fromServer.toPlayer.endGame;
-    emit.call(this, gameId, ev);
+    emit.call(this, gameId, ev, data);
   }
 };
